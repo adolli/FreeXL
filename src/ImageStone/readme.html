@@ -1,0 +1,329 @@
+<html>
+<head>
+<title>ImageStone</title>
+<Style>
+BODY, P, TD { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt }
+H2,H3,H4,H5 { color: #ff9900; font-weight: bold; }
+H2 { font-size: 13pt; }
+H3 { font-size: 12pt; }
+H4 { font-size: 10pt; color: black; }
+PRE { BACKGROUND-COLOR: #FBEDBB; FONT-FAMILY: "Courier New", Courier, mono; WHITE-SPACE: pre; }
+CODE { COLOR: #990000; FONT-FAMILY: "Courier New", Courier, mono; }
+</style>
+</head>
+<body bgcolor="#FFFFFF" color=#000000>
+
+<h2 align="center">ImageStone</h2>
+<H2>Introduction</H2>
+<P>ImageStone is a powerful C++ class library for image manipulation. It is written in pure C++ and is easily to portable. Its features include load/save (supports BMP, GIF, JPG, PNG, TIF, ICO, TGA, PCX, PSD...), display, histogram, undo/redo, and image transformation with over 100 predefined effects.</P>
+<H2>License</H2>
+<P>ImageStone is <B>free</B>. You can use the code however you want (free or commercial), as long as you don't claim it as your own. (If you use it in your product, I hope I could be notified.)</P>
+<H2>Using ImageStone</H2>
+<P>It's extremely easy, all you need to do is add <CODE>#include "ImageStone.h"</CODE> at the beginning of your source code. If you are using ImageStone in a MFC project, just add this include line at the end of <B>StdAfx.h</B> file.</P>
+<P>The most basic and the most important class is <CODE>FCObjImage</CODE>, let's learn how to use it.</P>
+<H2>... load/save image file under any OS</H2>
+<PRE>
+// for Windows : ImageStone use GDI+ to load/save image, Jpg/Png/Gif/Bmp/Tga/Tif be supported
+// for Linux : Only Bmp/Tga be supported, but you can set FreeImage handler to support more.
+FCObjImage   img ;
+img.Load ("test.jpg") ;
+if (!img.IsValidImage())
+{
+    assert(false) ;
+    return false ;
+}
+
+// print image's information : width, height, bit per pixel
+printf ("image's width : %d",  img.Width()) ;
+printf ("image's height : %d", img.Height()) ;
+printf ("image's bpp : %d",    img.ColorBits()) ;
+
+// Load/Save function determine image's format by file's ext name
+// save image as jpeg file, jpg's quality set 90 (ranges from 1 to 99)
+img.Save ("save.jpg", 90) ;
+img.Save ("save.png") ;
+img.Save ("save.tif") ;
+
+// Another way to set quality
+FCImageProperty   prop ;
+prop.SetPropertyValue (IMAGE_TAG_JPEG_QUALITY, "90") ;
+img.Save ("save.jpg", prop) ;
+</PRE>
+<H2>... load image from memory under any OS</H2><PRE>// Load image into memory
+char   * p = 0 ;
+int    n = 0 ;
+FCOXOHelper::LoadFileToBuffer ("test.jpg", p, n) ;
+
+FCObjImage   img ;
+img.Load (p, n, IMG_JPG) ;
+
+delete[] p ;
+
+// this line demonstrate how to determine image's format by file's ext name
+IMAGE_TYPE  t = FCObjImage::GetImageHandleFactory()-&gt;QueryImageFileType("test.jpg");</PRE>
+<H2>... load image from  DIB stream under any OS</H2>
+<PRE>// Load image into memory
+char   * p = 0 ;
+int    n = 0 ;
+FCOXOHelper::LoadFileToBuffer ("test.bmp", p, n) ;
+p += sizeof(BITMAPFILEHEADER) ;
+
+// now p point to a DIB stream
+FCObjImage   img ;
+img.LoadDIBStream (p, n) ;
+
+delete[] p ;</PRE>
+<H2>... load image from resource under Windows</H2>
+<PRE>
+// Load image from local exe file
+FCObjImage   img ;
+FCWin32::LoadImageRes (img, MAKEINTRESOURCE(nID), TEXT("JPG"), IMG_JPG) ;
+
+// Load image from DLL's resource
+HMODULE   hDll = LoadLibrary (TEXT("ResDll.dll")) ;
+FCWin32::LoadImageRes (img, MAKEINTRESOURCE(nID), TEXT("JPG"), IMG_JPG, hDll) ;
+
+// Load image from standard BITMAP resource
+FCWin32::LoadImageBitmapRes (img, MAKEINTRESOURCE(nID)) ;</PRE>
+<H2>...  load/save image via FreeImage library </H2>
+<PRE>
+// change to FreeImage library load/save image
+// more detail refer to example 005
+FCObjImage::SetImageHandleFactory (new FCImageHandleFactory_FreeImage) ;
+img.Load ("test.jpg") ;
+
+// change to GDI+ load/save image
+FCObjImage::SetImageHandleFactory (new FCImageHandleFactory_Gdiplus) ;
+img.Load ("test.jpg") ;
+</PRE>
+<H2>... combine ImageHandleFactory</H2>
+<PRE>// use FreeImage to load/save PSD/PCX image
+class CMyImageFactory : public FCImageHandleFactory
+{
+protected:
+    virtual FCImageHandleBase* CreateImageHandle (IMAGE_TYPE imgType)
+    {
+        switch (imgType)
+        {
+            case IMG_BMP : return new FCImageHandle_Bmp ;
+            case IMG_TGA : return new FCImageHandle_Tga ;
+            case IMG_JPG : return new FCImageHandle_Gdiplus ;
+            case IMG_GIF : return new FCImageHandle_Gdiplus ;
+            case IMG_TIF : return new FCImageHandle_Gdiplus ;
+            case IMG_PNG : return new FCImageHandle_Gdiplus ;
+            case IMG_PCX : return new FCImageHandle_FreeImage ;
+            case IMG_PSD : return new FCImageHandle_FreeImage ;
+        }
+        return 0 ;
+    }
+    // protected avoid user delete object.
+    virtual ~CMyImageFactory() {}
+};
+
+// use our custom factory to read/write image
+FCObjImage::SetImageHandleFactory (new CMyImageFactory) ;
+FCObjImage   img ;
+img.Load ("test.jpg") ;</PRE>
+<H2>... load multi-frame GIF</H2>
+<PRE>
+FCObjMultiFrame   img ;
+img.Load ("test.gif") ;
+img.GetFrame(0)-&gt;Save ("001.jpg") ;
+img.GetFrame(1)-&gt;Save ("001.jpg") ;
+...</PRE>
+<H2>... Load jpeg's EXIF information</H2>
+<PRE>
+FCObjImage        img ;
+FCImageProperty   prop ;
+img.Load ("test.jpg", &prop) ;
+
+// get camera ISO speed
+std::string   m = prop.QueryPropertyValue (IMAGE_TAG_EXIF_ISOSpeed) ;
+// get camera equip model
+std::string   n = prop.QueryPropertyValue (IMAGE_TAG_EquipModel) ;
+</PRE>
+<H2>... draw image object under Windows</H2>
+<PRE>FCObjImage   img ;
+// capture current screen
+RECT         rc = {0, 0, GetSystemMetrics(SM_CXSCREEN), 
+                         GetSystemMetrics(SM_CYSCREEN)} ;
+FCWin32::CaptureScreen (img, rc) ;
+
+// Draw image (no stretch) where top-left at (0,0) of hdc
+FCWin32::DrawImage (img, hdc, 0, 0) ;
+
+// Stretch image on region of hdc
+RECT     rcOnDC = {100, 100, 200, 200} ;
+FCWin32::DrawImage (img, hdc, rcOnDC) ;
+
+// Stretch image on central of hdc's region and keeping image's aspect
+FCWin32::DrawImageAspect (img, hdc, rcOnDC) ;
+
+// Stretch regionof image on region of hdc
+RECT     rcImg = {20, 20, 50, 50} ;
+FCWin32::DrawImage (img, hdc, rcOnDC, rcImg) ;</PRE>
+<H2>... copy/paste image to/from clipboard</H2><PRE>FCObjImage   img ;
+img.Load ("test.jpg") ;
+
+// copy image to clipboard
+FCWin32::CopyToClipboard (img) ;
+
+// get image in clipboard
+FCWin32::GetClipboardImage (img) ;</PRE>
+<H2>... convert between GDI HBITMAP and FCObjImage</H2><PRE>// create HBITMAP from FCObjImage object
+FCObjImage   img ;
+img.Load ("test.jpg") ;
+HBITMAP   h = FCWin32::CreateDDBHandle (img) ;
+
+// create FCObjImage object from HBITMAP
+FCWin32::CreateImageFromDDB (h, img) ;</PRE>
+<H2>... convert between GDI+ Bitmap and FCObjImage</H2>
+<PRE>// create GDI+ Bitmap from FCObjImage object
+FCObjImage   img ;
+img.Load ("test.jpg") ;
+Gdiplus::Bitmap   * pBmp = FCWin32::GDIPlus_CreateBitmap(img) ;
+delete pBmp ;
+
+// create FCObjImage object from GDI+ Bitmap
+FCWin32::GDIPlus_LoadBitmap (*pBmp, img) ;</PRE>
+<H2>... process image</H2><PRE>FCObjImage   img ;
+img.Load ("test.jpg") ;
+
+// resize (smooth) image
+img.Stretch (nWidth, nHeight) ;
+img.Stretch_Smooth (nWidth, nHeight) ;
+
+// Use SinglePixelProcessProc interface to process
+// image, there are over 100 pre-implemented effect,
+// please refer to class derived from FCInterface_PixelProcess
+FCPixelRotate   aCmd (37) ;
+img.SinglePixelProcessProc (aCmd) ;
+
+FCPixelBrightness   aCmd (150) ; // 150%
+img.SinglePixelProcessProc (aCmd) ;
+
+FCPixelMosaic   aCmd(5) ;
+img.SinglePixelProcessProc (aCmd) ;
+
+FCPixelOilPaint   aCmd (3) ;
+img.SinglePixelProcessProc (aCmd) ;
+</PRE>
+<H2>... custom image processing</H2>
+<PRE>// our processor : change pixel's RGB value 
+class CMyPixelProcessor : public FCSinglePixelProcessBase
+{
+public:
+    CMyPixelProcessor (int nR, int nG, int nB) : m_R(nR), m_G(nG), m_B(nB) {}
+private:
+    virtual void ProcessPixel (FCObjImage* pImg, int x, int y, BYTE* pPixel)
+    {
+        PCL_B(pPixel) = FClamp0255 (PCL_B(pPixel) + m_B) ;
+        PCL_G(pPixel) = FClamp0255 (PCL_G(pPixel) + m_G) ;
+        PCL_R(pPixel) = FClamp0255 (PCL_R(pPixel) + m_R) ;
+    }
+    int   m_R, m_G, m_B ;
+};
+
+// this class has the same function to upper
+// class, but implement other class
+class CMyImageProcessor : public FCPixelWholeImageBase
+{
+public:
+    CMyPixelProcessor (int nR, int nG, int nB) : m_R(nR), m_G(nG), m_B(nB) {}
+private:
+    virtual void ProcessWholeImage (FCObjImage* pImg, 
+                                    FCObjProgress* pProgress)
+    {
+        for (int y=0 ; y &lt; pImg-&gt;Height() ; y++)
+        {
+            for (int x=0 ; x &lt; pImg-&gt;Width() ; x++)
+            {
+                BYTE   * p = pImg-&gt;GetBits(x,y) ;
+                PCL_B(p) = FClamp0255 (PCL_B(p) + m_B) ;
+                PCL_G(p) = FClamp0255 (PCL_G(p) + m_G) ;
+                PCL_R(p) = FClamp0255 (PCL_R(p) + m_R) ;
+            }
+            if (pProgress)
+                pProgress-&gt;SetProgress (100 * y / pImg-&gt;Height()) ;
+        }
+    }
+    int   m_R, m_G, m_B ;
+};
+
+// use our custom processor
+FCObjImage   img ;
+img.Load ("test.jpg") ;
+
+CMyPixelProcessor   aCmd (20, 20, 20) ;
+img.SinglePixelProcessProc (aCmd) ;
+
+CMyImageProcessor   aCmd (20, 20, 20) ;
+img.SinglePixelProcessProc (aCmd) ;
+</PRE>
+<H2>... add text on image</H2><PRE>FCObjImage   img ;
+img.Load ("c:\\test.jpg") ;
+
+// now we create text layer
+FCObjTextLayer   imgT ;
+PACK_TextLayer   tp ;
+tp.m_bAddShadow = false ;
+tp.m_bAntiAliased = true ;
+tp.m_bBold = true ;
+tp.m_bItalic = true ;
+tp.m_crFont = PCL_RGBA(0,0,255) ;
+tp.m_nFontSize = 128 ;
+tp.m_strFace = "Arial" ;
+tp.m_strText = "Hello" ;
+FCWin32::CreateTextLayer_GDIPlus (imgT, tp) ;
+
+// now we have create text image, additional
+// we can add some affect on it, such as gradient color
+POINT                 pt1={0,0}, pt2={0,50} ;
+FCPixelGradientLine   aCmd (pt1, pt2, PCL_RGBA(0,0,255), 
+                            FCColor::crWhite()) ;
+imgT.SinglePixelProcessProc (aCmd) ;
+
+// blend text layer on image
+RECT   rc = {0, 0, imgT.Width(), imgT.Height()} ;
+img.AlphaBlend (imgT, rc, rc, 100) ;</PRE>
+
+<H2>History</H2>
+<UL>
+<LI>2007 - 03 - 11, V4.0<br>
++ Add FCPixelFillGradientFrame.<br>
+ + Add FCPixelLensFlare / FCPixelTileReflection / FCPixelSoftGlow effect.<br>
+* Modify example.<br>
+ * Improve FCObjImage::AlphaBlend.<br>
+ * Modify FCPixelBlinds.<br>
+ * Modify brightness/contrast/hue/saturation/emboss.<br>
+ * Rewrite gauss blur processor.<br>
+ - Remove FCPixelDeinterlace.<br>
+ - Remove FCPixelAddRandomNoise.<br>
+ - Remove FCPixelFill3DSolidFrame.<br>
+ - Remove FCImageHandleFactory_IJL15 and FCImageHandle_IPicture.<br><br>
+<LI>2006 - 10 - 25, V3.0<br>
+ * Improve FCImageHandle_Gdiplus class to load multi-frame gif/tiff image and load jpeg's EXIF information.<br>
+ * Improve FCImageHandle_FreeImage class to save gif with transparency color.<br> 
+ * Change FCPixelHueSaturation's hue arithmetic.<br>
+ * Change FCPixelColorTone's arithmetic, more look like old photo.<br>
+ * Change inner FCImageHandleBase interface, it's never mind for user.<br>
+ * Substitute std::fstream by ANSI C file function, because of a bug in VC2005.<br>
+ + Add FCImageProperty to store image's property, function FCObjImage::Load and FCObjImage::Save support it.<br>
+ + Add example 010 : Load jpeg's EXIF information via GDI+.<br>
+ - Remove FCObjImage::GetNextFrameDelay and FCObjImage::SetNextFrameDelay, you can get them from FCImageProperty.<br><br>
+ 
+<LI>2006 - 09 - 07, V2.0<br>
+ + More mature. <br><br>
+<LI>2006 - 03 - 11, V1.0<br>
+ + Initial version.
+</LI>
+</UL>
+<H2>Author and Contact</H2>
+<P>Contact information of the author, Fu Li:</P>
+<UL>
+<LI>E-Mail: <A href="mailto:crazybitwps@hotmail.com">crazybitwps@hotmail.com</A> 
+<LI>Homepage: <A href="http://www.crazy-bit.com" target=_blank>www.crazy-bit.com</A> </LI></UL>
+<p>
+<p>
+</body>
+</html>

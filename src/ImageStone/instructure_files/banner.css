@@ -1,0 +1,15 @@
+﻿/* Basic banner */
+.cbanner {font-size:12px;border:1px solid #d3d2d2;zoom:1;margin:0;}
+.cbanner .x1,.cbanner .x1a,.cbanner .x2,.cbanner .x2a {display:block;height:2px;background:url(img/sprites.png) no-repeat;position:relative;}
+.cbanner .x1 {background-position:right -20px;margin:-1px -1px 0 0;}
+.cbanner .x1a {float:left;width:2px;background-position:0 0;margin-left:-1px;overflow:hidden;}
+.cbanner .x2 {background-position:right -22px;margin:0 -1px -1px 0;}
+.cbanner .x2a {float:left;width:2px;background-position:0 -2px;margin-left:-1px;overflow:hidden;}
+.cbanner .cbanner-content {overflow:auto;}
+.cbanner .hd {line-height:18px; margin:auto;height:21px;background:url(img/sprites.png) 0 -200px repeat-x #e6e6e6;padding:1px 7px;}
+.cbanner .hd .act {float:right;}
+.cbanner .hd .act a {color:#000;}
+.cbanner .hd h3 {font-size:12px;margin:0;color:#7f7f7f;font-weight:bold;background:url(img/sprites.png) 0 -377px no-repeat;padding-left:15px;zoom:1;float:left;}
+.cbanner li{ list-style:none; line-height:20px; margin:0;padding-left: 9px;
+background: url(img/sprites.png) no-repeat 0 -450px;}
+.cbanner ul{margin:8px;}

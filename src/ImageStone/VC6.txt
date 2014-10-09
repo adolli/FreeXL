@@ -1,0 +1,10 @@
+if you using VC6, you must add GDI+ SDK, you can download GDI+ library from my homepage
+
+ -- http://www.crazy-bit.com/download/gdiplus.zip
+
+unzip this package to ImageStone's lib directory in such folder structure:
+
+lib\gdiplus\Include\*.h
+lib\gdiplus\Lib\GdiPlus.lib
+
+add .h and .lib path to your VC6's directories
