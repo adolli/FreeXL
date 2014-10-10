@@ -1,8 +1,0 @@
-loc="locData" _locAttrData="*">errorDisableFirewall</_locTag>
-            <_locTag _loc="locData" _locAttrData="*">errorDisableFirewallNoRights</_locTag>
-            <_locTag _loc="locData" _locAttrData="*">errorFirewallChanged</_locTag>
-            <_locTag _loc="locData" _locAttrData="*">errorServiceNotRunning</_locTag>
-            <_locTag _loc="locData" _locAttrData="*">confirmDialog</_locTag>
-            <_locTag _loc="locData" _locAttrData="*">errorDialog</_locTag>
-            <_locTag _loc="locData" _locAttrData="title,description,description_alt,moreInfoAccessKey,moreInfoText,moreInfoToolTip">step</_locTag>
-            <_locTag _loc="locData" _locAttrData="title,accessKey,actionToolTip">action</_locT
