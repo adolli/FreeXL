@@ -1,4 +1,4 @@
-// adXL.cpp
+ï»¿// adXL.cpp
 
 #include "adXL.h"
 #include <exception>
@@ -15,11 +15,11 @@ xlCell::SS_TYPE_MAP::SS_TYPE_MAP()
 {
 	if (!_initialized)
 	{
-		// ÔÚÕâÀïÌí¼Ó×Ö·û´®µ½ÀàĞÍµÄÓ³Éä
+		// åœ¨è¿™é‡Œæ·»åŠ å­—ç¬¦ä¸²åˆ°ç±»å‹çš„æ˜ å°„
 		StrToType["String"] = xlCell::T_String;
 		StrToType["Number"] = xlCell::T_Number;
 
-		StrToType["char"] = xlCell::T_String; //´ÓÏµÍ³ÄÚÖÃÀàĞÍÊ¶±ğºó×ª»»µ½ssTypeÀàĞÍ
+		StrToType["char"] = xlCell::T_String; //ä»ç³»ç»Ÿå†…ç½®ç±»å‹è¯†åˆ«åè½¬æ¢åˆ°ssTypeç±»å‹
 		StrToType["unsigned char"] = xlCell::T_String;
 		StrToType["int"] = xlCell::T_Number;
 		StrToType["long int"] = xlCell::T_Number;
@@ -29,7 +29,7 @@ xlCell::SS_TYPE_MAP::SS_TYPE_MAP()
 		StrToType["long double"] = xlCell::T_Number;
 		StrToType["float"] = xlCell::T_Number;
 
-		//ÔÚÕâÀïÌí¼ÓÀàĞÍµ½×Ö·û´®µÄÓ³Éä
+		//åœ¨è¿™é‡Œæ·»åŠ ç±»å‹åˆ°å­—ç¬¦ä¸²çš„æ˜ å°„
 		TypeToStr[xlCell::T_String] = "String";
 		TypeToStr[xlCell::T_Number] = "Number";
 
@@ -77,7 +77,7 @@ xlCell& xlCell::parseToCells(TiXmlNode* _cell)
 	data = $(_cell).children("Data").text();
 	
 	// debug : adolli
-	//			ÒÔÏÂÁ½¾ä´úÂëÔÚxlWorkbook::parseToSheets()º¯ÊıÖĞ´«Èë£¬²»ÓÉxlCell¿ØÖÆ
+	//			ä»¥ä¸‹ä¸¤å¥ä»£ç åœ¨xlWorkbook::parseToSheets()å‡½æ•°ä¸­ä¼ å…¥ï¼Œä¸ç”±xlCellæ§åˆ¶
 	//_colIndex	=$(_cell).iAttr("ss:Index");
 	//_rowIndex	=$(_cell).parent().iAttr("ss:Index");
 	ss_type = CellType[$(_cell).children("Data").attr("ss:Type")];
@@ -142,7 +142,7 @@ xlCell& xlCell::parseToStyle($& container)
 		container("Style&[ss:ID=Default]");
 	}
 
-	//¶ÔÆë
+	//å¯¹é½
 	styleClassTag = $(container).children("Alignment");
 	if (!styleClassTag.isEmpty())
 	{
@@ -159,7 +159,7 @@ xlCell& xlCell::parseToStyle($& container)
 		_style.alignment.wrapText = styleClassTag.bAttr("ss:WrapText");
 	}
 
-	//±ß¿ò
+	//è¾¹æ¡†
 	for (map<string, sBorder>::iterator it = _style.borders.begin();
 			it != _style.borders.end(); it++)
 	{
@@ -180,7 +180,7 @@ xlCell& xlCell::parseToStyle($& container)
 		}
 	}
 
-	//×ÖÌå
+	//å­—ä½“
 	styleClassTag = $(container).children("Font");
 	if (!styleClassTag.isEmpty())
 	{
@@ -201,7 +201,7 @@ xlCell& xlCell::parseToStyle($& container)
 						"ss:Underline")];
 	}
 
-	//Ìî³ä
+	//å¡«å……
 	styleClassTag = $(container).children("Interior");
 	if (!styleClassTag.isEmpty())
 	{
@@ -302,8 +302,8 @@ xlSheet& xlSheet::setMaxRow(UINT r)
 		return *this;
 	}
 
-	UINT originMaxRow = maxRow();				//¶ÁÈ¡Ô­Ê¼ĞĞÊı
-	UINT originMaxCol = maxCol();				//¶ÁÈ¡Ô­Ê¼ÁĞÊı
+	UINT originMaxRow = maxRow();				//è¯»å–åŸå§‹è¡Œæ•°
+	UINT originMaxCol = maxCol();				//è¯»å–åŸå§‹åˆ—æ•°
 
 	for (UINT _r = originMaxRow; _r < r; _r++)
 	{
@@ -311,7 +311,7 @@ xlSheet& xlSheet::setMaxRow(UINT r)
 		ss_table.push_back(vector<xlCell>());
 		for (UINT _c = 0; _c < originMaxCol; _c++)
 		{
-			// ĞÂÀ©Õ¹µÄĞĞĞèÒª¸øÃ¿¸öµ¥Ôª¸ñ³õÊ¼»¯
+			// æ–°æ‰©å±•çš„è¡Œéœ€è¦ç»™æ¯ä¸ªå•å…ƒæ ¼åˆå§‹åŒ–
 			ss_table.back().push_back(xlCell(_r + 1, _c + 1, this));
 		}
 	}
@@ -325,8 +325,8 @@ xlSheet& xlSheet::setMaxCol(UINT c)
 		return *this;
 	}
 
-	UINT originMaxRow = maxRow();				//¶ÁÈ¡Ô­Ê¼ĞĞÊı
-	UINT originMaxCol = maxCol();				//¶ÁÈ¡Ô­Ê¼ÁĞÊı
+	UINT originMaxRow = maxRow();				//è¯»å–åŸå§‹è¡Œæ•°
+	UINT originMaxCol = maxCol();				//è¯»å–åŸå§‹åˆ—æ•°
 
 	for (UINT _r = 0; _r < originMaxRow; _r++)
 	{
@@ -427,7 +427,7 @@ xlSheet& xlSheet::DeleteCell(int r, int c, ShiftType _type)
 	default:
 		for (UINT _r = r - 1; _r < maxrow - 1; _r++)
 		{
-			// Èç¹ûÉ¾³ıµÄÊÇ±ßÔµµÄµ¥Ôª¸ñ£¬forÀïµÄÓï¾äÊÇ²»»áÖ´ĞĞµÄ
+			// å¦‚æœåˆ é™¤çš„æ˜¯è¾¹ç¼˜çš„å•å…ƒæ ¼ï¼Œforé‡Œçš„è¯­å¥æ˜¯ä¸ä¼šæ‰§è¡Œçš„
 			ss_table[_r][c - 1] = ss_table[_r + 1][c - 1];
 		}
 		ss_table[maxrow - 1][c - 1].clear().clearStyle();
@@ -460,7 +460,7 @@ xlSheet& xlSheet::DeleteRange(int r1, int c1, int r2, int c2, ShiftType _type)
 	case xlShiftLeft:
 		if (cStart == 1 && cEnd == maxcol)
 		{
-			// ÕûĞĞÇå¿ÕµÄÇé¿ö
+			// æ•´è¡Œæ¸…ç©ºçš„æƒ…å†µ
 			for (UINT r = rStart - 1; r <= rEnd - 1; r++)
 			{
 				ss_table[r].clear();
@@ -480,7 +480,7 @@ xlSheet& xlSheet::DeleteRange(int r1, int c1, int r2, int c2, ShiftType _type)
 	case xlShiftUp:
 		if (cStart == 1 && cEnd == maxcol)
 		{
-			// ÕûĞĞÉ¾³ıµÄÇé¿ö
+			// æ•´è¡Œåˆ é™¤çš„æƒ…å†µ
 			ss_table.erase(ss_table.begin() + rStart - 1,
 					ss_table.begin() + rEnd);
 			setMaxRow(maxrow);
@@ -495,7 +495,7 @@ xlSheet& xlSheet::DeleteRange(int r1, int c1, int r2, int c2, ShiftType _type)
 				}
 				for (UINT r = maxrow - rEnd; r < maxrow; r++)
 				{
-					// µ±É¾³ıµÄµ¥Ôª¸ñÔÚ±ß½çÊ±¿ÉÒÔÖ±½ÓÇå³ı£¬²»»á¾­¹ıÉÏÃæÄÇ¸öÑ­»·
+					// å½“åˆ é™¤çš„å•å…ƒæ ¼åœ¨è¾¹ç•Œæ—¶å¯ä»¥ç›´æ¥æ¸…é™¤ï¼Œä¸ä¼šç»è¿‡ä¸Šé¢é‚£ä¸ªå¾ªç¯
 					ss_table[r][c].clear().clearStyle();
 				}
 			}
@@ -539,41 +539,41 @@ xlWorkbook& xlWorkbook::load(string filename)
 {
 	XL.loadXml(filename.c_str());
 	parseToSheets();
-	// ×îºó°ÑÄ¬ÈÏÑùÊ½±£´æ½østyle_map[0]µÄÎ»ÖÃ
+	// æœ€åæŠŠé»˜è®¤æ ·å¼ä¿å­˜è¿›style_map[0]çš„ä½ç½®
 	parseDefaultStyle();
 	return *this;
 }
 
 xlWorkbook& xlWorkbook::parseToSheets()
 {
-	// °ÑÕû¸öxml±í¸ñ½âÎöµ½ÄÚ´æÖĞ
+	// æŠŠæ•´ä¸ªxmlè¡¨æ ¼è§£æåˆ°å†…å­˜ä¸­
 
-	// ¶ÁÈ¡±í¸ñÊıÒÔ¼°ss:Name
+	// è¯»å–è¡¨æ ¼æ•°ä»¥åŠss:Name
 	XL("Worksheet");
 	for (UINT i = 0; i < XL.length(); i++)
 	{
 
-		// Ö±½Ópush½øÈ¥Ğ§ÂÊ¸ß£¬Í¬Ê±ÉèÖÃpwbÖ¸ÕëºÍsheet name
+		// ç›´æ¥pushè¿›å»æ•ˆç‡é«˜ï¼ŒåŒæ—¶è®¾ç½®pwbæŒ‡é’ˆå’Œsheet name
 		_theSheets.push_back(xlSheet($(XL[i]).attr("ss:Name"), this));
-		// ¶ÁÈ¡expandRow
+		// è¯»å–expandRow
 		_theSheets[i].setMaxRow(
 				strToInt(
 						$(XL[i]).children("Table").attr(
 								"ss:ExpandedRowCount")));
-		// ¶ÁÈ¡expandCol
+		// è¯»å–expandCol
 		_theSheets[i].setMaxCol(
 				strToInt(
 						$(XL[i]).children("Table").attr(
 								"ss:ExpandedColumnCount")));
 
-		// ¶ÁÈ¡Ã¿Ò»ĞĞ
+		// è¯»å–æ¯ä¸€è¡Œ
 		$ rows = $(XL[i]).children("Table").children("Row");
 		int rowIndex = 0;
 		int rowSpan = 0;
 		for (UINT j = 0; j < rows.length(); j++)
 		{
 
-			// ¸øÕâÒ»ĞĞ±àºÅ
+			// ç»™è¿™ä¸€è¡Œç¼–å·
 			if ($(rows[j]).attr("ss:Index") == "")
 			{
 				rowIndex++;
@@ -587,12 +587,12 @@ xlWorkbook& xlWorkbook::parseToSheets()
 				rowIndex = $(rows[j]).iAttr("ss:Index") + rowSpan;
 			}
 
-			// ÔÚ±éÀúÃ¿Ò»ĞĞÊ±¶ÁÈ¡cells
+			// åœ¨éå†æ¯ä¸€è¡Œæ—¶è¯»å–cells
 			$ cells = $(rows[j]).children("Cell");
 			int cellIndex = 0;
 			for (UINT k = 0; k < cells.length(); k++)
 			{
-				// ¸øÃ¿Ò»¸öcellĞ´ÉÏss:Index
+				// ç»™æ¯ä¸€ä¸ªcellå†™ä¸Šss:Index
 				if ($(cells[k]).attr("ss:Index") == "")
 				{
 					cellIndex++;
@@ -603,15 +603,15 @@ xlWorkbook& xlWorkbook::parseToSheets()
 					cellIndex = $(cells[k]).iAttr("ss:Index");
 				}
 
-				// ¶ÁÈ¡µ½ss_tableÖĞ
+				// è¯»å–åˆ°ss_tableä¸­
 				_theSheets[i].ss_table[rowIndex - 1][cellIndex - 1] = xlCell(
-						cells[k], XL);	//ÔØÈëµ¥Ôª¸ñ
+						cells[k], XL);	//è½½å…¥å•å…ƒæ ¼
 				_theSheets[i].ss_table[rowIndex - 1][cellIndex - 1]._pSh =
-						&_theSheets[i];	//Îªµ¥Ôª¸ñÉèÖÃÖ¸Ïò¸ÃsheetµÄÖ¸Õë
+						&_theSheets[i];	//ä¸ºå•å…ƒæ ¼è®¾ç½®æŒ‡å‘è¯¥sheetçš„æŒ‡é’ˆ
 				_theSheets[i].ss_table[rowIndex - 1][cellIndex - 1]._rowIndex =
-						rowIndex;		//µ¥Ôª¸ñĞĞºÅ
+						rowIndex;		//å•å…ƒæ ¼è¡Œå·
 				_theSheets[i].ss_table[rowIndex - 1][cellIndex - 1]._colIndex =
-						cellIndex;	//µ¥Ôª¸ñÁĞºÅ
+						cellIndex;	//å•å…ƒæ ¼åˆ—å·
 			}
 		}
 	}
@@ -621,23 +621,23 @@ xlWorkbook& xlWorkbook::parseToSheets()
 xlWorkbook& xlWorkbook::inverseParse()
 {
 
-	// ´ÓÄ£°æÀï¿½±´Ò»¸öÎÄ¼ş¹ıÀ´£¬È»ºó½øĞĞ±à¼­
+	// ä»æ¨¡ç‰ˆé‡Œæ‹·è´ä¸€ä¸ªæ–‡ä»¶è¿‡æ¥ï¼Œç„¶åè¿›è¡Œç¼–è¾‘
 	XL.loadXml("settings/_xl_template_.xml");
-	XL.save("_temp_xl");	//ÁÙÊ±ÎÄ¼ş²»ÒªÎÄ¼şÃû
+	XL.save("_temp_xl");	//ä¸´æ—¶æ–‡ä»¶ä¸è¦æ–‡ä»¶å
 	XL.loadXml("_temp_xl");
 
 	$ pasteTo = XL("Workbook");
 	for (UINT i = 0; i < _theSheets.size(); i++)
 	{
 
-		// ¿½±´Worksheet½Úµã£¬²¢ÉèÖÃĞÂWorksheetµÄÊôĞÔÖµ
+		// æ‹·è´WorksheetèŠ‚ç‚¹ï¼Œå¹¶è®¾ç½®æ–°Worksheetçš„å±æ€§å€¼
 		XL("Workbook>Worksheet&[ss:Name=_st_template_]").clone(pasteTo,
 				$::APOS_INSIDE | $::APOS_AFTER, $::CM_DeepCopy).attr("ss:Name",
 				_theSheets[i]._sheetName).children("Table").attr(
 				"ss:ExpandedColumnCount", int(_theSheets[i].maxCol())).attr(
 				"ss:ExpandedRowCount", int(_theSheets[i].maxRow())).children().remove();
 
-		// ÔÚĞÂµÄWorksheetÏÂĞ´ºÃRowºÍCell½Úµã
+		// åœ¨æ–°çš„Worksheetä¸‹å†™å¥½Rowå’ŒCellèŠ‚ç‚¹
 		XL(
 				"Workbook>Worksheet&[ss:Name=" + _theSheets[i]._sheetName
 						+ "]>Table");
@@ -648,7 +648,7 @@ xlWorkbook& xlWorkbook::inverseParse()
 			for (UINT c = 0; c < _theSheets[i].ss_table[r].size(); c++)
 			{
 				xlCell& tmpCell = _theSheets[i].ss_table[r][c];
-				// µ±µ¥Ôª¸ñÓĞÄÚÈİÊ±²Å²åÈëµ½xmlµç×Ó±í¸ñÖĞ
+				// å½“å•å…ƒæ ¼æœ‰å†…å®¹æ—¶æ‰æ’å…¥åˆ°xmlç”µå­è¡¨æ ¼ä¸­
 				if (!(tmpCell._style == _style_map[0]) || tmpCell.data != "")
 				{
 					string styleID = "";
@@ -658,32 +658,32 @@ xlWorkbook& xlWorkbook::inverseParse()
 								+ intToStr(registerStyle(tmpCell._style));
 						tmpCell._style.styleID = styleID;
 					}
-					XL.appendElement("Cell").children("Cell.last")//¶¨Î»µ½¸Õ²åÈëµÄCell
-					.attr("ss:Index", int(c + 1))					//ÉèÖÃindex
-					.attr("ss:StyleID", styleID)					//ÉèÖÃstyleID
-					.appendElement("Data")						//²åÈëDate½Úµã
-					.children("Data")							//¶¨Î»µ½¸Õ²åÈëµÄData½Úµã
-					.attr("ss:Type", tmpCell.getValueType())		//ÉèÖÃssType
-					.appendText(tmpCell.data)					//²åÈëµ¥Ôª¸ñÄÚÈİ
-					.parent().parent();						//×îºóÍË»Øµ½Row½Úµã£¬½øÈëÏÂÒ»´ÎÑ­»·
+					XL.appendElement("Cell").children("Cell.last")//å®šä½åˆ°åˆšæ’å…¥çš„Cell
+					.attr("ss:Index", int(c + 1))					//è®¾ç½®index
+					.attr("ss:StyleID", styleID)					//è®¾ç½®styleID
+					.appendElement("Data")						//æ’å…¥DateèŠ‚ç‚¹
+					.children("Data")							//å®šä½åˆ°åˆšæ’å…¥çš„DataèŠ‚ç‚¹
+					.attr("ss:Type", tmpCell.getValueType())		//è®¾ç½®ssType
+					.appendText(tmpCell.data)					//æ’å…¥å•å…ƒæ ¼å†…å®¹
+					.parent().parent();						//æœ€åé€€å›åˆ°RowèŠ‚ç‚¹ï¼Œè¿›å…¥ä¸‹ä¸€æ¬¡å¾ªç¯
 				}
 			}
-			XL.parent();										//×îºóÍË»ØTable½Úµã
+			XL.parent();										//æœ€åé€€å›TableèŠ‚ç‚¹
 		}
 	}
-	// ×îºóÒÆ³ıÄ£°æWorksheet
+	// æœ€åç§»é™¤æ¨¡ç‰ˆWorksheet
 	XL("Workbook>Worksheet&[ss:Name=_st_template_]").remove();
 
-	// ·´½âÎö²¢²åÈëstyle½Úµã
+	// åè§£æå¹¶æ’å…¥styleèŠ‚ç‚¹
 	XL("Styles");
 	for (map<int, xlStyle>::iterator it_stpool = _style_map.begin();
 			it_stpool != _style_map.end(); it_stpool++)
 	{
-		// ÉèÖÃ½­ÄÏStyle½Úµã
+		// è®¾ç½®æ±Ÿå—StyleèŠ‚ç‚¹
 		XL.appendElement("Style").children("Style.last").attr("ss:ID",
 				"st" + intToStr(it_stpool->first));
 
-		// ÉèÖÃStyleÄÚµÄ½Úµã£¬²¢±£Ö¤³öÈëµãÒ»ÖÂ
+		// è®¾ç½®Styleå†…çš„èŠ‚ç‚¹ï¼Œå¹¶ä¿è¯å‡ºå…¥ç‚¹ä¸€è‡´
 		XL.appendElement("Alignment").children("Alignment").attr(
 				"ss:Horizontal",
 				it_stpool->second.alignment._hAlign_toStr[it_stpool->second.alignment.horizontal_]).attr(
@@ -715,7 +715,7 @@ xlWorkbook& xlWorkbook::inverseParse()
 					it->first).attr("ss:LineStyle",
 					it->second._lStyleMap_toStr[it->second.lineStyle_]).attr(
 					"ss:Weight", it->second.weight_).attr("ss:Color",
-					it->second.color_).parent();				//ÉèÖÃÍêËÄ¸öÊôĞÔºó·µ»Øµ½¸¸½Úµã
+					it->second.color_).parent();				//è®¾ç½®å®Œå››ä¸ªå±æ€§åè¿”å›åˆ°çˆ¶èŠ‚ç‚¹
 		}
 		XL.parent();
 
@@ -855,7 +855,7 @@ xlWorkbook& xlWorkbook::parseToStylePool()
 	{
 		_styleID = $(XL[i]).attr("ss:ID");
 
-		//¶ÔÆë
+		//å¯¹é½
 		styleClassTag = $(XL[i]).children("Alignment");
 		if (!styleClassTag.isEmpty())
 		{
@@ -872,7 +872,7 @@ xlWorkbook& xlWorkbook::parseToStylePool()
 			_style.alignment.wrapText = styleClassTag.bAttr("ss:WrapText");
 		}
 
-		//±ß¿ò
+		//è¾¹æ¡†
 		for (map<string, sBorder>::iterator it = _style.borders.begin();
 				it != _style.borders.end(); it++)
 		{
@@ -893,7 +893,7 @@ xlWorkbook& xlWorkbook::parseToStylePool()
 			}
 		}
 
-		//×ÖÌå
+		//å­—ä½“
 		styleClassTag = $(XL[i]).children("Font");
 		if (!styleClassTag.isEmpty())
 		{
@@ -915,7 +915,7 @@ xlWorkbook& xlWorkbook::parseToStylePool()
 							"ss:Underline")];
 		}
 
-		//Ìî³ä
+		//å¡«å……
 		styleClassTag = $(XL[i]).children("Interior");
 		if (!styleClassTag.isEmpty())
 		{
@@ -925,7 +925,7 @@ xlWorkbook& xlWorkbook::parseToStylePool()
 							"ss:Pattern")];
 		}
 
-		// ÔÚ_style_mapÀïÌí¼ÓstyleÓ³Éä
+		// åœ¨_style_mapé‡Œæ·»åŠ styleæ˜ å°„
 		while (!_styleID.empty() && (_styleID[0] > '9' || _styleID[0] < '0'))
 		{
 			_styleID = _styleID.substr(1);
@@ -933,7 +933,7 @@ xlWorkbook& xlWorkbook::parseToStylePool()
 		_style_map[strToInt(_styleID)] = _style;
 	}
 
-	// ×îºó°ÑÄ¬ÈÏÑùÊ½±£´æ½østyle_map[0]µÄÎ»ÖÃ
+	// æœ€åæŠŠé»˜è®¤æ ·å¼ä¿å­˜è¿›style_map[0]çš„ä½ç½®
 	parseDefaultStyle();
 	return *this;
 }
@@ -951,12 +951,12 @@ int xlWorkbook::registerStyle(const xlStyle& _style)
 	{
 		if (it->second == _style)
 		{
-			return it->first;							// ÈôÒÑ¾­´æÔÚ¸ÃÑùÊ½ÁËÄÇ¾ÍÖ±½ÓÍË³ö·µ»ØIDºÅ
+			return it->first;							// è‹¥å·²ç»å­˜åœ¨è¯¥æ ·å¼äº†é‚£å°±ç›´æ¥é€€å‡ºè¿”å›IDå·
 		}
 	}
 	int newID = _style_map.rbegin()->first;
 	while (_style_map.find(++newID) != _style_map.end())
-		;								//É¨ÃèÑ°ÕÒÒ»¸öÎ´±»Õ¼ÓÃµÄIDºÅ
+		;								//æ‰«æå¯»æ‰¾ä¸€ä¸ªæœªè¢«å ç”¨çš„IDå·
 	_style_map[newID] = _style;
 	return newID;
 }
@@ -986,14 +986,14 @@ xlRange& xlRange::__Initialize_p_Range(xlSheet* _xlsheet, int r1, int c1,
 {
 	if (c1 == 0 && c2 == 0)
 	{
-		// xlRowÇé¿ö
+		// xlRowæƒ…å†µ
 		r2 = r2 == 0 ? r1 : r2;
 		c1 = 1;
 		c2 = _xlsheet->maxCol();
 	}
 	else if (r1 == 0 && r2 == 0)
 	{
-		// xlColumnÇé¿ö
+		// xlColumnæƒ…å†µ
 		c2 = c2 == 0 ? c1 : c2;
 		r1 = 1;
 		r2 = _xlsheet->maxRow();
@@ -1050,7 +1050,7 @@ xlCell& xlRange::corner(CornerCell _corner)
 	else
 	{
 		cout << "range is empty. return NULL" << endl;
-		throw 0;							//Ï£Íû³ÌĞò²»Òª¾­¹ıÕâÀï£¬ÕâÀïÊÇºÜÎ£ÏÕµÄ
+		throw 0;							//å¸Œæœ›ç¨‹åºä¸è¦ç»è¿‡è¿™é‡Œï¼Œè¿™é‡Œæ˜¯å¾ˆå±é™©çš„
 	}
 }
 
@@ -1110,7 +1110,7 @@ xlRange& xlRange::offset(int r_shift, int c_shift)
 	int newC2 = corner(xlBottomRight).colIndex() + c_shift;
 	try
 	{
-		// ÕâÒ»¿éÊÇÎªÁËÔÚ³ö´íÊ±Ç¿ÖÆÍ£Ö¹£¬È»ºóÊÖ¶¯´¦Àí
+		// è¿™ä¸€å—æ˜¯ä¸ºäº†åœ¨å‡ºé”™æ—¶å¼ºåˆ¶åœæ­¢ï¼Œç„¶åæ‰‹åŠ¨å¤„ç†
 		if (newR2 <= 0 || newC2 <= 0)
 		{
 			exception e("the xlRange is out of the table");
@@ -1176,7 +1176,7 @@ A1_STYLE::A1_STYLE(const string a1_style)
 	_expr = a1_style;
 	if (this->isValid())
 	{
-		Row1 = 0;							//Ä¬ÈÏ0Öµ
+		Row1 = 0;							//é»˜è®¤0å€¼
 		Col1 = 0;
 		Row2 = 0;
 		Col2 = 0;
@@ -1187,7 +1187,7 @@ A1_STYLE::A1_STYLE(const string a1_style)
 		vector < string > start_to_ends = split(a1_style, ':');
 		if (!start_to_ends.empty())
 		{
-			//ÅĞ¶Ï¾ø¶ÔÇøÓò col
+			//åˆ¤æ–­ç»å¯¹åŒºåŸŸ col
 			if (!start_to_ends[0].empty() && start_to_ends[0][0] == '$')
 			{
 				absolute["Col1"] = true;
@@ -1199,7 +1199,7 @@ A1_STYLE::A1_STYLE(const string a1_style)
 				Col1 = Col1 * 26 + ALPHABET.find(start_to_ends[0][0]) + 1;
 				start_to_ends[0] = start_to_ends[0].substr(1);
 			}
-			//ÅĞ¶Ï¾ø¶ÔÇøÓò row
+			//åˆ¤æ–­ç»å¯¹åŒºåŸŸ row
 			if (!start_to_ends[0].empty() && start_to_ends[0][0] == '$')
 			{
 				absolute["Row1"] = true;
@@ -1212,7 +1212,7 @@ A1_STYLE::A1_STYLE(const string a1_style)
 		}
 		if (start_to_ends.size() >= 2)
 		{
-			//ÅĞ¶Ï¾ø¶ÔÇøÓò col
+			//åˆ¤æ–­ç»å¯¹åŒºåŸŸ col
 			if (!start_to_ends[1].empty() && start_to_ends[1][0] == '$')
 			{
 				absolute["Col2"] = true;
@@ -1285,11 +1285,11 @@ RC_STYLE::RC_STYLE(const string rc_style)
 {
 	_expr = rc_style;
 
-	//½«Ğ¡Ğ´µÄ×ÖÄ¸×ª»»µ½´óĞ´×ª»»µ½´óĞ´£¨Ö÷Òª´¦Àír1c1£©
+	//å°†å°å†™çš„å­—æ¯è½¬æ¢åˆ°å¤§å†™è½¬æ¢åˆ°å¤§å†™ï¼ˆä¸»è¦å¤„ç†r1c1ï¼‰
 	string rc_exp = rc_style;
 	transform(rc_exp.begin(), rc_exp.end(), rc_exp.begin(), toupper);
 
-	Row1 = 0;							//Ä¬ÈÏ0Öµ
+	Row1 = 0;							//é»˜è®¤0å€¼
 	Col1 = 0;
 	Row2 = 0;
 	Col2 = 0;
@@ -1394,7 +1394,7 @@ bool RC_STYLE::isValid(string exp)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // StyleBase
 
-// Ó³Éäxml³õÊ¼»¯±ê¼Ç
+// æ˜ å°„xmlåˆå§‹åŒ–æ ‡è®°
 bool sBase::_alignMapInitialized = false;
 bool sBase::_bordrMapInitialized = false;
 bool sBase::_fontMapInitialized = false;
@@ -1423,7 +1423,7 @@ sAlign::Alignment_t()
 	wrapText = false;
 	if (!_alignMapInitialized)
 	{
-		// Ó³ÉäÀàĞÍ¶¼ÔÚxmlÎÄ¼şÖĞ¶¨Òå
+		// æ˜ å°„ç±»å‹éƒ½åœ¨xmlæ–‡ä»¶ä¸­å®šä¹‰
 		setupMapsByXML(_fileTargetForSettings, "_hAlign", _hAlign,
 				_hAlign_toStr, _hAlign_xlStr_toEnum);
 		setupMapsByXML(_fileTargetForSettings, "_vAlign", _vAlign,
@@ -1497,9 +1497,9 @@ map<int, string> sBorder::_lStyleMap_toStr;
 
 sBorder::Borders_t()
 {
-	color_ = "#000000";					//Ä¬ÈÏºÚÉ«
-	weight_ = 1;							//Ä¬ÈÏÏß¿í¶È£¬0±íÊ¾Ã»ÓĞ
-	lineStyle_ = XL_None;					//Ä¬ÈÏÃ»ÓĞÏßÌõ
+	color_ = "#000000";					//é»˜è®¤é»‘è‰²
+	weight_ = 1;							//é»˜è®¤çº¿å®½åº¦ï¼Œ0è¡¨ç¤ºæ²¡æœ‰
+	lineStyle_ = XL_None;					//é»˜è®¤æ²¡æœ‰çº¿æ¡
 	if (!_bordrMapInitialized)
 	{
 		setupMapsByXML(_fileTargetForSettings, "LineStyle_t", _lStyleMap,
@@ -1567,7 +1567,7 @@ sFont::Font_t()
 	color_ = "#000000";
 	size_ = 11;
 	charSet = "134";
-	name = "ËÎÌå";
+	name = "å®‹ä½“";
 	if (!_fontMapInitialized)
 	{
 		setupMapsByXML(_fileTargetForSettings, "UnderlineStyle_t", _underLnMap,
@@ -1676,8 +1676,8 @@ map<int, string> sInterior::_patternMap_toStr;
 
 sInterior::Interior_t()
 {
-	pattern = XL_None;	//Ä¬ÈÏÌî³äÑùÊ½ÎŞ
-	color_ = "";		//Ìî³äÉ«Ä¬ÈÏÎŞÑÕÉ«
+	pattern = XL_None;	//é»˜è®¤å¡«å……æ ·å¼æ— 
+	color_ = "";		//å¡«å……è‰²é»˜è®¤æ— é¢œè‰²
 	if (!_interiorMapInitialized)
 	{
 		setupMapsByXML(_fileTargetForSettings, "Pattern_t", _patternMap,
@@ -1735,7 +1735,7 @@ bool xlStyle::operator==(const xlStyle& rhs)
 	if (&rhs == this)
 		return true;
 
-	//ÓÉÓÚborderÊÇmapÀàĞÍµÄ£¬ËùÒÔÏÈÅĞ¶Ïborder£¬borderÍ¨¹ıÁËºóÔÙÅĞ¶Ï±ğµÄÑùÊ½
+	//ç”±äºborderæ˜¯mapç±»å‹çš„ï¼Œæ‰€ä»¥å…ˆåˆ¤æ–­borderï¼Œborderé€šè¿‡äº†åå†åˆ¤æ–­åˆ«çš„æ ·å¼
 	map<string, sBorder>::iterator it_lhs = borders.begin();
 	map<string, sBorder>::const_iterator it_rhs = rhs.borders.begin();
 	for (; it_lhs != borders.end() && it_rhs != rhs.borders.end();
@@ -1779,11 +1779,11 @@ bool sInterior::operator==(const Interior_t& rhs)
 
 /////////////////////////////////////////////////////////////
 // functions
-void FreeXL::setupMapsByXML(								//¶¨ÒåµÄÊ±ºòÒª¼ÓÉÏnamespace
-		string xmlFilename,			//xmlÎÄ¼şÃû
-		string tagName,				//xmlÖĞÒª¶ÁÈ¡µÄ±êÇ©Ãû
-		map<string, int>& strToEnum,	//Ó³Éäµ½Ã¶¾ÙÀàĞÍµÄmap
-		map<int, string>& enumToStr,	//´ÓÃ¶¾ÙÓ³Éäµ½stringµÄmap
+void FreeXL::setupMapsByXML(								//å®šä¹‰çš„æ—¶å€™è¦åŠ ä¸Šnamespace
+		string xmlFilename,			//xmlæ–‡ä»¶å
+		string tagName,				//xmlä¸­è¦è¯»å–çš„æ ‡ç­¾å
+		map<string, int>& strToEnum,	//æ˜ å°„åˆ°æšä¸¾ç±»å‹çš„map
+		map<int, string>& enumToStr,	//ä»æšä¸¾æ˜ å°„åˆ°stringçš„map
 		map<string, int>& xlStrToEnum)
 {
 	int enumIndex = 0;
@@ -1796,9 +1796,9 @@ void FreeXL::setupMapsByXML(								//¶¨ÒåµÄÊ±ºòÒª¼ÓÉÏnamespace
 		enumIndex = $(xml[i]).iAttr("index");
 		userStr = $(xml[i]).attr("userStr");
 		xlStr = $(xml[i]).attr("xlStr");
-		enumToStr[enumIndex] = xlStr;					//Ã¶¾ÙÀàĞÍµ½xl xmlÖĞÊôĞÔstrµÄÓ³Éä
-		strToEnum[userStr] = enumIndex;				//ÓÃ»§±à³ÌÊ±ÊäÈëµÄ×Ö·ûµ½Ã¶¾ÙÀàĞÍµÄÓ³Éä
-		xlStrToEnum[xlStr] = enumIndex;				//´Óxml¶ÁÈ¡ÊôĞÔÖµµÄÊ±ºò²éÑ¯µÄÓ³Éä
+		enumToStr[enumIndex] = xlStr;					//æšä¸¾ç±»å‹åˆ°xl xmlä¸­å±æ€§strçš„æ˜ å°„
+		strToEnum[userStr] = enumIndex;				//ç”¨æˆ·ç¼–ç¨‹æ—¶è¾“å…¥çš„å­—ç¬¦åˆ°æšä¸¾ç±»å‹çš„æ˜ å°„
+		xlStrToEnum[xlStr] = enumIndex;				//ä»xmlè¯»å–å±æ€§å€¼çš„æ—¶å€™æŸ¥è¯¢çš„æ˜ å°„
 	}
 }
 

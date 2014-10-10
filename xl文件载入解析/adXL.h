@@ -1,4 +1,4 @@
-// adXL.h
+ï»¿// adXL.h
 
 #ifndef _ADXL_H_
 #define _ADXL_H_
@@ -57,11 +57,11 @@ namespace FreeXL
 	
 	// global functions
 	//////////////////////////////////////////////////////////////////////////////////////////
-	void setupMapsByXML(			//¼ÓÔØstyleÀàµÄÑùÊ½Ó³ÉäµÄº¯Êı
-		string xmlFilename,			//xmlÎÄ¼şÃû
-		string tagName,				//xmlÖĞÒª¶ÁÈ¡µÄ±êÇ©Ãû
-		map<string, int>& strToEnum,	//Ó³Éäµ½Ã¶¾ÙÀàĞÍµÄmap
-		map<int, string>& enumToStr,	//´ÓÃ¶¾ÙÓ³Éäµ½stringµÄmap
+	void setupMapsByXML(			//åŠ è½½styleç±»çš„æ ·å¼æ˜ å°„çš„å‡½æ•°
+		string xmlFilename,			//xmlæ–‡ä»¶å
+		string tagName,				//xmlä¸­è¦è¯»å–çš„æ ‡ç­¾å
+		map<string, int>& strToEnum,	//æ˜ å°„åˆ°æšä¸¾ç±»å‹çš„map
+		map<int, string>& enumToStr,	//ä»æšä¸¾æ˜ å°„åˆ°stringçš„map
 		map<string, int>& xlStrToEnum);
 	
 	
@@ -73,12 +73,12 @@ namespace FreeXL
 		friend class xlWorkbook;
 	
 	private:
-		static string _fileTargetForSettings;							//ÓÃÀ´ÉèÖÃÓ³ÉäµÄxmlÎÄ¼şÂ·¾¶
+		static string _fileTargetForSettings;							//ç”¨æ¥è®¾ç½®æ˜ å°„çš„xmlæ–‡ä»¶è·¯å¾„
 	
 	public:
 		
-		// ÒÔÏÂÑùÊ½¿ÉÄÜÓĞ¹ØÓÚÄ³ÖÖÑùÊ½µÄÃ¶¾ÙÀàĞÍ
-		// Åª¸öÃ¶¾ÙÀàĞÍÖ÷ÒªÊÇ±à³ÌµÄÊ±ºòÓĞ³£Á¿²Î¿¼
+		// ä»¥ä¸‹æ ·å¼å¯èƒ½æœ‰å…³äºæŸç§æ ·å¼çš„æšä¸¾ç±»å‹
+		// å¼„ä¸ªæšä¸¾ç±»å‹ä¸»è¦æ˜¯ç¼–ç¨‹çš„æ—¶å€™æœ‰å¸¸é‡å‚è€ƒ
 		class StyleBase
 		{
 			friend class xlStyle;
@@ -86,55 +86,55 @@ namespace FreeXL
 			friend class xlWorkbook;
 		
 		private:
-			StyleBase();											//Ä¬ÈÏ²»ÔÊĞíÓÃ»§¶¨ÒåÕâ¸öÀà
-			static bool _alignMapInitialized;							//³õ´Î´ÓxmlÔØÈëÓ³ÉäµÄ±ê¼Ç
-			static bool _bordrMapInitialized;								//Ã¿¸ömap¶¼±ØĞë¶ÀÁ¢
-			static bool _fontMapInitialized;									//Í¬ÉÏ
+			StyleBase();											//é»˜è®¤ä¸å…è®¸ç”¨æˆ·å®šä¹‰è¿™ä¸ªç±»
+			static bool _alignMapInitialized;							//åˆæ¬¡ä»xmlè½½å…¥æ˜ å°„çš„æ ‡è®°
+			static bool _bordrMapInitialized;								//æ¯ä¸ªmapéƒ½å¿…é¡»ç‹¬ç«‹
+			static bool _fontMapInitialized;									//åŒä¸Š
 			static bool _interiorMapInitialized;								//
 			static bool _numberFormatMapInitialized;							//
 			static bool _protectionMapInitialized;								//
 		
 		};
 	
-		class Alignment_t : public StyleBase										//¶ÔÆë·½Ê½
+		class Alignment_t : public StyleBase										//å¯¹é½æ–¹å¼
 		{
 			friend class xlStyle;
 			friend class xlCell;
 			friend class xlWorkbook;
 		
 			enum hAlign_t
-			{														//Ë®Æ½¶ÔÆëÀàĞÍ
+			{														//æ°´å¹³å¯¹é½ç±»å‹
 				/* there's some type missing as they're not common used*/
 				XL_hDefault,														//
-				XL_Center,														//Ë®Æ½¾ÓÖĞ
-				XL_Left,														//Ë®Æ½¾Ó×ó
-				XL_Right,														//Ë®Æ½¾ÓÓÒ
-				XL_CAcross,														//Ë®Æ½¿çÁĞ¾ÓÖĞ
-				XL_Justify														//Ë®Æ½Á½¶Ë¶ÔÆë
+				XL_Center,														//æ°´å¹³å±…ä¸­
+				XL_Left,														//æ°´å¹³å±…å·¦
+				XL_Right,														//æ°´å¹³å±…å³
+				XL_CAcross,														//æ°´å¹³è·¨åˆ—å±…ä¸­
+				XL_Justify														//æ°´å¹³ä¸¤ç«¯å¯¹é½
 			};
 			
 			enum vAlign_t
-			{														//´¹Ö±¶ÔÆëÀàĞÍ
+			{														//å‚ç›´å¯¹é½ç±»å‹
 				/* there's some type missing as they're not common used*/
 				XL_vDefault, XL_Middle,/*in xl is center, 
-				 but in order to distinguish them, we use middle*/			//´¹Ö±¾ÓÖĞ
-				XL_Bottom,														//´¹Ö±¾ÓÏÂ
-				XL_Top															//´¹Ö±¾ÓÉÏ
+				 but in order to distinguish them, we use middle*/			//å‚ç›´å±…ä¸­
+				XL_Bottom,														//å‚ç›´å±…ä¸‹
+				XL_Top															//å‚ç›´å±…ä¸Š
 			};
 		
-			static map<string, int> _hAlign;						//ÓÃ×÷×Ö·û´®Ó³Éäµ½Align_t
+			static map<string, int> _hAlign;						//ç”¨ä½œå­—ç¬¦ä¸²æ˜ å°„åˆ°Align_t
 			static map<string, int> _vAlign;
-			static map<string, int> _hAlign_xlStr_toEnum;			//ÓÃ×÷°ÑxmlÊôĞÔÖµÓ³Éäµ½enumÖµ
+			static map<string, int> _hAlign_xlStr_toEnum;			//ç”¨ä½œæŠŠxmlå±æ€§å€¼æ˜ å°„åˆ°enumå€¼
 			static map<string, int> _vAlign_xlStr_toEnum;
-			static map<int, string> _hAlign_toStr;					//ÓÃ×÷Align_tÓ³Éäµ½string
+			static map<int, string> _hAlign_toStr;					//ç”¨ä½œAlign_tæ˜ å°„åˆ°string
 			static map<int, string> _vAlign_toStr;
-			int vertical_;												//´¹Ö±¶ÔÆë·½Ê½
-			int horizontal_;											//Ë®Æ½¶ÔÆë·½Ê½
-			int rotation;												//Ğı×ª(·¶Î§£º-90~+90)
-			bool wrapText;												//×Ô¶¯»»ĞĞ
+			int vertical_;												//å‚ç›´å¯¹é½æ–¹å¼
+			int horizontal_;											//æ°´å¹³å¯¹é½æ–¹å¼
+			int rotation;												//æ—‹è½¬(èŒƒå›´ï¼š-90~+90)
+			bool wrapText;												//è‡ªåŠ¨æ¢è¡Œ
 		
 		public:
-			Alignment_t();											//¹¹Ôìº¯ÊıÓÃÓÚ³õÊ¼»¯alignMap
+			Alignment_t();											//æ„é€ å‡½æ•°ç”¨äºåˆå§‹åŒ–alignMap
 			string getVerticalAlign()
 			{
 				return _vAlign_toStr[vertical_];
@@ -162,35 +162,35 @@ namespace FreeXL
 			Alignment_t & setWrappedText(bool value);
 			Alignment_t & setRotation(int value);
 			Alignment_t & operator=(string expr);
-			bool operator==(const Alignment_t& rhs);			//±È½ÏÁ½¸öAlignment_tÖµÊÇ·ñÍêÈ«ÏàÍ¬
+			bool operator==(const Alignment_t& rhs);			//æ¯”è¾ƒä¸¤ä¸ªAlignment_tå€¼æ˜¯å¦å®Œå…¨ç›¸åŒ
 		
 		};
 		
-		class Borders_t : public StyleBase											//±ß¿ò
+		class Borders_t : public StyleBase											//è¾¹æ¡†
 		{
 			friend class xlStyle;
 			friend class xlCell;
 			friend class xlWorkbook;
 		
 			enum LineStyle_t
-			{													//±ß¿òÏßĞÍÀàĞÍ
-				XL_None,														//ÎŞÏßÌõ
-				XL_Continuous,														//ÊµÏß
-				XL_Solid,														//ÊµÏß£¨Í¬ÉÏ£©
-				XL_Dash,															//ĞéÏß
-				XL_DashDot,														//µã»®Ïß
-				XL_DashDotDot,													//µãµã»®Ïß
-				XL_Dot,																//µã
-				XL_Double,														//Ë«ÊµÏß
+			{													//è¾¹æ¡†çº¿å‹ç±»å‹
+				XL_None,														//æ— çº¿æ¡
+				XL_Continuous,														//å®çº¿
+				XL_Solid,														//å®çº¿ï¼ˆåŒä¸Šï¼‰
+				XL_Dash,															//è™šçº¿
+				XL_DashDot,														//ç‚¹åˆ’çº¿
+				XL_DashDotDot,													//ç‚¹ç‚¹åˆ’çº¿
+				XL_Dot,																//ç‚¹
+				XL_Double,														//åŒå®çº¿
 				XL_SlantDashDot
 			};
 		
 			static map<string, int> _lStyleMap;
 			static map<string, int> _lStyleMap_xlStr_toEnum;
 			static map<int, string> _lStyleMap_toStr;
-			int lineStyle_;												//±ß¿òÏßĞÍ
-			int weight_;			//±ß¿ò¿í¶È(È¡Öµ·¶Î§£¬0~3£¬µ«Êµ¼ÊÉÏÔÚexcelÖĞ»á×Ô¶¯ÉáÈ¥Ğ¡Êı£¬ÆäÊµÖ»ÓĞ4ÖÖÏßºñ¶È0,1,2,3)
-			string color_;													//±ß¿òÑÕÉ«
+			int lineStyle_;												//è¾¹æ¡†çº¿å‹
+			int weight_;			//è¾¹æ¡†å®½åº¦(å–å€¼èŒƒå›´ï¼Œ0~3ï¼Œä½†å®é™…ä¸Šåœ¨excelä¸­ä¼šè‡ªåŠ¨èˆå»å°æ•°ï¼Œå…¶å®åªæœ‰4ç§çº¿åšåº¦0,1,2,3)
+			string color_;													//è¾¹æ¡†é¢œè‰²
 		
 		public:
 			Borders_t();
@@ -215,44 +215,44 @@ namespace FreeXL
 			Borders_t & setBorderWeight(int iValue);
 			Borders_t & setBorderColor(string strValue);
 			Borders_t & operator=(string expr);
-			bool operator==(const Borders_t& rhs);				//±È½ÏÁ½¸öBorders_tÖµÊÇ·ñÍêÈ«ÏàÍ¬
+			bool operator==(const Borders_t& rhs);				//æ¯”è¾ƒä¸¤ä¸ªBorders_tå€¼æ˜¯å¦å®Œå…¨ç›¸åŒ
 		
 		};
 		
-		class Font_t : public StyleBase												//×ÖÌå
+		class Font_t : public StyleBase												//å­—ä½“
 		{
 			friend class xlStyle;
 			friend class xlCell;
 			friend class xlWorkbook;
 		
 			enum UnderlineStyle_t
-			{												//ÏÂ»®ÏßÀàĞÍ
-				XL_None,														//ÎŞÏÂ»®Ïß
-				XL_Single,														//µ¥ÏÂ»®Ïß
-				XL_Double														//Ë«ÏÂ»®Ïß
+			{												//ä¸‹åˆ’çº¿ç±»å‹
+				XL_None,														//æ— ä¸‹åˆ’çº¿
+				XL_Single,														//å•ä¸‹åˆ’çº¿
+				XL_Double														//åŒä¸‹åˆ’çº¿
 			};
 			enum VerticalAlign_t
-			{												//ÉÏÏÂ±êÀàĞÍ
-				XL_Default,															//³£¹æ
-				XL_Subscript,														//ÏÂ±ê
-				XL_Superscript														//ÉÏ±ê
+			{												//ä¸Šä¸‹æ ‡ç±»å‹
+				XL_Default,															//å¸¸è§„
+				XL_Subscript,														//ä¸‹æ ‡
+				XL_Superscript														//ä¸Šæ ‡
 			};
 		
-			static map<string, int> _underLnMap;							//ÏÂ»®ÏßÑùÊ½Ó³Éä
+			static map<string, int> _underLnMap;							//ä¸‹åˆ’çº¿æ ·å¼æ˜ å°„
 			static map<string, int> _underLnMap_xlStr_toEnum;
-			static map<int, string> _underLnMap_toStr;					//ÏÂ»®ÏßÑùÊ½Ó³Éäµ½×Ö·û´®
-			static map<string, int> _vAlign;									//ÉÏÏÂ±êÓ³Éä
+			static map<int, string> _underLnMap_toStr;					//ä¸‹åˆ’çº¿æ ·å¼æ˜ å°„åˆ°å­—ç¬¦ä¸²
+			static map<string, int> _vAlign;									//ä¸Šä¸‹æ ‡æ˜ å°„
 			static map<string, int> _vAlign_xlStr_toEnum;
 			static map<int, string> _vAlign_toStr;									//
-			string name;													//×ÖÌåÃû
-			string charSet;												//×Ö·û¼¯£¬Ä¬ÈÏ134
-			double size_;													//×ÖÌå´óĞ¡
-			string color_;													//×ÖÌåÑÕÉ«
-			bool strikeThrough_;											//ÊÇ·ñÓĞÉ¾³ıÏß
-			bool italic_;												//ÊÇ·ñÇãĞ±
-			bool bold_;													//ÊÇ·ñ¼Ó´Ö
-			int underlineStyle_;										//ÏÂ»®ÏßÑùÊ½
-			int vertical_Align_;										//ÉÏÏÂ±êÑùÊ½
+			string name;													//å­—ä½“å
+			string charSet;												//å­—ç¬¦é›†ï¼Œé»˜è®¤134
+			double size_;													//å­—ä½“å¤§å°
+			string color_;													//å­—ä½“é¢œè‰²
+			bool strikeThrough_;											//æ˜¯å¦æœ‰åˆ é™¤çº¿
+			bool italic_;												//æ˜¯å¦å€¾æ–œ
+			bool bold_;													//æ˜¯å¦åŠ ç²—
+			int underlineStyle_;										//ä¸‹åˆ’çº¿æ ·å¼
+			int vertical_Align_;										//ä¸Šä¸‹æ ‡æ ·å¼
 		
 		public:
 			Font_t();
@@ -309,44 +309,44 @@ namespace FreeXL
 			Font_t & setItalic(bool value);
 			Font_t & setBold(bool value);
 			Font_t & operator=(string expr);
-			bool operator==(const Font_t& rhs);						//±È½ÏÁ½¸öFont_tÖµÊÇ·ñÍêÈ«ÏàÍ¬
+			bool operator==(const Font_t& rhs);						//æ¯”è¾ƒä¸¤ä¸ªFont_tå€¼æ˜¯å¦å®Œå…¨ç›¸åŒ
 		
 		};
 	
-		class Interior_t : public StyleBase											//Ìî³ä
+		class Interior_t : public StyleBase											//å¡«å……
 		{
 			friend class xlStyle;
 			friend class xlCell;
 			friend class xlWorkbook;
 		
 			enum Pattern_t
-			{													//Ìî³äÀàĞÍ
-				XL_None,														//ÎŞÌî³ä
-				XL_Solid,														//ÊµĞÄÌî³ä
-				XL_Gray75,														//75%»Ò¶È
+			{													//å¡«å……ç±»å‹
+				XL_None,														//æ— å¡«å……
+				XL_Solid,														//å®å¿ƒå¡«å……
+				XL_Gray75,														//75%ç°åº¦
 				XL_Gray50,															//50
 				XL_Gray25,															//25
 				XL_Gray125,														//12.5
 				XL_Gray0625,													//6.25
-				XL_HorzStripe,													//Ë®Æ½Ïß£¨´Ö£©
-				XL_VertStripe,													//´¹Ö±Ïß£¨´Ö£©
-				XL_ReverseDiagStripe,											//¸±¶Ô½ÇÏß
-				XL_DiagStripe,													//Ö÷¶Ô½ÇÏß
-				XL_ThinHorzStripe,												//Ë®Æ½Ïß£¨Ï¸£©
-				XL_ThinVertStripe,												//´¹Ö±Ïß£¨Ï¸£©
-				XL_ThinHorzCross,											//Ë®Æ½´¹Ö±½»²æÏß£¨Ï¸£©
-				XL_ThinReverseDiagStripe,									//¸±¶Ô½ÇÏß£¨Ï¸£©
-				XL_ThinDiagStripe,//Ö÷¶Ô½ÇÏß£¨Ï¸£©														
-				XL_ThinDiagCross,											//½»²æ¶Ô½ÇÏß£¨Ï¸£©
-				XL_DiagCross,													//½»²æ¶Ô½ÇÏß
-				XL_ThickDiagCross											//½»²æ¶Ô½ÇÏß£¨´Ö£©
+				XL_HorzStripe,													//æ°´å¹³çº¿ï¼ˆç²—ï¼‰
+				XL_VertStripe,													//å‚ç›´çº¿ï¼ˆç²—ï¼‰
+				XL_ReverseDiagStripe,											//å‰¯å¯¹è§’çº¿
+				XL_DiagStripe,													//ä¸»å¯¹è§’çº¿
+				XL_ThinHorzStripe,												//æ°´å¹³çº¿ï¼ˆç»†ï¼‰
+				XL_ThinVertStripe,												//å‚ç›´çº¿ï¼ˆç»†ï¼‰
+				XL_ThinHorzCross,											//æ°´å¹³å‚ç›´äº¤å‰çº¿ï¼ˆç»†ï¼‰
+				XL_ThinReverseDiagStripe,									//å‰¯å¯¹è§’çº¿ï¼ˆç»†ï¼‰
+				XL_ThinDiagStripe,//ä¸»å¯¹è§’çº¿ï¼ˆç»†ï¼‰														
+				XL_ThinDiagCross,											//äº¤å‰å¯¹è§’çº¿ï¼ˆç»†ï¼‰
+				XL_DiagCross,													//äº¤å‰å¯¹è§’çº¿
+				XL_ThickDiagCross											//äº¤å‰å¯¹è§’çº¿ï¼ˆç²—ï¼‰
 			};
 		
-			static map<string, int> _patternMap;								//Ìî³äÑùÊ½Ó³Éä
+			static map<string, int> _patternMap;								//å¡«å……æ ·å¼æ˜ å°„
 			static map<string, int> _patternMap_xlStr_toEnum;
 			static map<int, string> _patternMap_toStr;
-			string color_;													//Ìî³äÉ«
-			int pattern;												//Ìî³äÑùÊ½
+			string color_;													//å¡«å……è‰²
+			int pattern;												//å¡«å……æ ·å¼
 		
 		public:
 			Interior_t();
@@ -365,17 +365,17 @@ namespace FreeXL
 			Interior_t & setInteriorPattern(string value);
 			Interior_t & setInteriorPattern(Pattern_t enumValue);
 			Interior_t & operator=(string expr);
-			bool operator==(const Interior_t& rhs);				//±È½ÏÁ½¸öInterior_tÖµÊÇ·ñÍêÈ«ÏàÍ¬
+			bool operator==(const Interior_t& rhs);				//æ¯”è¾ƒä¸¤ä¸ªInterior_tå€¼æ˜¯å¦å®Œå…¨ç›¸åŒ
 			
 		};
 	
-		class NumberFormat_t : public StyleBase									//Êı×Ö¸ñÊ½
+		class NumberFormat_t : public StyleBase									//æ•°å­—æ ¼å¼
 		{
 		public:
 		
 		};
 		
-		class Protection_t : public StyleBase									//µ¥Ôª¸ñ±£»¤
+		class Protection_t : public StyleBase									//å•å…ƒæ ¼ä¿æŠ¤
 		{
 		public:
 		
@@ -384,16 +384,16 @@ namespace FreeXL
 		typedef Borders_t sBorder;
 		
 		// style members
-		Alignment_t alignment;												//¶ÔÆë
-		map<string, sBorder> borders;												//±ß¿ò
-		Font_t font;													//×ÖÌå
-		Interior_t interior;												//Ìî³ä
-		NumberFormat_t numberFormat;										//Êı×Ö¸ñÊ½(Î´ÍêÉÆ)
-		Protection_t protection;											//±£»¤(Î´ÍêÉÆ)
+		Alignment_t alignment;												//å¯¹é½
+		map<string, sBorder> borders;												//è¾¹æ¡†
+		Font_t font;													//å­—ä½“
+		Interior_t interior;												//å¡«å……
+		NumberFormat_t numberFormat;										//æ•°å­—æ ¼å¼(æœªå®Œå–„)
+		Protection_t protection;											//ä¿æŠ¤(æœªå®Œå–„)
 		string styleID;												//ss:StyleID
 		
 		xlStyle();
-		bool operator==(const xlStyle& rhs);						//±È½ÏÁ½¸östyle¶ÔÏóÖµÊÇ·ñÍêÈ«ÏàÍ¬
+		bool operator==(const xlStyle& rhs);						//æ¯”è¾ƒä¸¤ä¸ªstyleå¯¹è±¡å€¼æ˜¯å¦å®Œå…¨ç›¸åŒ
 		
 	};
 	// typedef change into short-form
@@ -406,7 +406,7 @@ namespace FreeXL
 	typedef xlStyle::NumberFormat_t sNumFormat;
 	typedef xlStyle::Protection_t sProtect;
 	
-	class Cell															//Õâ¸öÖ»ÊÇµ¥Ôª¸ñ×ø±êÀà
+	class Cell															//è¿™ä¸ªåªæ˜¯å•å…ƒæ ¼åæ ‡ç±»
 	{
 	
 	public:
@@ -430,13 +430,13 @@ namespace FreeXL
 		
 		enum SS_TYPE
 		{
-			T_String,				//ÎÄ±¾(default type)
-			T_Number,				//Êı×Ö
-			T_Date					//ÈÕÆÚ
+			T_String,				//æ–‡æœ¬(default type)
+			T_Number,				//æ•°å­—
+			T_Date					//æ—¥æœŸ
 		};
 		
 		static class SS_TYPE_MAP
-		{										//¸ÃÀàÓÃÓÚ±£´æµ¥Ôª¸ñÀàĞÍµÄÓ³Éä
+		{										//è¯¥ç±»ç”¨äºä¿å­˜å•å…ƒæ ¼ç±»å‹çš„æ˜ å°„
 		
 		private:
 			static bool _initialized;
@@ -449,19 +449,19 @@ namespace FreeXL
 		} __cell_type;
 		
 		protected:
-			SS_TYPE_MAP __TO_INITIALIZE_CellTYPE;						//ÓÃÓÚ³õÊ¼»¯SS_TYPE_MAP
-			string data;													//µ¥Ôª¸ñÊı¾İ
-			SS_TYPE ss_type;												//µ¥Ôª¸ñÊı¾İÀàĞÍ
-			UINT _rowIndex;												//ĞĞ±ê
-			UINT _colIndex;												//ÁĞ±ê
-			xlStyle _style;													//µ¥Ôª¸ñstyle¶ÔÏó
-			xlSheet * _pSh;													//Ö¸ÏòÍâ²ãµÄsheet¶ÔÏó
+			SS_TYPE_MAP __TO_INITIALIZE_CellTYPE;						//ç”¨äºåˆå§‹åŒ–SS_TYPE_MAP
+			string data;													//å•å…ƒæ ¼æ•°æ®
+			SS_TYPE ss_type;												//å•å…ƒæ ¼æ•°æ®ç±»å‹
+			UINT _rowIndex;												//è¡Œæ ‡
+			UINT _colIndex;												//åˆ—æ ‡
+			xlStyle _style;													//å•å…ƒæ ¼styleå¯¹è±¡
+			xlSheet * _pSh;													//æŒ‡å‘å¤–å±‚çš„sheetå¯¹è±¡
 		
 		private:
 			xlCell(UINT rIndex, UINT cIndex, xlSheet* psh);
-			xlCell(TiXmlNode* _cell, $ xQ);							//Ö±½ÓÔÚ½âÎöcells
-			xlCell & parseToCells(TiXmlNode* _cell);					//´ÓCell½Úµã½âÎöµ½xlCell¶ÔÏó
-			xlCell & parseToStyle($& container);							//´Óxml½âÎöµ¥Ôª¸ñstyle
+			xlCell(TiXmlNode* _cell, $ xQ);							//ç›´æ¥åœ¨è§£æcells
+			xlCell & parseToCells(TiXmlNode* _cell);					//ä»CellèŠ‚ç‚¹è§£æåˆ°xlCellå¯¹è±¡
+			xlCell & parseToStyle($& container);							//ä»xmlè§£æå•å…ƒæ ¼style
 		
 		public:
 			xlCell(string _data = "", SS_TYPE type = T_String);
@@ -476,7 +476,7 @@ namespace FreeXL
 				return false;
 			else
 				return true;
-		}																//¶ÁÈ¡µ¥Ôª¸ñÖµ(inline)
+		}																//è¯»å–å•å…ƒæ ¼å€¼(inline)
 		
 		_Temp_T inline bool setValue(const T& setBy)
 		{
@@ -487,7 +487,7 @@ namespace FreeXL
 			else
 			this->ss_type=CellType[typeid(T).name()];
 			return true;
-		}																		//ÉèÖÃµ¥Ôª¸ñÖµ
+		}																		//è®¾ç½®å•å…ƒæ ¼å€¼
 		
 		_Temp_T inline xlCell & operator=(const T& setBy)
 		{
@@ -495,21 +495,21 @@ namespace FreeXL
 			return *this;
 		}
 		
-		string value();												//È¡×Ö·û´®Öµ
-		int iValue();//È¡ÕûÊı
-		double dValue();//È¡¸¡µãÊı
-		string getValueType();//·µ»ØExcelÖĞµÄÊı¾İÀàĞÍ
-		inline UINT rowIndex();//·µ»ØĞĞºÅ£¬1¿ªÊ¼
-		inline UINT colIndex();//·µ»ØÁĞºÅ£¬1¿ªÊ¼
+		string value();												//å–å­—ç¬¦ä¸²å€¼
+		int iValue();//å–æ•´æ•°
+		double dValue();//å–æµ®ç‚¹æ•°
+		string getValueType();//è¿”å›Excelä¸­çš„æ•°æ®ç±»å‹
+		inline UINT rowIndex();//è¿”å›è¡Œå·ï¼Œ1å¼€å§‹
+		inline UINT colIndex();//è¿”å›åˆ—å·ï¼Œ1å¼€å§‹
 		
-		xlStyle & style();//·µ»Øµ¥Ôª¸ñµÄstyleÑùÊ½¶ÔÏó
+		xlStyle & style();//è¿”å›å•å…ƒæ ¼çš„styleæ ·å¼å¯¹è±¡
 		string getStyleID();
-		xlCell & setStyleBy(const xlStyle& _style);//ÉèÖÃStyle
+		xlCell & setStyleBy(const xlStyle& _style);//è®¾ç½®Style
 		
-		inline xlCell & printCell();//ÔÚÆÁÄ»ÉÏÏÔÊ¾µ¥Ôª¸ñÄÚÈİ
-		inline bool isEmpty();//µ¥Ôª¸ñÎª¿Õ£¿
-		xlCell & clear();//Çå³şµ¥Ôª¸ñÄÚÈİ£¬µ«±£ÁôÑùÊ½
-		xlCell & clearStyle();//Çå³şµ¥Ôª¸ñÑùÊ½£¬µ«±£ÁôÎÄ±¾ÄÚÈİ
+		inline xlCell & printCell();//åœ¨å±å¹•ä¸Šæ˜¾ç¤ºå•å…ƒæ ¼å†…å®¹
+		inline bool isEmpty();//å•å…ƒæ ¼ä¸ºç©ºï¼Ÿ
+		xlCell & clear();//æ¸…æ¥šå•å…ƒæ ¼å†…å®¹ï¼Œä½†ä¿ç•™æ ·å¼
+		xlCell & clearStyle();//æ¸…æ¥šå•å…ƒæ ¼æ ·å¼ï¼Œä½†ä¿ç•™æ–‡æœ¬å†…å®¹
 		void Delete(ShiftType _type=xlShiftUp);
 	
 	};
@@ -525,40 +525,40 @@ namespace FreeXL
 		typedef vector<vector<xlCell> > SS_TABLE;
 	
 	protected:
-		SS_TABLE ss_table;												//µ¥Ôª¸ñ±í
-		string _sheetName;												//¹¤×÷±íÃû³Æ
-		xlWorkbook * _pWB;											//Ö¸ÏòËùÔÚÍâ¿ÇWorkbook
+		SS_TABLE ss_table;												//å•å…ƒæ ¼è¡¨
+		string _sheetName;												//å·¥ä½œè¡¨åç§°
+		xlWorkbook * _pWB;											//æŒ‡å‘æ‰€åœ¨å¤–å£³Workbook
 	
 	public:
 		xlSheet();
 		xlSheet(string _name, xlWorkbook* _pwb = nullptr);
 	
-		xlCell & cells(int r, int c);										//¶ÁÈ¡µ¥Ôª¸ñ
-		xlCell & cells(string a1_style);									//¶ÁÈ¡µ¥Ôª¸ñ
+		xlCell & cells(int r, int c);										//è¯»å–å•å…ƒæ ¼
+		xlCell & cells(string a1_style);									//è¯»å–å•å…ƒæ ¼
 	
-		xlRange range(int r1, int c1, int r2, int c2);				//·µ»Ø¸Ã±íÖĞµÄÒ»¸öÇøÓòÒıÓÃ
+		xlRange range(int r1, int c1, int r2, int c2);				//è¿”å›è¯¥è¡¨ä¸­çš„ä¸€ä¸ªåŒºåŸŸå¼•ç”¨
 		xlRange range(Cell cell1, Cell cell2);
 		xlRange range(string a1_style);
 	
-		xlRow row(UINT startIndex, UINT endIndex = 0);				//·µ»Ø±íÖĞÇøÓòµÄÒıÓÃ£¨ĞĞ£©
+		xlRow row(UINT startIndex, UINT endIndex = 0);				//è¿”å›è¡¨ä¸­åŒºåŸŸçš„å¼•ç”¨ï¼ˆè¡Œï¼‰
 		xlRow row(string a1_style);
 	
-		xlColumn column(UINT startIndex, UINT endIndex = 0);		//·µ»Ø±íÖĞÇøÓòµÄÒıÓÃ£¨ÁĞ£©
+		xlColumn column(UINT startIndex, UINT endIndex = 0);		//è¿”å›è¡¨ä¸­åŒºåŸŸçš„å¼•ç”¨ï¼ˆåˆ—ï¼‰
 		xlColumn column(string a1_style);
 	
 		const UINT maxRow() const;
 		const UINT maxCol() const;
-		xlSheet & setMaxRow(UINT r);										//ÉèÖÃ×î´óĞĞÊı
-		xlSheet & setMaxCol(UINT c);										//ÉèÖÃ×î´óÁĞÊı
-		inline string sheetName();									//·µ»Øsheet name
-		inline xlSheet & sheetName(string setName);					//ÉèÖÃsheet name
+		xlSheet & setMaxRow(UINT r);										//è®¾ç½®æœ€å¤§è¡Œæ•°
+		xlSheet & setMaxCol(UINT c);										//è®¾ç½®æœ€å¤§åˆ—æ•°
+		inline string sheetName();									//è¿”å›sheet name
+		inline xlSheet & sheetName(string setName);					//è®¾ç½®sheet name
 	
 		xlSheet & printSheet();
 	
-		xlWorkbook & Delete();												//É¾³ı¸Ã¹¤×÷±í
-		xlSheet & DeleteCell(int r, int c, ShiftType _type = xlShiftUp);	//É¾³ıµ¥Ôª¸ñ
+		xlWorkbook & Delete();												//åˆ é™¤è¯¥å·¥ä½œè¡¨
+		xlSheet & DeleteCell(int r, int c, ShiftType _type = xlShiftUp);	//åˆ é™¤å•å…ƒæ ¼
 		xlSheet & DeleteCell(Cell cell, ShiftType _type = xlShiftUp);
-		xlSheet & DeleteRange(int r1, int c1, int r2, int c2, ShiftType _type = xlDetermineBySize);		//É¾³ıÑ¡Çø
+		xlSheet & DeleteRange(int r1, int c1, int r2, int c2, ShiftType _type = xlDetermineBySize);		//åˆ é™¤é€‰åŒº
 		xlSheet & DeleteRange(Cell cell1, Cell cell2, ShiftType _type = xlDetermineBySize);
 		xlSheet & DeleteRange(string a1_Style, ShiftType _type = xlDetermineBySize);
 	
@@ -574,31 +574,31 @@ namespace FreeXL
 	
 	protected:
 		string _filename;
-		$ XL;														//×°ÔØÁËxmlµç×Ó±í¸ñµÄÑ¡ÔñÆ÷
+		$ XL;														//è£…è½½äº†xmlç”µå­è¡¨æ ¼çš„é€‰æ‹©å™¨
 		vector<xlSheet> _theSheets;
-		map<int, xlStyle> _style_map;						//styleIDµ½xlStyle¶ÔÏóµÄÓ³Éä
+		map<int, xlStyle> _style_map;						//styleIDåˆ°xlStyleå¯¹è±¡çš„æ˜ å°„
 	
 	public:
 		xlWorkbook(string filename = "");
-		xlWorkbook & load(string filename);									//ÔØÈëÎÄ¼ş
-		xlWorkbook & save();												//±£´æÎÄ¼ş
-		xlWorkbook & saveAs(string filename);								//Áí´æÎªÎÄ¼ş
-		int registerStyle(const xlStyle& _style);			//ÏòÑùÊ½³ØÀï×¢²áÒ»¸öÑùÊ½£¬·µ»Ø×¢²áºóµÄÑùÊ½ID
+		xlWorkbook & load(string filename);									//è½½å…¥æ–‡ä»¶
+		xlWorkbook & save();												//ä¿å­˜æ–‡ä»¶
+		xlWorkbook & saveAs(string filename);								//å¦å­˜ä¸ºæ–‡ä»¶
+		int registerStyle(const xlStyle& _style);			//å‘æ ·å¼æ± é‡Œæ³¨å†Œä¸€ä¸ªæ ·å¼ï¼Œè¿”å›æ³¨å†Œåçš„æ ·å¼ID
 	
-		xlSheet & newSheet(string _sheetName);							//ĞÂ½¨sheet
-		xlWorkbook & newSheets(int number_of_new);						//ĞÂ½¨n¸ö¹¤×÷±í
-		xlWorkbook & DeleteSheet(string _sheetName);					//É¾³ısheet
+		xlSheet & newSheet(string _sheetName);							//æ–°å»ºsheet
+		xlWorkbook & newSheets(int number_of_new);						//æ–°å»ºnä¸ªå·¥ä½œè¡¨
+		xlWorkbook & DeleteSheet(string _sheetName);					//åˆ é™¤sheet
 		xlWorkbook & DeleteSheet(int index);
 		xlSheet & sheets(int index);
 		xlSheet & sheets(string sheetName);
-		UINT sheetsCount() const;									//·µ»Ø¹¤×÷±í¸öÊı
-		bool hasSheet(string name) const;								//²âÊÔÊÇ·ñÓĞ¸Ã¹¤×÷±í
+		UINT sheetsCount() const;									//è¿”å›å·¥ä½œè¡¨ä¸ªæ•°
+		bool hasSheet(string name) const;								//æµ‹è¯•æ˜¯å¦æœ‰è¯¥å·¥ä½œè¡¨
 	
 	private:
-		xlWorkbook & parseToSheets();										//½âÎöÎÄ¼ş
-		xlWorkbook & inverseParse();					//·´½âÎö£¬¼´°ÑÄÚ´æÖĞµÄexcel×ª»»µ½xmlµç×Ó±í¸ñ
-		xlWorkbook & parseToStylePool();							//´Óxml¶ÁÈ¡ÀàĞÍµ½ÀàĞÍ³ØÖĞ
-		xlWorkbook & parseDefaultStyle();	//ÔÚxmlÎÄ¼şÖĞ¶ÁÈ¡defaultÑùÊ½²¢±£´æÔÚstyle_map[0]µÄÎ»ÖÃ
+		xlWorkbook & parseToSheets();										//è§£ææ–‡ä»¶
+		xlWorkbook & inverseParse();					//åè§£æï¼Œå³æŠŠå†…å­˜ä¸­çš„excelè½¬æ¢åˆ°xmlç”µå­è¡¨æ ¼
+		xlWorkbook & parseToStylePool();							//ä»xmlè¯»å–ç±»å‹åˆ°ç±»å‹æ± ä¸­
+		xlWorkbook & parseDefaultStyle();	//åœ¨xmlæ–‡ä»¶ä¸­è¯»å–defaultæ ·å¼å¹¶ä¿å­˜åœ¨style_map[0]çš„ä½ç½®
 	
 	};
 	
@@ -610,7 +610,7 @@ namespace FreeXL
 	
 	protected:
 		pSS_TABLE p_table;
-		xlSheet * _pSh;													//Ö¸ÏòsheetµÄÖ¸Õë
+		xlSheet * _pSh;													//æŒ‡å‘sheetçš„æŒ‡é’ˆ
 	
 	public:
 		xlRange(xlSheet* _xlsheet, int r1, int c1, int r2, int c2);
@@ -619,7 +619,7 @@ namespace FreeXL
 		
 		~xlRange()
 		{
-		}											//Îö¹¹Ê±²»×öÈÎºÎÊÂÇé
+		}											//ææ„æ—¶ä¸åšä»»ä½•äº‹æƒ…
 	
 		_Temp_T inline xlRange & setValue(const T& setBy)
 		{
@@ -631,7 +631,7 @@ namespace FreeXL
 				}
 			}
 			return *this;
-		}														//¸ørangeÖĞÃ¿Ò»¸öcell¸³Öµ
+		}														//ç»™rangeä¸­æ¯ä¸€ä¸ªcellèµ‹å€¼
 		
 		_Temp_T inline xlRange & operator=(const T& setBy)
 		{
@@ -639,19 +639,19 @@ namespace FreeXL
 		}
 		
 		xlCell & at(UINT rel_r,UINT rel_c);
-		xlCell & corner(CornerCell _corner);						//·µ»ØÑ¡Çø½ÇÂäµÄµ¥Ôª¸ñÒıÓÃ
+		xlCell & corner(CornerCell _corner);						//è¿”å›é€‰åŒºè§’è½çš„å•å…ƒæ ¼å¼•ç”¨
 	
-		UINT rangeWidth();			//Ñ¡Çø¿í¶È
-		UINT rangeHeight();			//Ñ¡Çø´óĞ¡
+		UINT rangeWidth();			//é€‰åŒºå®½åº¦
+		UINT rangeHeight();			//é€‰åŒºå¤§å°
 	
-		xlRange & setStyleBy(const xlStyle& _style);			//ÉèÖÃStyle
-		xlRange & clear();												//Çå³ıÊı¾İ
-		xlRange & clearStyle();										//Çå³şÑùÊ½
+		xlRange & setStyleBy(const xlStyle& _style);			//è®¾ç½®Style
+		xlRange & clear();												//æ¸…é™¤æ•°æ®
+		xlRange & clearStyle();										//æ¸…æ¥šæ ·å¼
 	
-		xlRange & offset(int r_shift,int c_shift);//½«Ñ¡ÇøÏà¶ÔÆ«ÒÆ
+		xlRange & offset(int r_shift,int c_shift);//å°†é€‰åŒºç›¸å¯¹åç§»
 	
 	private:
-		xlRange & __Initialize_p_Range(xlSheet* _xlsheet,int r1,int c1,int r2,int c2);//ÓÃÓÚÔÚ¹¹Ôìº¯ÊıÖĞ¼õÉÙ´úÂëÁ¿
+		xlRange & __Initialize_p_Range(xlSheet* _xlsheet,int r1,int c1,int r2,int c2);//ç”¨äºåœ¨æ„é€ å‡½æ•°ä¸­å‡å°‘ä»£ç é‡
 	
 	};
 	
@@ -660,8 +660,8 @@ namespace FreeXL
 	{
 	
 	protected:
-		UINT _startRowIndex;											//ÆğÊ¼ĞĞºÅ
-		int _span;									//¹²ÓĞĞĞÊı(lastrow=startrow+span-1)
+		UINT _startRowIndex;											//èµ·å§‹è¡Œå·
+		int _span;									//å…±æœ‰è¡Œæ•°(lastrow=startrow+span-1)
 	
 	public:
 		xlRow(xlSheet* _xlsheet, UINT startRowIndex, UINT endRowIndex = 0);
@@ -679,8 +679,8 @@ namespace FreeXL
 	{
 	
 	protected:
-		UINT _startColIndex;											//ÆğÊ¼ÁĞºÅ
-		int _span;									//¹²ÓĞÁĞÊı(lastrow=startrow+span-1)
+		UINT _startColIndex;											//èµ·å§‹åˆ—å·
+		int _span;									//å…±æœ‰åˆ—æ•°(lastrow=startrow+span-1)
 	
 	public:
 		xlColumn(xlSheet* _xlsheet, UINT startColIndex, UINT endColIndex = 0);
@@ -693,7 +693,7 @@ namespace FreeXL
 	};
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
-	class A1_STYLE									//ÓÃÀ´´¦ÀíA1ÒıÓÃÑùÊ½Ñ¡ÔñµÄ×Ö·û´®£¨e.g. A1:B3£©
+	class A1_STYLE									//ç”¨æ¥å¤„ç†A1å¼•ç”¨æ ·å¼é€‰æ‹©çš„å­—ç¬¦ä¸²ï¼ˆe.g. A1:B3ï¼‰
 	{
 		
 		friend class RC_STYLE;
@@ -703,9 +703,9 @@ namespace FreeXL
 	
 	public:
 		static string ALPHABET;
-		int Row1;													//ÆğÊ¼ĞĞºÅ
+		int Row1;													//èµ·å§‹è¡Œå·
 		int Col1;
-		int Row2;													//ÖÕÖ¹ĞĞºÅ
+		int Row2;													//ç»ˆæ­¢è¡Œå·
 		int Col2;
 		map<string, bool> absolute;
 		A1_STYLE(const string a1_style = "");
@@ -726,9 +726,9 @@ namespace FreeXL
 		string _expr;
 	
 	public:
-		int Row1;													//ÆğÊ¼ĞĞºÅ
+		int Row1;													//èµ·å§‹è¡Œå·
 		int Col1;
-		int Row2;													//ÖÕÖ¹ĞĞºÅ
+		int Row2;													//ç»ˆæ­¢è¡Œå·
 		int Col2;
 		map<string, bool> relativity;
 		RC_STYLE(const string rc_style = "");
