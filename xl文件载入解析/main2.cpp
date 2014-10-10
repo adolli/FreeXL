@@ -7,9 +7,6 @@
 using namespace std;
 using namespace FreeXL;
 
-
-
-
 int GetMaxLevel(xlSheet& sheet, unsigned int startRow, unsigned int col_index)
 {
 	const unsigned int MAX_ROW = sheet.maxRow();
@@ -23,7 +20,7 @@ int GetMaxLevel(xlSheet& sheet, unsigned int startRow, unsigned int col_index)
 
 void BatchLevelCalc()
 {
-	cout<<"---  批量层级处理工具 v1.0  ---"<<endl<<endl;
+	cout << "---  批量层级处理工具 v1.0  ---" << endl << endl;
 
 	string filename = "输入表";
 	string sheetname = "Sheet1";
@@ -32,23 +29,22 @@ void BatchLevelCalc()
 	string strColMass = "C";
 
 	// 打开 “xx总表” 的 “sheetname”
-	cout<<endl<<"请确保 “输入表” 已经被关闭"<<endl;
+	cout << endl << "请确保 “输入表” 已经被关闭" << endl;
 	system("pause");
 
-	cout<<endl<<"正在读取……请稍候……"<<endl;
+	cout << endl << "正在读取……请稍候……" << endl;
 	xlWorkbook wb(filename + ".xml");
 	xlSheet& sh = wb.sheets(sheetname);
-	cout<<"正在计算……请稍候……"<<endl;
-
+	cout << "正在计算……请稍候……" << endl;
 
 	const unsigned int COL_LEVEL = A1_STYLE(strColLevel).Col1;			//<! 层级
 	const unsigned int COL_QUANTITY = A1_STYLE(strColQty).Col1;			//<! 数量
-	const unsigned int COL_MASS = A1_STYLE(strColMass).Col1;			//<! 单个质量
-	const unsigned int COL_CAL_MASS = sh.maxCol() + 1;					//<! 计算质量
+	const unsigned int COL_MASS = A1_STYLE(strColMass).Col1;		//<! 单个质量
+	const unsigned int COL_CAL_MASS = sh.maxCol() + 1;				//<! 计算质量
 
 	// 获取该表最大行号
 	const unsigned int MAX_ROW = sh.maxRow();
-	
+
 	// 默认数据起始行为第2行
 	unsigned int START_ROW = 2;
 
@@ -64,7 +60,6 @@ void BatchLevelCalc()
 
 	// 获取最底的层级和该表最大行号
 	const unsigned int MAX_LEVEL = GetMaxLevel(sh, 2, COL_LEVEL);
-
 
 	// 先填充单件质量
 	sh.cells(START_ROW - 1, COL_CAL_MASS) = "computedMass";
@@ -85,10 +80,12 @@ void BatchLevelCalc()
 			// 把当前层级的数据累加起来
 			if (sh.cells(r, COL_LEVEL).iValue() == level)
 			{
-				inheritMass += sh.cells(r, COL_CAL_MASS).dValue() * sh.cells(r, COL_QUANTITY).iValue();
+				inheritMass += sh.cells(r, COL_CAL_MASS).dValue()
+						* sh.cells(r, COL_QUANTITY).iValue();
 			}
 			// 遇到当前层级更高一层的就把累加的数据保存到更高一层
-			else if (sh.cells(r, COL_LEVEL).iValue() == level - 1 && inheritMass != 0)
+			else if (sh.cells(r, COL_LEVEL).iValue() == level - 1
+					&& inheritMass != 0)
 			{
 				sh.cells(r, COL_CAL_MASS) = inheritMass;
 				inheritMass = 0;
@@ -96,15 +93,13 @@ void BatchLevelCalc()
 		}
 	}
 
-
-	cout<<"计算完成，正在保存……请稍候……"<<endl;
+	cout << "计算完成，正在保存……请稍候……" << endl;
 
 	// 另存为
 	wb.saveAs("output.xml");
-	cout<<"保存完毕！ 输出文件名为 “output.xml”"<<endl;
-	cout<<"请打开 “output.xml” 的最后一列将数据取走"<<endl;
+	cout << "保存完毕！ 输出文件名为 “output.xml”" << endl;
+	cout << "请打开 “output.xml” 的最后一列将数据取走" << endl;
 }
-
 
 /*
  * @brief	零件
@@ -112,8 +107,8 @@ void BatchLevelCalc()
 class Part
 {
 public:
-	Part(string id, string name, string engineer, int qty)
-		: id_(id), name_(name), productEngineer(engineer), quantity(qty)
+	Part(string id, string name, string engineer, int qty) :
+			id_(id), name_(name), productEngineer(engineer), quantity(qty)
 	{
 	}
 
@@ -124,14 +119,14 @@ public:
 
 };
 
-
 class ListItem
 {
 public:
 
-	ListItem()
-		: quantity(0)
-	{}
+	ListItem() :
+			quantity(0)
+	{
+	}
 
 	string name_;
 	string productEngineer;
@@ -148,7 +143,8 @@ void OutputToSubmitList(map<string, ListItem>& m, const vector<Part>& p)
 	}
 }
 
-void CombineToSubmitList(map<string, ListItem>& m, const vector<Part>& p, unsigned int nCars)
+void CombineToSubmitList(map<string, ListItem>& m, const vector<Part>& p,
+		unsigned int nCars)
 {
 	for (auto it = p.begin(); it != p.end(); ++it)
 	{
@@ -160,7 +156,7 @@ void CombineToSubmitList(map<string, ListItem>& m, const vector<Part>& p, unsign
 
 int main()
 {
-	cout<<"---  零件基本表自动清单工具 v1.0  ---"<<endl<<endl;
+	cout << "---  零件基本表自动清单工具 v1.0  ---" << endl << endl;
 
 	string filename = "零件基本表";
 	string sheetname = "Input";
@@ -173,28 +169,27 @@ int main()
 	const unsigned int COL_NAME = A1_STYLE(strColName).Col1;		//<! 零件名称
 	const unsigned int COL_ENG = A1_STYLE(strColEng).Col1;			//<! 产品工程师
 
-	cout<<endl<<"请确保 “" + filename + "” 已经被关闭"<<endl;
+	cout << endl << "请确保 “" + filename + "” 已经被关闭" << endl;
 	system("pause");
 
-	cout<<endl<<"正在解析数据……请稍候……"<<endl;
+	cout << endl << "正在解析数据……请稍候……" << endl;
 	xlWorkbook wb(filename + ".xml");
 	xlSheet& sh = wb.sheets(sheetname);
 	xlSheet& output_sh = wb.sheets("Output");
 	xlSheet& String_sh = wb.sheets("String");
-	cout<<"正在计算……请稍候……"<<endl;
-
+	cout << "正在计算……请稍候……" << endl;
 
 	// 找出要用到的String
-	map<string, string> stringTable;
+	map < string, string > stringTable;
 	for (unsigned int r = 2; r <= String_sh.maxRow(); ++r)
 	{
-		stringTable[String_sh.cells(r, 1).value()] = String_sh.cells(r, 2).value();
+		stringTable[String_sh.cells(r, 1).value()] =
+				String_sh.cells(r, 2).value();
 	}
-
 
 	const unsigned int MAX_ROW = sh.maxRow();
 	const unsigned int MAX_COL = sh.maxCol();
-	
+
 	// 默认数据起始行为第5行
 	const unsigned int START_ROW = 5;
 	const unsigned int START_COL = 5;
@@ -202,7 +197,7 @@ int main()
 	vector<Part> vParts;
 	map<string, ListItem> mapParts;
 	map<string, ListItem> mapPartsPerType;
-	
+
 	for (unsigned int c = START_COL; c <= MAX_COL; ++c)
 	{
 		unsigned int FatherQty = 0;
@@ -223,11 +218,10 @@ int main()
 			else
 			{
 				vParts.push_back(
-					Part(
-					sh.cells(r, COL_ID).value(), 
-					sh.cells(r, COL_NAME).value(), 
-					sh.cells(r, COL_ENG).value(), 
-					sh.cells(r, c).iValue() * FatherQty * CarQty));
+						Part(sh.cells(r, COL_ID).value(),
+								sh.cells(r, COL_NAME).value(),
+								sh.cells(r, COL_ENG).value(),
+								sh.cells(r, c).iValue() * FatherQty * CarQty));
 			}
 		}
 
@@ -238,8 +232,8 @@ int main()
 			OutputToSubmitList(mapParts, vParts);
 			vParts.clear();
 		}
-	}	
-	
+	}
+
 	// 导出单台用量
 	output_sh.cells(1, 5) = "single usage";
 	unsigned int rr = 2;
@@ -266,17 +260,18 @@ int main()
 			output_sh.cells(rr, COL_NAME) = it->second.name_;
 			output_sh.cells(rr, 6) = it->second.quantity;
 			output_sh.cells(rr, 7) = it->second.productEngineer;
-			output_sh.cells(rr, 4) 
-				= stringTable.find("sample_status") != stringTable.end() ? stringTable["sample_status"] : "undefined";
-			
+			output_sh.cells(rr, 4) =
+					stringTable.find("sample_status") != stringTable.end() ?
+							stringTable["sample_status"] : "undefined";
+
 			// move to next line
 			++rr;
 		}
 	}
 
-	cout<<"正在保存……请稍候……"<<endl;
-	wb.saveAs(filename + "_out.xml"); 
-	cout<<"保存成功……请打开 “" + filename + "_out” 读取"<<endl;
+	cout << "正在保存……请稍候……" << endl;
+	wb.saveAs(filename + "_out.xml");
+	cout << "保存成功……请打开 “" + filename + "_out” 读取" << endl;
 
 	system("pause");
 	return 0;

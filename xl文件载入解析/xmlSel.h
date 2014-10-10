@@ -84,34 +84,36 @@
 using namespace std;
 
 typedef unsigned int UINT;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // class declairation
 class $;
 class conEx;
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // function
-		/**************************************************************************************************************
-			È«¾Öº¯Êı
-		*/
-						vector<string>		split(string source,char splitSymbol);//·Ö¸î×Ö·û´®
-						string				joint(const vector<string>& vec,string withThis);//´®Áª×Ö·û´®
-						vector<TiXmlNode*>	traverse(TiXmlNode* rootElement,bool (*testOk)(TiXmlNode* Node,string test),string testValue);//±éÀúTiXmlNodeµÄ½Úµã£¬²¢×÷Ä³¸öÅĞ¶Ï
-						vector<TiXmlNode*>	traverseOnce(TiXmlNode* rootElement,bool (*testOk)(TiXmlNode* Node,string test),string testValue);//±éÀúTiXmlNode¸ú½ÚµãÏÂµÄÒ»²ã×Ó½Úµã£¬²¢×÷Ä³¸öÅĞ¶Ï
-						vector<TiXmlNode*>	traverseAmongNodes(vector<TiXmlNode*> amongThis,bool (*testOk)(TiXmlNode* Node,string test),string testValue);//±éÀúamongThisÖĞËùÓĞ½Úµã£¬°ÑÂú×ãÌõ¼şµÄ½Úµã·µ»Ø
-template<typename T>	vector<T> &			VecCombine(vector<T> &,const vector<T> &);//ºÏ²¢Á½¸öÍ¬ÀàĞÍµÄvector
-						string				removeSection(const string origin,string condition,string& removed);//È¥³ı°üº¬condition(¡­¡­)ÕâÑùµÄÒ»¶Î²¢½«À¨ºÅÄÚÈİ¸³¸øremoved,e.g. removeSection("12f(abc)123","2f",str);Õâ¸öº¯Êı·µ»Ø"12123",str±äÎª"abc"
-						void				dump_to_stdout(const char* pFilename);//Ê÷ĞÎÊä³öxmlÎÄµµ
-						int					strToInt(string str);	//½«string×ª»»³Éint
-						double				strToDouble(string str);	
-						string				intToStr(int num);		//½«intÇ¿ÖÆ×ª»»³Éstring
-						string				doubleToStr(double num);
-						string &			encode(string& encodeStr);//¸øÉ¸Ñ¡Ìõ¼şµÄ×Ö·û´®±àÂë£¬°Ñ':'µÈ»»³ÉÊµÌå·ûºÅ
-						string &			decode(string& decodeStr);//¸øÉ¸Ñ¡Ìõ¼şµÄ×Ö·û´®½âÂë£¬°ÑÊµÌå·ûºÅ×ª»»³É·ûºÅ
-						string &			filterStrProc(string& filterStr);//´¦ÀíÑ¡ÔñÆ÷µÄµÄÑ¡ÔñÌõ¼ş×Ö·û´®£¬±ÜÃâ·ûºÅ³åÍ»
+vector<string> split(string source, char splitSymbol); //·Ö¸î×Ö·û´®
+string joint(const vector<string>& vec, string withThis); //´®Áª×Ö·û´®
+vector<TiXmlNode*> traverse(TiXmlNode* rootElement, bool (*testOk)(TiXmlNode* Node, string test), string testValue); //±éÀúTiXmlNodeµÄ½Úµã£¬²¢×÷Ä³¸öÅĞ¶Ï
+vector<TiXmlNode*> traverseOnce(TiXmlNode* rootElement, bool (*testOk)(TiXmlNode* Node, string test), string testValue); //±éÀúTiXmlNode¸ú½ÚµãÏÂµÄÒ»²ã×Ó½Úµã£¬²¢×÷Ä³¸öÅĞ¶Ï
+vector<TiXmlNode*> traverseAmongNodes(vector<TiXmlNode*> amongThis, bool (*testOk)(TiXmlNode* Node, string test), string testValue); //±éÀúamongThisÖĞËùÓĞ½Úµã£¬°ÑÂú×ãÌõ¼şµÄ½Úµã·µ»Ø
 
-						ostream &			operator<<(ostream & out,$& xQuery);//iosÊä³öº¯Êı
-						
+template <typename T> 
+vector<T> & VecCombine(vector<T> &, const vector<T> &); //ºÏ²¢Á½¸öÍ¬ÀàĞÍµÄvector
+
+string removeSection(const string origin, string condition, string& removed); //È¥³ı°üº¬condition(¡­¡­)ÕâÑùµÄÒ»¶Î²¢½«À¨ºÅÄÚÈİ¸³¸øremoved,e.g. removeSection("12f(abc)123","2f",str);Õâ¸öº¯Êı·µ»Ø"12123",str±äÎª"abc"
+void dump_to_stdout(const char* pFilename); //Ê÷ĞÎÊä³öxmlÎÄµµ
+int strToInt(string str);	//½«string×ª»»³Éint
+double strToDouble(string str);
+string intToStr(int num);		//½«intÇ¿ÖÆ×ª»»³Éstring
+string doubleToStr(double num);
+string & encode(string& encodeStr);		//¸øÉ¸Ñ¡Ìõ¼şµÄ×Ö·û´®±àÂë£¬°Ñ':'µÈ»»³ÉÊµÌå·ûºÅ
+string & decode(string& decodeStr);		//¸øÉ¸Ñ¡Ìõ¼şµÄ×Ö·û´®½âÂë£¬°ÑÊµÌå·ûºÅ×ª»»³É·ûºÅ
+string & filterStrProc(string& filterStr);		//´¦ÀíÑ¡ÔñÆ÷µÄµÄÑ¡ÔñÌõ¼ş×Ö·û´®£¬±ÜÃâ·ûºÅ³åÍ»
+
+ostream & operator<<(ostream & out, $& xQuery);		//iosÊä³öº¯Êı
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // interface
@@ -119,310 +121,304 @@ template<typename T>	vector<T> &			VecCombine(vector<T> &,const vector<T> &);//º
 extern $ xQuery;
 extern $ xQ;
 
+
 // selector and manipulator
 class $
 {
 	// friend classes decl
-	friend	class				$_Excel;
-	friend	class				$_Sheets;
-	friend	class				$_Cells;
-	friend	class				$_Rows;
-	friend	class				$_Columns;
-	friend	class				$_Range;
-	friend	class				conExParser;
-private:
-		/**************************************************************************************************************
-			Ë½ÓĞ²Ù×÷º¯Êı
-		*/
-			$				  &	subtractBy(const vector<TiXmlNode*>			&);	//²î¼¯ÔËËã£¨Ğ§ÂÊ²»¸ß£©
-			$				  &	intersectionWith(const vector<TiXmlNode*>	&);	//½»¼¯ÔËËã£¨Ğ§ÂÊ²»¸ß£©
-			$				  &	intersectionWith(const $					&);	//½»¼¯ÔËËã£¨Ğ§ÂÊ²»¸ß£©
-			
-			$				  &	pushNode(TiXmlNode* node);						//ÔÚ$_SelElementºóÌí¼Ó½Úµã
+	friend class $_Excel;
+	friend class $_Sheets;
+	friend class $_Cells;
+	friend class $_Rows;
+	friend class $_Columns;
+	friend class $_Range;
+	friend class conExParser;
 
-		/**************************************************************************************************************
-			²âÊÔº¯Êı
-		*/
-	static  bool				testNodeType(TiXmlNode* Node,int type);			//²âÊÔ½ÚµãÀàĞÍÊÇ·ñµÈÓÚtype
-			bool				hasNode(TiXmlNode* Node);						//ÅĞ¶ÏÑ¡ÔñÆ÷ÖĞÊÇ·ñ°üº¬¸Ã½Úµã
-			
-		/**************************************************************************************************************
-			Ë½ÓĞ¹¹Ôìº¯Êı£¬²»Òª°ÑTiXmlÓĞ¹ØµÄ±©Â¶³öÈ¥ÒÔÃâÓ°ÏìÊ¹ÓÃ
-		*/
-								$(string filter,TiXmlNode* root);						//Ë½ÓĞµÄ¹¹Ôìº¯ÊıÓÃÓÚ¸ÃÀàµÄÄÚ²¿
-								$(TiXmlDocument* _xmlDoc,string filter,string root);	//Ë½ÓĞµÄ¹¹Ôìº¯ÊıÓÃÓÚ¸ÃÀàµÄÄÚ²¿
-								$(vector<TiXmlNode*> vecNode);							
-			
-		/**************************************************************************************************************
-			²åÈë½ÚµãµÄÍ¨ÓÃº¯Êı£¬·ÀÖ¹´øÈë·ÇÕı³£ÀàĞÍµÄÄ£°æÀàĞÍµ¼ÖÂ³ö´í£¬ÉèÎªË½ÓĞ
-		*/
-			template<typename T>												//Ë½ÓĞappendº¯Êı
-			$				  &	_append(
-									T node_type,								//Òª²åÈëµÄ½Úµã
-									int method									//²åÈë·½·¨
-								);
+private:
+	
+	$ & subtractBy(const vector<TiXmlNode*> &);	//²î¼¯ÔËËã£¨Ğ§ÂÊ²»¸ß£©
+	$ & intersectionWith(const vector<TiXmlNode*> &);	//½»¼¯ÔËËã£¨Ğ§ÂÊ²»¸ß£©
+	$ & intersectionWith(const $ &);	//½»¼¯ÔËËã£¨Ğ§ÂÊ²»¸ß£©
+	$ & pushNode(TiXmlNode* node);						//ÔÚ$_SelElementºóÌí¼Ó½Úµã
+
+
+	/**
+	 * ²âÊÔº¯Êı
+	 */
+	static bool testNodeType(TiXmlNode* Node, int type);		//²âÊÔ½ÚµãÀàĞÍÊÇ·ñµÈÓÚtype
+	bool hasNode(TiXmlNode* Node);						//ÅĞ¶ÏÑ¡ÔñÆ÷ÖĞÊÇ·ñ°üº¬¸Ã½Úµã
+
+	
+	/**
+	 * Ë½ÓĞ¹¹Ôìº¯Êı£¬²»Òª°ÑTiXmlÓĞ¹ØµÄ±©Â¶³öÈ¥ÒÔÃâÓ°ÏìÊ¹ÓÃ
+	 */
+	$(string filter, TiXmlNode* root);						//Ë½ÓĞµÄ¹¹Ôìº¯ÊıÓÃÓÚ¸ÃÀàµÄÄÚ²¿
+	$(TiXmlDocument* _xmlDoc, string filter, string root);	//Ë½ÓĞµÄ¹¹Ôìº¯ÊıÓÃÓÚ¸ÃÀàµÄÄÚ²¿
+	$(vector<TiXmlNode*> vecNode);
+
+	/** 
+	 * ²åÈë½ÚµãµÄÍ¨ÓÃº¯Êı£¬·ÀÖ¹´øÈë·ÇÕı³£ÀàĞÍµÄÄ£°æÀàĞÍµ¼ÖÂ³ö´í£¬ÉèÎªË½ÓĞ
+	 */
+	template<typename T>											//Ë½ÓĞappendº¯Êı
+	$ & _append(T node_type,								//Òª²åÈëµÄ½Úµã
+			int method									//²åÈë·½·¨
+			);
 
 protected:
-		/**************************************************************************************************************
-			±£»¤³ÉÔ±£¬filename²»ĞèÒª£¬xmlDoc->ValueStr()¿ÉÒÔ·µ»ØÎÄ¼şÃû
-		*/
-			vector<TiXmlNode*>	$_SelElement;									//±»É¸Ñ¡³öÀ´µÄ¶¼·ÅÔÚÀïÃæ
-			TiXmlDocument	  *	xmlDoc;											//xmlÎÄµµÖ¸Õë
-	static	TiXmlDocument	  * recentXmlDoc;									//ÉÏÒ»´Î¶ÁÈ¡µÄxmlDoc±£´æÔÚÕâÀï£¬·½±ã$(selector)µÄÓÃ·¨
-			bool				isPreDefined;									//ÅĞ¶ÏÊÇ·ñÊÇÔ¤¶¨Òå¶ÔÏóµÄ±êÖ¾
-			
+	
+	/**
+	 * ±£»¤³ÉÔ±£¬filename²»ĞèÒª£¬xmlDoc->ValueStr()¿ÉÒÔ·µ»ØÎÄ¼şÃû
+	 */
+	vector<TiXmlNode*> $_SelElement;							//±»É¸Ñ¡³öÀ´µÄ¶¼·ÅÔÚÀïÃæ
+	TiXmlDocument * xmlDoc;											//xmlÎÄµµÖ¸Õë
+	static TiXmlDocument * recentXmlDoc;	//ÉÏÒ»´Î¶ÁÈ¡µÄxmlDoc±£´æÔÚÕâÀï£¬·½±ã$(selector)µÄÓÃ·¨
+	bool isPreDefined;									//ÅĞ¶ÏÊÇ·ñÊÇÔ¤¶¨Òå¶ÔÏóµÄ±êÖ¾
+
 public:
 
-		/**************************************************************************************************************
-			Ã¶¾ÙÀàĞÍ
-		*/
-	enum NodeType// xmlNodeType
+	
+	enum NodeType									// xmlNodeType
 	{
-		XML_DOCUMENT, 
-		XML_ELEMENT, 
-		XML_COMMENT, 
-		XML_UNKNOWN, 
-		XML_TEXT,  
+		XML_DOCUMENT,
+		XML_ELEMENT,
+		XML_COMMENT,
+		XML_UNKNOWN,
+		XML_TEXT,
 		XML_DECLARATION,
 		NT_AllType
 	};
-	
-	enum appendMethod{// append method
-		APDM_SELFCLOSE		=	0x01,											//²åÈë×Ô¶¯±ÕºÏ±êÇ©
-		APDM_DOUBLETAG		=	0x02,											//²åÈë·Ç×Ô¶¯±ÕºÏ±êÇ©
-		APDM_ALL			=	0x04,											//¶ÔÑ¡ÔñÆ÷ËùÓĞ½ÚµãÖ´ĞĞappend½Úµã
-		APOS_AFTER			=	0x08,											//²åÈëÎ»ÖÃÔÚ½Úµãºó										
-		APOS_INSIDE			=	0x10,											//²åÈëÎ»ÖÃÔÚ½ÚµãÄÚ									
-		APOS_BEFORE			=	0x20											//²åÈëÎ»ÖÃÔÚ½ÚµãÇ°
-	};
-	enum copyMethod{
-		CM_With_singleNODE,	/*replace with single node*/
-		CM_With_whole_TREE,	/*replace with whole tree*/
-		CM_DeepCopy,		/*the same as RM_With_singleNODE*/
-		CM_ShallowCopy		/*the same as RM_With_whole_TREE*/
-	};
 
-	enum printMethod{//´òÓ¡µ½ÆÁÄ»µÄÄ£Ê½
-		PM_TEXT				=	0x1,											//°´ÕÕÎÄ¼ş±¾ÉíµÄÎÄ±¾´òÓ¡
-		PM_TREE				=	0x2												//°´ÕÕÊ÷×´½á¹¹´òÓ¡
-	};
-
-	enum errorType{//¿ÉÄÜ´íÎóµÄÀàĞÍ£¬ÓÃÓÚ·µ»Ø´íÎó
-		ET_ATTR_NOT_FOUND	=	0x99999998,
-		ET_NODE_NOT_EXIST	=	0x99999999
-	};
-
-	enum queryAttr { // ²éÑ¯ÊôĞÔµÄÊ±ºò´íÎó»òÕßÕıÈ·µÄ·µ»ØÖµ
-		QA_SUCCESS			=	0x00000000,									//³É¹¦£¨attrº¯Êı²»·µ»ØÕâ¸öÖµ£¬Ö±½Ó·µ»Ø¶ÔÓ¦ÊôĞÔÖµ£¬Õâ¸öÖµÖ»ÔÚ³ÌĞòÄÚ²¿³öÏÖ£©
-		QA_NO_ATTRIBUTE		=	0x99999998,									//ÕÒ²»µ½ÊôĞÔ
-		QA_WRONG_TYPE														//ÀàĞÍ´íÎó
-	};
-
-	enum OS_Validation{// offspringValidation ·µ»ØÊÇ·ñÊôÓÚÑ¡ÔñÆ÷ÖĞµÄºó´ú
-		OS_ALL,																	//È«ÊÇÑ¡ÔñÆ÷ÖĞµÄºó´ú
-		OS_PART,																//Ò»²¿·ÖÊÇ~~
-		OS_NONE																	//Ã»ÓĞÒ»¸öÊÇ~~
+	enum appendMethod
+	{									// append method
+		APDM_SELFCLOSE = 0x01,										//²åÈë×Ô¶¯±ÕºÏ±êÇ©
+		APDM_DOUBLETAG = 0x02,										//²åÈë·Ç×Ô¶¯±ÕºÏ±êÇ©
+		APDM_ALL = 0x04,									//¶ÔÑ¡ÔñÆ÷ËùÓĞ½ÚµãÖ´ĞĞappend½Úµã
+		APOS_AFTER = 0x08,		//²åÈëÎ»ÖÃÔÚ½Úµãºó										
+		APOS_INSIDE = 0x10,			//²åÈëÎ»ÖÃÔÚ½ÚµãÄÚ									
+		APOS_BEFORE = 0x20											//²åÈëÎ»ÖÃÔÚ½ÚµãÇ°
 	};
 	
-		/**************************************************************************************************************
-			¹¹Ôìº¯Êı
-		*/
-	static	string				notFound;										//ÓÃÓÚ·µ»ØÕÒ²»µ½ËùÒªµÄÖµ»òÕß½Úµã
-	static	map<string,TiXmlDocument*> fileMap;									//ÎÄ¼şÃûÓëÎÄµµ½ÚµãµÄ¶ÔÓ¦¹ØÏµ£¬ÏàÍ¬ÎÄ¼şÔÚÍ¬Ò»³ÌĞòÖĞÖ»¶ÁÈ¡Ò»´ÎÇÒxmlDocÏàÍ¬
-	
-								
-								$(TiXmlNode* node);								//Ö±½Ó½«½Úµã°ü×°ÆğÀ´
-								$(const char * xmlFileName);
-								$(string filter,$ root );
-								$(const char * xmlFileName,string filter,string rootSel);
-								$();											//Ä¬ÈÏ¹¹Ôìº¯ÊıµÄ³ÉÔ±xmlDocÎªNULL
-								$(bool _isPreDefined);							//ÓÃÓÚ¹¹ÔìÔ¤¶¨ÒåÀàĞÍ
-								~$();
-			$				  &	loadXml(const char * xmlFileName);				//½«ÊµÀı°ó¶¨xmlÎÄµµ
-			bool				save(string filename="");						//±£´æÎÄ¼ş
-			$				  & setPreDefinedObj();								//Éè¶ÔÏóÎªÔ¤¶¨Òå¶ÔÏó
-		
-		/**************************************************************************************************************
-			Ñ¡ÔñÆ÷
-		*/
-			$				  &	select(string filter,TiXmlNode* root=NULL);		//É¸Ñ¡ºó·ÅÈëÊµÀıµÄ$_SelElement³ÉÔ±ÄÚ(base)
-			$				  &	select(string filter,string rootStr);			//É¸Ñ¡ºó·ÅÈëÊµÀıµÄ$_SelElement³ÉÔ±ÄÚ
-			$				  &	select(string filter,$& root );					//É¸Ñ¡ºó·ÅÈëÊµÀıµÄ$_SelElement³ÉÔ±ÄÚ
-			$				  & selectAllNode(TiXmlNode* root);					//Ñ¡ÔñËùÓĞxmlÎÄµµÖĞµÄ½Úµã±£´æµ½$_selElementÖĞ
-			$				  & selectAllNode($& root);
-			$				  & operator()(string selector,string root="");		//Óëselect¹¦ÄÜÏàÍ¬µ«ÊÇ½«selectorÖĞÔ­ÓĞµÄ½ÚµãÇå³ıºóÔÙÑ¡Ôñ
-			$				  & operator()(string selector,$& root);
+	enum copyMethod
+	{
+		CM_With_singleNODE, /*replace with single node*/
+		CM_With_whole_TREE, /*replace with whole tree*/
+		CM_DeepCopy, /*the same as RM_With_singleNODE*/
+		CM_ShallowCopy /*the same as RM_With_whole_TREE*/
+	};
 
-		/**************************************************************************************************************
-			¹ıÂËÆ÷ÓëÅÅ³ıÆ÷
-		*/
-			$				  &	filter(string condition );						//¹ıÂËÂú×ãÌõ¼şµÄÉ¸Ñ¡½á¹û
-			$				  & filter(NodeType type);							//¹ıÂË³öÂú×ã½ÚµãÀàĞÍÌõ¼şµÄ½Úµã
-			$				  &	except(string condition );						//ÅÅ³ıÂú×ãÌõ¼şµÄÉ¸Ñ¡½á¹û(ÓëfilterÏà·´)
-			
-		/**************************************************************************************************************
-			xml½Úµã·ÃÎÊÓë±éÀú
-		*/
-			$				  & next(string condition="");						//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄÏÂÒ»¸öĞÖµÜ½Úµã,¿ÉÒÔ´øÓĞÑ¡ÔñÌõ¼ş
-			$				  & previous(string condition="");					//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄÉÏÒ»¸öĞÖµÜ½Úµã,¿ÉÒÔ´øÓĞÑ¡ÔñÌõ¼ş
-			$				  & nextAll(string condition="");					//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄÏÂ·½ËùÓĞĞÖµÜ½Úµã,¿ÉÒÔ´øÓĞÑ¡ÔñÌõ¼ş
-			$				  & previousAll(string condition="");				//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄÉÏ·½ËùÓĞĞÖµÜ½Úµã,¿ÉÒÔ´øÓĞÑ¡ÔñÌõ¼ş
+	enum printMethod
+	{											//´òÓ¡µ½ÆÁÄ»µÄÄ£Ê½
+		PM_TEXT = 0x1,											//°´ÕÕÎÄ¼ş±¾ÉíµÄÎÄ±¾´òÓ¡
+		PM_TREE = 0x2												//°´ÕÕÊ÷×´½á¹¹´òÓ¡
+	};
 
-			$				  & parent();										//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄ¸¸½Úµã
-			$				  & ancestors();									//·µ»ØÑ¡ÔñÆ÷ÖĞÃ¿Ò»¸ö½ÚµãµÄËùÓĞ×æÏÈ½Úµã
-			$				  & children(string selector="*");					//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãÂú×ãÌõ¼şµÄº¢×Ó½Úµã£¨Ö±Ïµ£©,²ÎÊı¿ÕÔò·µ»ØËùÓĞÖ±Ïµº¢×Ó
-			$				  & offspring(string selector="*");
-			bool				noChildren();									//·µ»ØÑ¡ÔñÆ÷µÚÒ»¸ö½ÚµãÊÇ·ñÓĞº¢×Ó½Úµã
+	enum errorType
+	{												
+		//¿ÉÄÜ´íÎóµÄÀàĞÍ£¬ÓÃÓÚ·µ»Ø´íÎó
+		ET_ATTR_NOT_FOUND = 0x99999998, 
+		ET_NODE_NOT_EXIST = 0x99999999
+	};
 
-		/**************************************************************************************************************
-			xml²Ù×÷
-		*/
-			string				attr(string attrname);							//·µ»ØËùÑ¡½ÚµãµÄµÚÒ»¸öµÄattrnameÊôĞÔÖµ,ÕÒ²»µ½·µ»Ø""
-			int					iAttr(string attrname);							//·µ»ØintµÄÊôĞÔÖµ£¬Èç¹û´æÔÚ
-			double				dAttr(string attrname);							//·µ»ØdoubleµÄÊôĞÔÖµ£¬Èç¹û´æÔÚ£¬int»òdouble²»´æÔÚ·µ»Ø$::QA_NO_ATTRIBUTE
-			bool				bAttr(string attrname);							//µ±Ñ¡ÔñÆ÷¿Õ»òÕßÎŞ¸ÃÊôĞÔ»òÕßÖµÎª0Ê±·µ»Øfalse£¬ÆäÓà¶¼·µ»Øtrue
-			vector<string>		getAllAttr(string attrname);					//·µ»ØselectorÖĞËùÓĞ½ÚµãµÄattrnameÊôĞÔ£¬ÏÂ±ê¶ÔÓ¦
-			$				  &	attr(string attrname,string value);				//ÉèÖÃËùÓĞ½ÚµãÊôĞÔ
-			$				  &	attr(string attrname,int    value);				//ÉèÖÃËùÓĞ½ÚµãÊôĞÔ (ÖØÔØ²»Í¬ÊôĞÔÖµÀàĞÍ)
-			$				  &	attr(string attrname,double value);				//ÉèÖÃËùÓĞ½ÚµãÊôĞÔ (ÖØÔØ²»Í¬ÊôĞÔÖµÀàĞÍ)
-		
-			//DOM append child
-			$				  & appendDeclaration(								//ÎÄµµÉêÃ÷
-									string ver="1.0",							//version
-									string encoding="utf-8",					//encoding
-									string standalone="yes",					//standAlone
-									int method=$::APOS_BEFORE
-								);
-			$				  & appendElement(									//ÔªËØ½Úµã
-									string tagName="",
-									int method=$::APDM_ALL|$::APOS_INSIDE|$::APOS_AFTER|$::APDM_DOUBLETAG
-								);
-			$				  & appendText(										//ÎÄ±¾½Úµã
-									string text="",
-									int method=$::APDM_ALL|$::APOS_INSIDE|$::APOS_AFTER
-								);
-			$				  & appendComment(									//×¢ÊÍ½Úµã
-									string comment="",
-									int method=$::APOS_BEFORE					//Ä¬ÈÏÌí¼Ó·½Ê½
-								);
+	enum queryAttr
+	{
+		// ²éÑ¯ÊôĞÔµÄÊ±ºò´íÎó»òÕßÕıÈ·µÄ·µ»ØÖµ
+		QA_SUCCESS = 0x00000000,		//³É¹¦£¨attrº¯Êı²»·µ»ØÕâ¸öÖµ£¬Ö±½Ó·µ»Ø¶ÔÓ¦ÊôĞÔÖµ£¬Õâ¸öÖµÖ»ÔÚ³ÌĞòÄÚ²¿³öÏÖ£©
+		QA_NO_ATTRIBUTE = 0x99999998,									//ÕÒ²»µ½ÊôĞÔ
+		QA_WRONG_TYPE													//ÀàĞÍ´íÎó
+	};
 
-			//Selector remove child
-			$				  & removeFromSelector(string selector="*");		//´ÓÑ¡ÔñÆ÷ÖĞÒÆ³ı½Úµã£¬Ä¬ÈÏÒÆ³ıËùÓĞ
-			$				  & removeFromSelector(int index);					//´ÓÑ¡ÔñÆ÷ÖĞÒÆ³ıindexÏÂ±êµÄ½Úµã
-
-			//DOM remove/replace child
-			$				  & remove(string selector="");						//´ÓxmlÖĞÒÆ³ı½Úµã£¬Ä¬ÈÏÒÆ³ıÑ¡ÔñÆ÷ÖĞµÄ½Úµã£¬·ñÔòÒÆ³ıselectorÑ¡Ôñ³öµÄ½Úµã
-			$				  & removeText(string selector="");					//´ÓxmlÖĞÒÆ³ıÎÄ±¾½Úµã£¬Ä¬ÈÏÒÆ³ıÑ¡ÔñÆ÷ÖĞµÄ½ÚµãµÄÎÄ±¾½Úµã¼°Æäº¢×ÓÖĞµÄÎÄ±¾½Úµã
-			$				  & replaceWith(
-									string withThis,
-									int copyMethod=$::CM_ShallowCopy
-								);												//ÓÃwithThis×÷ÎªÑ¡ÔñÆ÷Ìõ¼şÑ¡³öµÄ½ÚµãÌæ»»µ±Ç°Ñ¡ÔñÆ÷ÖĞµÄ½Úµã£¬¿ÉÒÔÒ»»»¶à¡£
-			$				  & replaceWith(
-									$& withThis,								//ÓÃwithThisÖĞµÄ½ÚµãÌæ»»selectorÖĞDOM½Úµã
-									int copyMethod=$::CM_ShallowCopy
-								);												//½«withThis´úÈëselectorÖĞµÄ½Úµã
-			$				  & replaceWithNewElement(string tagName);			//½Úµã»»³ÉĞÂÔªËØ£¬·µ»Ø°üº¬¸ÃÔªËØµÄÑ¡ÔñÆ÷
-			$				  & clone(
-									$& pasteTo,
-									int position=$::APOS_AFTER,
-									int copyMethod=$::CM_ShallowCopy
-								);												//½«½Úµã¸´ÖÆµ½pasteToÖ®ºó»òÕßÖ®Ç°µÄÎ»ÖÃ,×¢Òâ£¡·µ»Øµ½Ñ¡ÔñÆ÷ÖĞµÄÊÇĞÂ²åÈëµÄ½Úµã
-			$				  & cloneTo(
-									$& pasteTo,
-									int position=$::APOS_AFTER,
-									int copyMethod=$::CM_ShallowCopy
-								);												//ÓëcloneÏàÍ¬£¬µ«ÊÇÑ¡ÔñÆ÷ÖĞµÄÈÔÈ»ÊÇÔ­À´µÄ½Úµã
-			$				  & wrapBy($& byThis);								//°ÑÑ¡ÔñÆ÷ÖĞµÄ½ÚµãÓÃÁíÒ»¸ö½ÚµãµÄ¿½±´À´°ü¹üÔÚÍâÃæ,²»½¨ÒéÊ¹ÓÃÓĞÉÏÏÂ²ã¹ØÏµµÄ½ÚµãµÄÑ¡ÔñÆ÷
-			$				  & wrapByElement(string tagName);					//ÓÃÄ³ĞÂÔªËØ°ü¹ü
-
-		/**************************************************************************************************************
-			Ñ¡ÔñÆ÷²Ù×÷
-		*/
-			$				  & clear();										//Çå³ıÉ¸Ñ¡Æ÷ÖĞµÄÄÚÈİ
-			$				  & clearSame();									//Çå³ı$_SelElementÖĞÏàÍ¬µÄÄÚÈİ
-			$				  & popEmpty();										//Çå³ş$_SelElementÖĞÎª¿ÕµÄ½Úµã
-			vector<TiXmlNode*>	getSelection(int index=-1);						//Ñ¡³öµÚindex¸öÉ¸Ñ¡³öµÄ½Úµã(0¿ªÊ¼¼Æ£¬Ğ¡ÓÚ0Ôò·µ»ØµÚÒ»¸ö)
-			TiXmlNode		  *	lastSelection();
-			TiXmlNode		  * getNode(int index=-1);							//Ñ¡³öµÚindex¸öÉ¸Ñ¡³öµÄ½Úµã(0¿ªÊ¼¼Æ£¬Ğ¡ÓÚ0Ôò·µ»ØµÚÒ»¸ö)
-			TiXmlNode		  * operator[](int index);							
-			unsigned int		length()const;									//·µ»ØÉ¸Ñ¡³öµÄ½ÚµãµÄ¸öÊı
-			string				text();											//·µ»Ø$_SelElement[0]µÄtextº¢×ÓµÄvalue()£¬Èç¹û±¾ÉíÊÇtext½ÚµãÔòÖ±½Ó·µ»Ø±¾ÉíµÄvalue()
-			string				tagName(int index=0);							//·µ»ØÔªËØ½ÚµãµÄ±êÇ©Ãû£¬Ñ¡ÔñÆ÷ÖĞµÄµÚÒ»¸ö
-			int					nodeType();										//·µ»Ø½ÚµãÀàĞÍ
-			
-			bool				notBindXml();									//ÅĞ¶ÏÊÇ·ñ°ó¶¨ÁËxml
-			bool				isEmpty();										//·µ»ØÊÇ·ñÎª¿Õ
-			OS_Validation		hasOffSpring(const string& selector);			//ÅĞ¶Ï$_SelElement[0]ÊÇ·ñÓĞselectorÑ¡ÖĞµÄºó´ú
-			bool				has(NodeType type);								//·µ»ØÑ¡ÔñÆ÷ÖĞÊÇ·ñº¬ÓĞtypeÀàĞÍµÄ½Úµã
-			$				  & getNodeWithType(NodeType type);					//·µ»ØÑ¡ÔñÆ÷ÖĞtypeÀàĞÍµÄ½ÚµãµÄÑ¡ÔñÆ÷
-			$				  &	displaySelTagName();							//ÏÔÊ¾³öËùÓĞÉ¸Ñ¡½á¹û£¨½Úµã£©µÄvalue()
-			$				  & print(printMethod method=$::PM_TREE);			//´òÓ¡xmlÎÄµµ
-			string				fileName();
-			$				  & operator+=(const $& addThis);					//ºÏ²¢Ñ¡³öÀ´µÄ½Úµã£¬Çë×¢Òâ±£Ö¤Á½¸ö$µÄxmlDocÊÇ·ñÏàÍ¬£¬²»ÏàÍ¬ÊÇºÏ²¢²»ÁËµÄ
-			$				  &	operator- (const $& substractThis);				//²î¼¯£¬Ğ§¹ûÏàµ±ÓÚexcept
-	friend	ostream &			operator<<(ostream & out,$& xQuery);			//Ê÷×´´òÓ¡ÎÄµµ
-
+	enum OS_Validation
+	{										// offspringValidation ·µ»ØÊÇ·ñÊôÓÚÑ¡ÔñÆ÷ÖĞµÄºó´ú
+		OS_ALL,														//È«ÊÇÑ¡ÔñÆ÷ÖĞµÄºó´ú
+		OS_PART,														//Ò»²¿·ÖÊÇ~~
+		OS_NONE														//Ã»ÓĞÒ»¸öÊÇ~~
+	};
 
 	
-		/**************************************************************************************************************
-			Ñ¡ÔñÆ÷±éÀúº¯Êı
-		*/
-			template<typename Ret_type,typename Para_type> 
-			Ret_type			each(Para_type (*function)());					//±éÀúËùÓĞÉ¸Ñ¡½á¹ûµÄº¯Êı
+	static string notFound;									//ÓÃÓÚ·µ»ØÕÒ²»µ½ËùÒªµÄÖµ»òÕß½Úµã
+	static map<string, TiXmlDocument*> fileMap;	//ÎÄ¼şÃûÓëÎÄµµ½ÚµãµÄ¶ÔÓ¦¹ØÏµ£¬ÏàÍ¬ÎÄ¼şÔÚÍ¬Ò»³ÌĞòÖĞÖ»¶ÁÈ¡Ò»´ÎÇÒxmlDocÏàÍ¬
 
+	$(TiXmlNode* node);								//Ö±½Ó½«½Úµã°ü×°ÆğÀ´
+	$(const char * xmlFileName);
+	$(string filter, $ root);
+	$(const char * xmlFileName, string filter, string rootSel);
+	$();											//Ä¬ÈÏ¹¹Ôìº¯ÊıµÄ³ÉÔ±xmlDocÎªNULL
+	$(bool _isPreDefined);							//ÓÃÓÚ¹¹ÔìÔ¤¶¨ÒåÀàĞÍ
+	~$();
+	$ & loadXml(const char * xmlFileName);				//½«ÊµÀı°ó¶¨xmlÎÄµµ
+	bool save(string filename = "");						//±£´æÎÄ¼ş
+	$ & setPreDefinedObj();								//Éè¶ÔÏóÎªÔ¤¶¨Òå¶ÔÏó
 
-		/**************************************************************************************************************/
+	/**
+	 * Ñ¡ÔñÆ÷
+	 */
+	$ & select(string filter, TiXmlNode* root = NULL);//É¸Ñ¡ºó·ÅÈëÊµÀıµÄ$_SelElement³ÉÔ±ÄÚ(base)
+	$ & select(string filter, string rootStr);		//É¸Ñ¡ºó·ÅÈëÊµÀıµÄ$_SelElement³ÉÔ±ÄÚ
+	$ & select(string filter, $& root);				//É¸Ñ¡ºó·ÅÈëÊµÀıµÄ$_SelElement³ÉÔ±ÄÚ
+	$ & selectAllNode(TiXmlNode* root);			//Ñ¡ÔñËùÓĞxmlÎÄµµÖĞµÄ½Úµã±£´æµ½$_selElementÖĞ
+	$ & selectAllNode($& root);
+	$ & operator()(string selector, string root = "");//Óëselect¹¦ÄÜÏàÍ¬µ«ÊÇ½«selectorÖĞÔ­ÓĞµÄ½ÚµãÇå³ıºóÔÙÑ¡Ôñ
+	$ & operator()(string selector, $& root);
+
+	/**
+	 * ¹ıÂËÆ÷ÓëÅÅ³ıÆ÷
+	 */
+	$ & filter(string condition);						//¹ıÂËÂú×ãÌõ¼şµÄÉ¸Ñ¡½á¹û
+	$ & filter(NodeType type);							//¹ıÂË³öÂú×ã½ÚµãÀàĞÍÌõ¼şµÄ½Úµã
+	$ & except(string condition);						//ÅÅ³ıÂú×ãÌõ¼şµÄÉ¸Ñ¡½á¹û(ÓëfilterÏà·´)
+
+	/**
+	 * xml½Úµã·ÃÎÊÓë±éÀú
+	 */
+	$ & next(string condition = "");			//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄÏÂÒ»¸öĞÖµÜ½Úµã,¿ÉÒÔ´øÓĞÑ¡ÔñÌõ¼ş
+	$ & previous(string condition = "");		//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄÉÏÒ»¸öĞÖµÜ½Úµã,¿ÉÒÔ´øÓĞÑ¡ÔñÌõ¼ş
+	$ & nextAll(string condition = "");			//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄÏÂ·½ËùÓĞĞÖµÜ½Úµã,¿ÉÒÔ´øÓĞÑ¡ÔñÌõ¼ş
+	$ & previousAll(string condition = "");		//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄÉÏ·½ËùÓĞĞÖµÜ½Úµã,¿ÉÒÔ´øÓĞÑ¡ÔñÌõ¼ş
+
+	$ & parent();										//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãµÄ¸¸½Úµã
+	$ & ancestors();									//·µ»ØÑ¡ÔñÆ÷ÖĞÃ¿Ò»¸ö½ÚµãµÄËùÓĞ×æÏÈ½Úµã
+	$ & children(string selector = "*");//·µ»ØÑ¡ÔñÆ÷Ã¿Ò»¸ö½ÚµãÂú×ãÌõ¼şµÄº¢×Ó½Úµã£¨Ö±Ïµ£©,²ÎÊı¿ÕÔò·µ»ØËùÓĞÖ±Ïµº¢×Ó
+	$ & offspring(string selector = "*");
+	bool noChildren();									//·µ»ØÑ¡ÔñÆ÷µÚÒ»¸ö½ÚµãÊÇ·ñÓĞº¢×Ó½Úµã
+
+	/**
+	 * xml²Ù×÷
+	 */
+	string attr(string attrname);				//·µ»ØËùÑ¡½ÚµãµÄµÚÒ»¸öµÄattrnameÊôĞÔÖµ,ÕÒ²»µ½·µ»Ø""
+	int iAttr(string attrname);							//·µ»ØintµÄÊôĞÔÖµ£¬Èç¹û´æÔÚ
+	double dAttr(string attrname);//·µ»ØdoubleµÄÊôĞÔÖµ£¬Èç¹û´æÔÚ£¬int»òdouble²»´æÔÚ·µ»Ø$::QA_NO_ATTRIBUTE
+	bool bAttr(string attrname);			//µ±Ñ¡ÔñÆ÷¿Õ»òÕßÎŞ¸ÃÊôĞÔ»òÕßÖµÎª0Ê±·µ»Øfalse£¬ÆäÓà¶¼·µ»Øtrue
+	vector<string> getAllAttr(string attrname);	//·µ»ØselectorÖĞËùÓĞ½ÚµãµÄattrnameÊôĞÔ£¬ÏÂ±ê¶ÔÓ¦
+	$ & attr(string attrname, string value);				//ÉèÖÃËùÓĞ½ÚµãÊôĞÔ
+	$ & attr(string attrname, int value);				//ÉèÖÃËùÓĞ½ÚµãÊôĞÔ (ÖØÔØ²»Í¬ÊôĞÔÖµÀàĞÍ)
+	$ & attr(string attrname, double value);			//ÉèÖÃËùÓĞ½ÚµãÊôĞÔ (ÖØÔØ²»Í¬ÊôĞÔÖµÀàĞÍ)
+
+	//DOM append child
+	$ & appendDeclaration(								//ÎÄµµÉêÃ÷
+			string ver = "1.0",							//version
+			string encoding = "utf-8",					//encoding
+			string standalone = "yes",					//standAlone
+			int method = $::APOS_BEFORE);
+	$ & appendElement(
+			//ÔªËØ½Úµã
+			string tagName = "",
+			int method = $::APDM_ALL | $::APOS_INSIDE | $::APOS_AFTER
+					| $::APDM_DOUBLETAG);
+	$ & appendText(
+			//ÎÄ±¾½Úµã
+			string text = "",
+			int method = $::APDM_ALL | $::APOS_INSIDE | $::APOS_AFTER);
+	$ & appendComment(									//×¢ÊÍ½Úµã
+			string comment = "", int method = $::APOS_BEFORE			//Ä¬ÈÏÌí¼Ó·½Ê½
+			);
+
+	//Selector remove child
+	$ & removeFromSelector(string selector = "*");		//´ÓÑ¡ÔñÆ÷ÖĞÒÆ³ı½Úµã£¬Ä¬ÈÏÒÆ³ıËùÓĞ
+	$ & removeFromSelector(int index);					//´ÓÑ¡ÔñÆ÷ÖĞÒÆ³ıindexÏÂ±êµÄ½Úµã
+
+	//DOM remove/replace child
+	$ & remove(string selector = "");//´ÓxmlÖĞÒÆ³ı½Úµã£¬Ä¬ÈÏÒÆ³ıÑ¡ÔñÆ÷ÖĞµÄ½Úµã£¬·ñÔòÒÆ³ıselectorÑ¡Ôñ³öµÄ½Úµã
+	$ & removeText(string selector = "");//´ÓxmlÖĞÒÆ³ıÎÄ±¾½Úµã£¬Ä¬ÈÏÒÆ³ıÑ¡ÔñÆ÷ÖĞµÄ½ÚµãµÄÎÄ±¾½Úµã¼°Æäº¢×ÓÖĞµÄÎÄ±¾½Úµã
+	$ & replaceWith(string withThis, int copyMethod = $::CM_ShallowCopy);//ÓÃwithThis×÷ÎªÑ¡ÔñÆ÷Ìõ¼şÑ¡³öµÄ½ÚµãÌæ»»µ±Ç°Ñ¡ÔñÆ÷ÖĞµÄ½Úµã£¬¿ÉÒÔÒ»»»¶à¡£
+	$ & replaceWith($& withThis,				//ÓÃwithThisÖĞµÄ½ÚµãÌæ»»selectorÖĞDOM½Úµã
+			int copyMethod = $::CM_ShallowCopy);	//½«withThis´úÈëselectorÖĞµÄ½Úµã
+	$ & replaceWithNewElement(string tagName);			//½Úµã»»³ÉĞÂÔªËØ£¬·µ»Ø°üº¬¸ÃÔªËØµÄÑ¡ÔñÆ÷
+	$ & clone($& pasteTo, int position = $::APOS_AFTER, int copyMethod =
+			$::CM_ShallowCopy);		//½«½Úµã¸´ÖÆµ½pasteToÖ®ºó»òÕßÖ®Ç°µÄÎ»ÖÃ,×¢Òâ£¡·µ»Øµ½Ñ¡ÔñÆ÷ÖĞµÄÊÇĞÂ²åÈëµÄ½Úµã
+	$ & cloneTo($& pasteTo, int position = $::APOS_AFTER, int copyMethod =
+			$::CM_ShallowCopy);						//ÓëcloneÏàÍ¬£¬µ«ÊÇÑ¡ÔñÆ÷ÖĞµÄÈÔÈ»ÊÇÔ­À´µÄ½Úµã
+	$ & wrapBy($& byThis);			//°ÑÑ¡ÔñÆ÷ÖĞµÄ½ÚµãÓÃÁíÒ»¸ö½ÚµãµÄ¿½±´À´°ü¹üÔÚÍâÃæ,²»½¨ÒéÊ¹ÓÃÓĞÉÏÏÂ²ã¹ØÏµµÄ½ÚµãµÄÑ¡ÔñÆ÷
+	$ & wrapByElement(string tagName);					//ÓÃÄ³ĞÂÔªËØ°ü¹ü
+
+	/**
+	 * Ñ¡ÔñÆ÷²Ù×÷
+	 */
+	$ & clear();										//Çå³ıÉ¸Ñ¡Æ÷ÖĞµÄÄÚÈİ
+	$ & clearSame();									//Çå³ı$_SelElementÖĞÏàÍ¬µÄÄÚÈİ
+	$ & popEmpty();										//Çå³ş$_SelElementÖĞÎª¿ÕµÄ½Úµã
+	vector<TiXmlNode*> getSelection(int index = -1);//Ñ¡³öµÚindex¸öÉ¸Ñ¡³öµÄ½Úµã(0¿ªÊ¼¼Æ£¬Ğ¡ÓÚ0Ôò·µ»ØµÚÒ»¸ö)
+	TiXmlNode * lastSelection();
+	TiXmlNode * getNode(int index = -1);	//Ñ¡³öµÚindex¸öÉ¸Ñ¡³öµÄ½Úµã(0¿ªÊ¼¼Æ£¬Ğ¡ÓÚ0Ôò·µ»ØµÚÒ»¸ö)
+	TiXmlNode * operator[](int index);
+	unsigned int length() const;								//·µ»ØÉ¸Ñ¡³öµÄ½ÚµãµÄ¸öÊı
+	string text();//·µ»Ø$_SelElement[0]µÄtextº¢×ÓµÄvalue()£¬Èç¹û±¾ÉíÊÇtext½ÚµãÔòÖ±½Ó·µ»Ø±¾ÉíµÄvalue()
+	string tagName(int index = 0);						//·µ»ØÔªËØ½ÚµãµÄ±êÇ©Ãû£¬Ñ¡ÔñÆ÷ÖĞµÄµÚÒ»¸ö
+	int nodeType();										//·µ»Ø½ÚµãÀàĞÍ
+
+	bool notBindXml();									//ÅĞ¶ÏÊÇ·ñ°ó¶¨ÁËxml
+	bool isEmpty();										//·µ»ØÊÇ·ñÎª¿Õ
+	OS_Validation hasOffSpring(const string& selector);	//ÅĞ¶Ï$_SelElement[0]ÊÇ·ñÓĞselectorÑ¡ÖĞµÄºó´ú
+	bool has(NodeType type);							//·µ»ØÑ¡ÔñÆ÷ÖĞÊÇ·ñº¬ÓĞtypeÀàĞÍµÄ½Úµã
+	$ & getNodeWithType(NodeType type);					//·µ»ØÑ¡ÔñÆ÷ÖĞtypeÀàĞÍµÄ½ÚµãµÄÑ¡ÔñÆ÷
+	$ & displaySelTagName();							//ÏÔÊ¾³öËùÓĞÉ¸Ñ¡½á¹û£¨½Úµã£©µÄvalue()
+	$ & print(printMethod method = $::PM_TREE);			//´òÓ¡xmlÎÄµµ
+	string fileName();
+	$ & operator+=(const $& addThis);	//ºÏ²¢Ñ¡³öÀ´µÄ½Úµã£¬Çë×¢Òâ±£Ö¤Á½¸ö$µÄxmlDocÊÇ·ñÏàÍ¬£¬²»ÏàÍ¬ÊÇºÏ²¢²»ÁËµÄ
+	$ & operator-(const $& substractThis);				//²î¼¯£¬Ğ§¹ûÏàµ±ÓÚexcept
+	friend ostream & operator<<(ostream & out, $& xQuery);			//Ê÷×´´òÓ¡ÎÄµµ
+
+	/**
+	 * Ñ¡ÔñÆ÷±éÀúº¯Êı
+	 */
+	template<typename Ret_type, typename Para_type>
+	Ret_type each(Para_type (*function)());					//±éÀúËùÓĞÉ¸Ñ¡½á¹ûµÄº¯Êı
+
+	/**************************************************************************************************************/
 };
 
-//class hesd
+//class head
 class filterEx;
 
 //functions
-void removeSpaceBeforeGT(string& conexp);										//É¾³ıconExµÄ>×Ö·ûÇ°ËùÓĞ¿Õ¸ñ
-char removeBraketPairFrom(
-	string& conexp,			//ÔÚÆ¥Åä·ûºÅÖĞ¼äµÄ±í´ïÊ½£¬¼´È¥³ıÀ¨ºÅºóÖĞ¼äµÄÄÚÈİ
-	string ls,				//×óÀ¨ºÅ
-	string rs,				//ÓÒÀ¨ºÅ
-	string& lRemain,		//À¨ºÅ×ó±ßµÄ×Ö·û´®
-	string& rRemain			//À¨ºÅÓÒ±ßµÄ×Ö·û´®
-	);						//ÔÚconexpÖĞÒÆ³ı×îÍâ²ãÆ¥ÅäµÄÀ¨ºÅ£¬×óÀ¨ºÅÎªls£¬ÓÒÀ¨ºÅÎªrs
-
+void removeSpaceBeforeGT(string& conexp);					//É¾³ıconExµÄ>×Ö·ûÇ°ËùÓĞ¿Õ¸ñ
+char removeBraketPairFrom(string& conexp,			//ÔÚÆ¥Åä·ûºÅÖĞ¼äµÄ±í´ïÊ½£¬¼´È¥³ıÀ¨ºÅºóÖĞ¼äµÄÄÚÈİ
+		string ls,				//×óÀ¨ºÅ
+		string rs,				//ÓÒÀ¨ºÅ
+		string& lRemain,		//À¨ºÅ×ó±ßµÄ×Ö·û´®
+		string& rRemain			//À¨ºÅÓÒ±ßµÄ×Ö·û´®
+		);//ÔÚconexpÖĞÒÆ³ı×îÍâ²ãÆ¥ÅäµÄÀ¨ºÅ£¬×óÀ¨ºÅÎªls£¬ÓÒÀ¨ºÅÎªrs
 
 // conEx parser
 class conExParser
 {
+
 public:
-			string				originExp;
-			vector<string>		vecExp;
-								conExParser(string exp="");
-			conExParser		  &	parse(string exp);
-			vector<TiXmlNode*>	match(TiXmlNode* root);
-			vector<TiXmlNode*>	matchOnce(TiXmlNode* root);
+	string originExp;
+	vector<string> vecExp;
+	conExParser(string exp = "");
+	conExParser & parse(string exp);
+	vector<TiXmlNode*> match(TiXmlNode* root);
+	vector<TiXmlNode*> matchOnce(TiXmlNode* root);
 
 };
 
 // conditionExpression conEx
 class conEx
 {
-	friend	class				conExGp;
-	friend	class				filterExGp;
-	friend	class				conExParser;
+	friend class conExGp;
+	friend class filterExGp;
+	friend class conExParser;
+
 protected:
-			string				testTagName;									//±êÇ©Æ¥ÅäÃû
-			string				testAttrName;									//ÊôĞÔÆ¥ÅäÃû
-			string				testAttrValue;									//ÊôĞÔÆ¥ÅäÖµ
-			string				testAttrMatchType;								//ÊôĞÔÆ¥Åä·½Ê½
-			conExGp			  * pConExGp;										//±í´ïÊ½Èº×é
-			bool				exceptThisConEx;								//ÊÇ·ñÆ¥Åä½á¹ûÈ¡·´
-			vector<filterEx>	filterExGp;										//¹ıÂËÆ÷Èº×é£¨È«¶¼»ò¹ØÏµ£©
+	string testTagName;									//±êÇ©Æ¥ÅäÃû
+	string testAttrName;									//ÊôĞÔÆ¥ÅäÃû
+	string testAttrValue;									//ÊôĞÔÆ¥ÅäÖµ
+	string testAttrMatchType;								//ÊôĞÔÆ¥Åä·½Ê½
+	conExGp * pConExGp;										//±í´ïÊ½Èº×é
+	bool exceptThisConEx;								//ÊÇ·ñÆ¥Åä½á¹ûÈ¡·´
+	vector<filterEx> filterExGp;								//¹ıÂËÆ÷Èº×é£¨È«¶¼»ò¹ØÏµ£©
+
 public:
-	enum	Relation{
+	enum Relation
+	{
 		CONEX_DEFAULT,			//Ö»×öµÚÒ»¸öÔªËØµÄÅĞ¶Ï
 		CONEX_AND,				//ºÍÌõ¼ş
 		CONEX_OR,				//»òÌõ¼ş
 		CONEX_NOT				//·ÇÌõ¼ş
 	};
-	enum	FilterType{
+	
+	enum FilterType
+	{
 		FT_ALL,					//Æ¥ÅäÈ«²¿
 		FT_FIRST,				//Æ¥Åäµ½µÚÒ»¸ö¾ÍÍ£Ö¹
 		FT_LAST,				//È¡Æ¥Åä½á¹ûµÄ×îºóÒ»¸ö
@@ -432,48 +428,56 @@ public:
 		FT_EVEN,				//È¡µÚ2n¸öÆ¥Åä½á¹û
 		FT_NODETYPE				//È¡½ÚµãÎªtypeµÄÆ¥Åä½á¹û
 	};
-	static	string				blank;											//±íÊ¾¿Õ±í´ïÊ½µÄ³£Á¿
-			conExGp			  & conExSplit(string exp,char spSymbol);			//·Ö½âºó·µ»Ø×ÔÉíconExGp(Èº×é)µÄÒıÓÃ
 	
-								conEx(string exp="*",bool except=false);
-			conEx			  &	parse(string exp);								//°Ñ±í´ïÊ½µÄĞÅÏ¢½âÎöµ½Êı¾İ³ÉÔ±ÖĞ
-			bool				match(TiXmlNode* node);							//²âÊÔÊÇ·ñÆ¥Åä¸Ã½Úµã
-			vector<TiXmlNode*>	matchTree(TiXmlNode* root);						//±éÀúÊ÷·µ»ØÂú×ãµÄ½Úµã
-			vector<TiXmlNode*>	matchOnce(TiXmlNode* root);						//±éÀúÊ÷·µ»ØÂú×ãµÄ½Úµã
-			//vector<TiXmlNode*>	matchVector(TiXmlNode* root,int& matchCount);	//±éÀúvectorÖĞµÄ½Úµã·µ»ØÂú×ãµÄ
-			
-			bool				filterDone();									//µ±filterTypeÈ«ÎªFT_ALLÊ±·µ»Øtrue
+	static string blank;											//±íÊ¾¿Õ±í´ïÊ½µÄ³£Á¿
+	conExGp & conExSplit(string exp, char spSymbol);	//·Ö½âºó·µ»Ø×ÔÉíconExGp(Èº×é)µÄÒıÓÃ
 
+	conEx(string exp = "*", bool except = false);
+	conEx & parse(string exp);								//°Ñ±í´ïÊ½µÄĞÅÏ¢½âÎöµ½Êı¾İ³ÉÔ±ÖĞ
+	bool match(TiXmlNode* node);							//²âÊÔÊÇ·ñÆ¥Åä¸Ã½Úµã
+	vector<TiXmlNode*> matchTree(TiXmlNode* root);					//±éÀúÊ÷·µ»ØÂú×ãµÄ½Úµã
+	vector<TiXmlNode*> matchOnce(TiXmlNode* root);					//±éÀúÊ÷·µ»ØÂú×ãµÄ½Úµã
+	//vector<TiXmlNode*>	matchVector(TiXmlNode* root,int& matchCount);	//±éÀúvectorÖĞµÄ½Úµã·µ»ØÂú×ãµÄ
+
+	bool filterDone();								//µ±filterTypeÈ«ÎªFT_ALLÊ±·µ»Øtrue
 
 };
 
 class conExGp
 {
-	friend	class				conEx;
-	friend	class				conExParser;
+	
+	friend class conEx;
+	friend class conExParser;
+
 protected:
-			vector<conEx>		conexGp;										//Ìõ¼ş±í´ïÊ½Èº×é
-			conEx::Relation		_conExRelation;
-			bool				exceptThisConExGp;								//¸Ã×éµÄÅĞ¶Ï½á¹ûÊÇ·ñÈ¡·´
+	vector<conEx> conexGp;										//Ìõ¼ş±í´ïÊ½Èº×é
+	conEx::Relation _conExRelation;
+	bool exceptThisConExGp;								//¸Ã×éµÄÅĞ¶Ï½á¹ûÊÇ·ñÈ¡·´
+
 public:
-								conExGp();
-			bool				gpMatch(TiXmlNode* node);						//×ÜÌåÆ¥Åä½Úµã
+	conExGp();
+	bool gpMatch(TiXmlNode* node);						//×ÜÌåÆ¥Åä½Úµã
 
 };
 
 class filterEx
 {
-	friend	class				conEx;
-	friend	class				conExParser;
+	
+	friend class conEx;
+	friend class conExParser;
+
 protected:
-			int					filterType;										//filterÀàĞÍ
-			int					testNodeType;
-			int					filterValue;									//Í¨³£±íÊ¾atµ½ÄÄ¸öÎ»ÖÃµÄÖµ
-			bool				_used;											//±»ÓÃ¹ıÁËÒ»´Îºó»á±ê¼ÇÎªtrue
+	int filterType;										//filterÀàĞÍ
+	int testNodeType;
+	int filterValue;									//Í¨³£±íÊ¾atµ½ÄÄ¸öÎ»ÖÃµÄÖµ
+	bool _used;											//±»ÓÃ¹ıÁËÒ»´Îºó»á±ê¼ÇÎªtrue
+
 public:
-								filterEx(string exp="");
-			filterEx		  & parse(string exp);
+	filterEx(string exp = "");
+	filterEx & parse(string exp);
+
 };
+
 
 #endif		/*_XMLSEL_H_*/
 
