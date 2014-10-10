@@ -10,4 +10,4 @@ FreeXL
 4. 整行或整列的访问与修改。
 5. R1C1样式或A1样式串的解析
 
-该库代码对xml文件解析基于xQuery++的xml解析器，点击这里[xQuery++](http://github.com/adolli/xQuery++)查看相关代码
+该库代码对xml文件解析基于xQuery++的xml解析器，点击这里[xQuery++](https://github.com/adolli/xQuery-plus-plus)查看相关代码
