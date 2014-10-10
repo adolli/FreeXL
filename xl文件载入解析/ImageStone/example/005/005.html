@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>tutorial</title>
+<Style>
+BODY, P, TD { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt }
+H2,H3,H4,H5 { color: #ff9900; font-weight: bold; }
+H2 { font-size: 13pt; }
+H3 { font-size: 12pt; }
+H4 { font-size: 10pt; color: black; }
+PRE { BACKGROUND-COLOR: #FBEDBB; FONT-FAMILY: "Courier New", Courier, mono; WHITE-SPACE: pre; }
+CODE { COLOR: #990000; FONT-FAMILY: "Courier New", Courier, mono; }
+.style1 {
+	color: #0000FF;
+	font-weight: bold;
+}
+.style2 {color: #0000FF}
+.style3 {
+	color: #FF0000;
+	font-weight: bold;
+}
+</style>
+</head>
+<body bgcolor="#FFFFFF" color=#000000>
+<H2>example: 005</H2>
+<table width="80%"  border="0" bgcolor="#FFFFEC">
+  <tr valign="top">
+    <td class="style1"><span class="style1">Purpose:</span></td>
+    <td><p>Use FreeImage library to read/write image</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr valign="top">
+    <td class="style1"><span class="style1">OS:</span></td>
+    <td><p>windows, linux... (any C++ compiler)</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr valign="top">
+    <td class="style1"><span class="style1">Place:</span></td>
+    <td><p>example/005/src</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr valign="top">
+    <td class="style1"><span class="style1">Notice:</span></td>
+    <td><p class="style3">you must put a multi-frame GIF image named test.gif in same folder to the executable binary</p>
+      <p>this demo use FCObjMultiFrame object to load multiple page gif image, then save every page as 1.jpg, 2.jpg...</p>
+      <p>&nbsp;</p>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td class="style1"><span class="style2">Usage:</span></td>
+    <td><p>Use FreeImage to read/write image file.<br>
+      1)<br>
+      #define PCL_3RD_LIBRARY_USE_FREEIMAGE before #include &quot;ImageStone.h&quot;<br>
+      if you want to use FreeImage in static lib mode, please #define FREEIMAGE_LIB before #include &quot;ImageStone.h&quot;<br>
+      <br>
+2)<br> 
+add under line before using FCObjImage::Load/Save<br>
+FCObjImage::SetImageHandleFactory (new FCImageHandleFactory_FreeImage) ;<br>
+<br>
+3)<br> 
+download FreeImage -- <a href="http://sourceforge.net/projects/freeimage" target="_blank">http://sourceforge.net/projects/freeimage</a><br>
+place package file in this path under ImageStone directory<br>
+ lib\FreeImage\Dist\..<br> 
+ lib\FreeImage\Source\..<br>
+ <br>
+4)<br> 
+Compile FreeImage<br>
+-- VC6/2003/2005 :<br>
+open FreeImage.dsw to compile (compile project FreeImage if you want to use FreeImage in DLL mode and don't define FREEIMAGE_LIB before #include &quot;ImageStone.h&quot;, compile project FreeImageLib if you want to use FreeImage in static lib mode and must define FREEIMAGE_LIB before #include &quot;ImageStone.h&quot;) <br>
+the example 005 has define FREEIMAGE_LIB, so compile project FreeImageLib. <br>
+<br>
+Your application's run-time library must same to FreeImage, otherwise you will encounter error LNK2005<br>
+VC6:  project-&gt;settings-&gt;C/C++-&gt;Code Generation-&gt;Use run-time library <br>
+VC2003/VC2005: project-&gt;properties-&gt;C/C++-&gt;Code Generation-&gt;Runtime library<br>
+<br>
+now add link FreeImaged.lib/FreeImage.lib to your project, do nothing in example 005, the link file path has been setted. <br>
+
+<br>        
+-- Linux :<br>
+      type make command under lib\FreeImage</p>
+      <p>&nbsp;</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

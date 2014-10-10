@@ -1,0 +1,109 @@
+<enumMaps>
+    <!--use the format below-->
+    <!--XL_enumName  index=enumValue  userString  excelString-->
+    <!--
+        userString: user type the string in cpp file such as sty.alignment="center bottom",
+                    then we'll see <Alignment ss:Vertical="Bottom" ss:Horizon="Center" /> in excel xml doc.
+        excelString:making the map relationship from userString to excelString.
+        
+        caution    :the sequence must be the same as in the excelQuery.h
+    -->
+    <Alignment>
+        <_hAlign>
+            <XL_hDefault     index="0" userStr="hdefault"       xlStr="" />
+            <XL_hDefault     index="0" userStr="reset"          xlStr="" />
+            <XL_Center       index="1" userStr="center"         xlStr="Center" />
+            <XL_Left         index="2" userStr="left"           xlStr="Left" />
+            <XL_Right        index="3" userStr="right"          xlStr="Right" />
+            <XL_CAcross      index="4" userStr="across"         xlStr="CenterAcrossSelection" />
+            <XL_Justify      index="5" userStr="justify"        xlStr="Justify" />
+        </_hAlign>           
+        <_vAlign>            
+            <XL_vDefault     index="0" userStr="vdefault"       xlStr="" />
+            <XL_vDefault     index="0" userStr="reset"          xlStr="" />
+            <XL_Middle       index="1" userStr="middle"         xlStr="Center" />
+            <XL_Bottom       index="2" userStr="bottom"         xlStr="Bottom" />
+            <XL_Top          index="3" userStr="top"            xlStr="Top" />
+        </_vAlign>
+    </Alignment>
+    <Borders>
+        <LineStyle_t>
+            <XL_None         index="0" userStr="none"           xlStr="" />
+            <XL_None         index="0" userStr="reset"          xlStr="" />
+            <XL_Continuous   index="1" userStr="continuous"     xlStr="Continuous" />
+            <XL_Solid        index="2" userStr="solid"          xlStr="Continuous" />
+            <XL_Dash         index="3" userStr="dash"           xlStr="Dash" />
+            <XL_Dash         index="3" userStr="-"              xlStr="Dash" />
+            <XL_DashDot      index="4" userStr="dashdot"        xlStr="DashDot" />
+            <XL_DashDot      index="4" userStr="-."             xlStr="DashDot" />
+            <XL_DashDotDot   index="5" userStr="dashdotdot"     xlStr="DashDotDot" />
+            <XL_DashDotDot   index="5" userStr="-.."            xlStr="DashDotDot" />
+            <XL_Dot          index="6" userStr="dot"            xlStr="Dot" />
+            <XL_Dot          index="6" userStr="."              xlStr="Dot" />
+            <XL_Double       index="7" userStr="double"         xlStr="Double" />
+            <XL_Double       index="7" userStr="="              xlStr="Double" />
+            <XL_SlantDashDot index="8" userStr="slantdashdot"   xlStr="SlantDashDot" />
+        </LineStyle_t>
+    </Borders>
+    <Font_t>
+        <UnderlineStyle_t>
+            <XL_None        index="0" userStr="none"            xlStr="" />
+            <XL_None        index="0" userStr="reset"           xlStr="" />
+            <XL_None        index="0" userStr="noUnderLine"     xlStr="" />
+            <XL_Single      index="1" userStr="single"          xlStr="Single" />
+            <XL_Single      index="1" userStr="_"               xlStr="Single" />
+            <XL_Double      index="2" userStr="double"          xlStr="Double" />
+            <XL_Double      index="2" userStr="="               xlStr="Double" />
+        </UnderlineStyle_t>
+        <VerticalAlign_t>
+            <XL_Default     index="0" userStr="default"         xlStr="" />
+            <XL_Default     index="0" userStr="reset"           xlStr="" />
+            <XL_Default     index="0" userStr="resetScript"     xlStr="" />
+            <XL_Subscript   index="1" userStr="sub"             xlStr="Subscript" />
+            <XL_Subscript   index="1" userStr="subscript"       xlStr="Subscript" />
+            <XL_Superscript index="2" userStr="super"           xlStr="Superscript" />
+            <XL_Superscript index="2" userStr="superscript"     xlStr="Superscript" />
+            <XL_Superscript index="2" userStr="^"               xlStr="Superscript" />
+        </VerticalAlign_t>
+    </Font_t>
+    <Interior_t>
+        <Pattern_t>
+            <XL_None                  index="0"  userStr="none"         xlStr="" />
+            <XL_None                  index="0"  userStr="reset"        xlStr="" />
+            <XL_Solid                 index="1"  userStr="solid"        xlStr="Solid" />
+            <XL_Gray75                index="2"  userStr="gray75"       xlStr="Gray75" />
+            <XL_Gray75                index="2"  userStr="75%"          xlStr="Gray75" />
+            <XL_Gray50                index="3"  userStr="gray50"       xlStr="Gray50" />
+            <XL_Gray50                index="3"  userStr="50%"          xlStr="Gray50" />
+            <XL_Gray25                index="4"  userStr="gray25"       xlStr="Gray25" />
+            <XL_Gray25                index="4"  userStr="25%"          xlStr="Gray25" />
+            <XL_Gray125               index="5"  userStr="gray12.5"     xlStr="Gray125" />
+            <XL_Gray125               index="5"  userStr="12.5%"        xlStr="Gray125" />
+            <XL_Gray0625              index="6"  userStr="gray6.25"     xlStr="Gray0625" />
+            <XL_Gray0625              index="6"  userStr="6.25%"        xlStr="Gray0625" />
+            <XL_HorzStripe            index="7"  userStr="horz"         xlStr="HorzStripe" />
+            <XL_HorzStripe            index="7"  userStr="-"            xlStr="HorzStripe" />
+            <XL_VertStripe            index="8"  userStr="vert"         xlStr="VertStripe" />
+            <XL_VertStripe            index="8"  userStr="|"            xlStr="VertStripe" />
+            <XL_ReverseDiagStripe     index="9"  userStr="rdiag"        xlStr="ReverseDiagStripe" />
+            <XL_ReverseDiagStripe     index="9"  userStr="/"            xlStr="ReverseDiagStripe" />
+            <XL_DiagStripe            index="10"  userStr="diag"         xlStr="DiagStripe" />
+            <XL_DiagStripe            index="10"  userStr="\"            xlStr="DiagStripe" />
+            <XL_ThickDiagCross        index="11"  userStr="thickDiagx"   xlStr="ThickDiagCross" />
+            <XL_ThickDiagCross        index="11"  userStr="X"            xlStr="ThickDiagCross" />
+            <XL_ThinHorzStripe        index="12" userStr="thinHorz"     xlStr="ThinHorzStripe" />
+            <XL_ThinVertStripe        index="13" userStr="thinVert"     xlStr="ThinVertStripe" />
+            <XL_ThinHorzCross         index="14" userStr="thinHorz+"    xlStr="ThinHorzCross" />
+            <XL_ThinHorzCross         index="14" userStr="+"            xlStr="ThinHorzCross" />
+            <XL_ThinReverseDiagStripe index="15" userStr="thinRDiag"    xlStr="ThinReverseDiagStripe" />
+            <XL_ThinDiagStripe        index="16" userStr="thinDiag"     xlStr="ThinDiagStripe" />
+            <XL_ThinDiagCross         index="17" userStr="thinDiagx"    xlStr="ThinDiagCross" />
+            <XL_DiagCross             index="18" userStr="diagx"        xlStr="DiagCross" />
+            <XL_DiagCross             index="18" userStr="x"            xlStr="DiagCross" />
+        </Pattern_t>
+    </Interior_t>
+
+</enumMaps>
+<!--
+
+-->

@@ -1,0 +1,148 @@
+﻿.navmenu{
+	clear:both;
+	position: relative;
+	padding: 0 0 0 34px;
+	margin: 0 auto 0 auto;
+	background: url(img/navmenu_bg.gif) repeat-x;
+	height: 46px;
+	list-style: none;
+}
+
+.navmenu li{
+	float:left;
+}
+
+.navmenu li a{
+	float: left;
+	display: block;
+	color:#DA4901;
+	text-decoration: none;
+	font-family: sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	padding:0 0 0 16px;
+	height: 46px;
+	line-height: 46px;
+	text-align: center;
+	cursor: pointer;	
+}
+
+.navmenu li a b{
+	float: left;
+	display: block;
+	padding: 3px 24px 0 8px;
+}
+
+.navmenu li.current a, .navmenu li a:hover{
+	color: #fff;text-decoration:none;
+	background: url(img/navmenu_hover_left.gif) no-repeat;
+	background-position: left 0px;
+}
+
+.navmenu li.current a b, .navmenu li a:hover b{
+	color: #fff;
+	background: url(img/navmenu_hover_right.gif) no-repeat right top;
+}
+
+.menuStripBlue
+{
+	margin-bottom:10px;
+    font-family: Calibri, '微软雅黑', '黑体', Arial;
+    font-size: 14px;
+    width: 100%;
+    min-width: 950px;
+    height: auto;
+    background-color: #0270bf;
+    float: left;
+    position: relative;
+    z-index: 99999;
+}
+.menuStripBlue a
+{
+    display: block;
+    padding: 7px 0;
+    float: left;
+}
+.menuCommonBlue
+{
+    border-left: 1px solid #0380d9;
+    min-width: 20px;
+    height: auto;
+    display: inline-block;
+    border-right: 1px solid #005793;
+}
+.menuLastBlue
+{
+    min-width: 20px;
+    height: auto;
+    border-left: 1px solid #0288e7;
+    display: inline-block;
+}
+.menuLinkBlue
+{
+	height:19px;
+    text-decoration: none;
+    color: White;
+    font-size: 15px;
+    font-weight: bold;
+}
+a.menuLinkBlue
+{
+    color: White;
+}
+a.menuLinkBlue:hover
+{
+    background: #f60;
+	cursor: pointer;
+}
+a.menuLinkBlue:hover .menuCommonBlue
+{
+    border-left: 1px solid #f60;
+    border-right: 1px solid #f60;
+}
+a.menuLinkBlue:hover .menuFirstBlue
+{
+    border-right: 1px solid #f60;
+}
+a.menuLinkBlue:hover .menuLastBlue
+{
+    border-left: 1px solid #f60;
+}
+a.menuLinkBlue.active
+{
+    background: #fff;
+    color: #0270bf;
+}
+a.menuLinkBlue.active .menuCommonBlue
+{
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+a.menuLinkBlue.active .menuFirstBlue
+{
+    border-right: 1px solid #fff;
+}
+a.menuLinkBlue.active .menuLastBlue
+{
+    border-left: 1px solid #fff;
+}
+.menuLinkTextBlue
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.menuCommonBlue
+{
+    border-left: 1px solid #0380d9;
+    min-width: 20px;
+    height: auto;
+    display: inline-block;
+    border-right: 1px solid #005793;
+}
+.menuFirstBlue
+{
+    min-width: 20px;
+    height: auto;
+    border-right: 1px solid #005793;
+    display: inline-block;
+}

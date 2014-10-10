@@ -1,0 +1,89 @@
+﻿生成启动时间为 2013/1/15 22:23:52。
+开始生成时的环境:
+1830B7BD-F7A3-4c4d-989B-C004DE465EDE = 1254:37ed30
+ALLUSERSPROFILE = C:\ProgramData
+APPDATA = C:\Users\Administrator\AppData\Roaming
+asl.log = Destination=file
+CommonProgramFiles = C:\Program Files\Common Files
+COMPUTERNAME = HL-20120811ZQTO
+ComSpec = C:\Windows\system32\cmd.exe
+FP_NO_HOST_CHECK = NO
+HOMEDRIVE = C:
+HOMEPATH = \Users\Administrator
+include = C:\Program Files\Microsoft Visual Studio\VC98\atl\include;C:\Program Files\Microsoft Visual Studio\VC98\mfc\include;C:\Program Files\Microsoft Visual Studio\VC98\include
+KMP_DUPLICATE_LIB_OK = TRUE
+lib = C:\Program Files\Microsoft Visual Studio\VC98\mfc\lib;C:\Program Files\Microsoft Visual Studio\VC98\lib
+LOCALAPPDATA = C:\Users\Administrator\AppData\Local
+LOGONSERVER = \\HL-20120811ZQTO
+MKL_SERIAL = YES
+NUMBER_OF_PROCESSORS = 4
+OS = Windows_NT
+Path = C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\Thunder Network\KanKan\Codecs;C:\Program Files\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Microsoft Visual Studio\Common\Tools\WinNT;C:\Program Files\Microsoft Visual Studio\Common\MSDev98\Bin;C:\Program Files\Microsoft Visual Studio\Common\Tools;C:\Program Files\Microsoft Visual Studio\VC98\bin
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+PROCESSOR_ARCHITECTURE = x86
+PROCESSOR_IDENTIFIER = x86 Family 6 Model 42 Stepping 7, GenuineIntel
+PROCESSOR_LEVEL = 6
+PROCESSOR_REVISION = 2a07
+ProgramData = C:\ProgramData
+ProgramFiles = C:\Program Files
+PSModulePath = C:\Windows\system32\WindowsPowerShell\v1.0\Modules\
+PUBLIC = C:\Users\Public
+SESSIONNAME = Console
+SystemDrive = C:
+SystemRoot = C:\Windows
+TEMP = C:\Users\ADMINI~1\AppData\Local\Temp
+TMP = C:\Users\ADMINI~1\AppData\Local\Temp
+USERDOMAIN = HL-20120811ZQTO
+USERNAME = Administrator
+USERPROFILE = C:\Users\Administrator
+VisualStudioDir = C:\Users\Administrator\Documents\Visual Studio 2010
+VS100COMNTOOLS = C:\Program Files\Microsoft Visual Studio 10.0\Common7\Tools\
+VS110COMNTOOLS = C:\Program Files\Microsoft Visual Studio 11.0\Common7\Tools\
+windir = C:\Windows
+windows_tracing_flags = 3
+windows_tracing_logfile = C:\BVTBin\Tests\installpackage\csilogfile.log
+_DFX_INSTALL_UNSIGNED_DRIVER = 1
+
+     1>项目“E:\whut\制作\xl文件载入解析\xl文件载入解析\xl文件载入解析.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\xl文件载入解析.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main2.cpp
+         main2.cpp
+     1>e:\whut\制作\xl文件载入解析\xl文件载入解析\imagestone\include\oxo_helper.h(41): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>e:\whut\制作\xl文件载入解析\xl文件载入解析\imagestone\include\oxo_helper.h(55): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>e:\whut\制作\xl文件载入解析\xl文件载入解析\imagestone\include\imagefile\interface_imagehandle.h(38): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>e:\whut\制作\xl文件载入解析\xl文件载入解析\imagestone\include\pixelprocessor\pixelprocessorbase.h(2796): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>e:\whut\制作\xl文件载入解析\xl文件载入解析\imagestone\include\fwin32.h(976): warning C4996: '_wsplitpath': This function or variable may be unsafe. Consider using _wsplitpath_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\stdlib.h(829) : 参见“_wsplitpath”的声明
+     1>e:\whut\制作\xl文件载入解析\xl文件载入解析\imagestone\include\fwin32.h(977): warning C4996: '_wmakepath': This function or variable may be unsafe. Consider using _wmakepath_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\stdlib.h(819) : 参见“_wmakepath”的声明
+     1>e:\whut\制作\xl文件载入解析\xl文件载入解析\imagestone\include\imagefile\imagehandle_bmp.h(86): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>e:\whut\制作\xl文件载入解析\xl文件载入解析\imagestone\include\imagefile\imagehandle_tga.h(150): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+       Link:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\whut\制作\xl文件载入解析\Debug\xl文件载入解析.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\xl文件载入解析.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\whut\制作\xl文件载入解析\Debug\xl文件载入解析.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\whut\制作\xl文件载入解析\Debug\xl文件载入解析.lib" /MACHINE:X86 Debug\adXL.obj
+         Debug\conEx.obj
+         Debug\dump_to_stdout.obj
+         Debug\main2.obj
+         Debug\tinystr.obj
+         Debug\tinyxml.obj
+         Debug\tinyxmlerror.obj
+         Debug\tinyxmlparser.obj
+         Debug\xmlSel.obj
+         xl文件载入解析.vcxproj -> E:\whut\制作\xl文件载入解析\Debug\xl文件载入解析.exe
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"E:\whut\制作\xl文件载入解析\Debug\xl文件载入解析.exe.manifest" /manifest "Debug\xl文件载入解析.exe.intermediate.manifest"
+       FinalizeBuildStatus:
+         正在删除文件“Debug\xl文件载入解析.unsuccessfulbuild”。
+         正在对“Debug\xl文件载入解析.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\whut\制作\xl文件载入解析\xl文件载入解析\xl文件载入解析.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:12.97

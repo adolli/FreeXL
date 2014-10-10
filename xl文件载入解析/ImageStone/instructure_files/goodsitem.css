@@ -1,0 +1,26 @@
+﻿#columnbanner {height:100px; margin-top:10px;background-color:#FDFAF2;}
+#columnname {font-family:"Microsoft YaHei",黑体;font-size:26px; line-height:100px;margin-left:20px;}
+#contentleft {float:left;margin-top:8px;width:220px;}
+#contentmain {float:left;line-height:18px;margin:8px 0 0 8px;width:720px;overflow:hidden;}
+.hotbox {width:220px;margin-bottom:10px;}
+#summary {line-height:24px;margin-top:8px;padding:10px;background-color:#FFFFFF;}
+#summary .price {color: #F30;font-size: 14px;font-weight: bold;}
+#details{font-family:verdana,宋体;font-size:12px;line-height:20px;padding:20px;background-color: #F8FAFD;border: 1px solid #C1D9F4;}
+.comment .summary {width:400px;padding-right:8px;}
+.downlink{height:30px;}
+a:link.downlink {color: #A9501B;
+font-weight: normal;
+text-decoration: underline;
+white-space: nowrap;}
+a:visited.downlink {color:#A9501B; text-decoration:none}
+a:hover.downlink , a:active.downlink , a:focus.downlink {color:#FF6600;text-decoration:underline;}
+
+#cats {margin-bottom:10px;}
+#introduce,#comments {margin:20px 0 20px 0;}
+#introduce .info {margin-left:10px;}
+#introduce h3 { width:100%; height:30px; background:url(/images/2012/info.gif) 10px 6px no-repeat; line-height:30px; font-weight:bold; color:#000; text-indent:34px; font-size:14px; margin-bottom:5px; }
+#comments h3 { width:100%; height:30px; background:url(/images/2012/chat.gif) 10px 6px no-repeat; line-height:30px; font-weight:bold; color:#000; text-indent:34px; font-size:14px; margin-bottom:5px; }
+.code_tree {margin-top:20px;overflow:auto;}
+.code_tree h3 { width:100%; height:30px; background:url(/images/2012/code.gif) 10px 6px no-repeat; line-height:30px; font-weight:bold; color:#000; text-indent:34px; font-size:14px; margin-bottom:5px; }
+.code_tree #codebrowser { float:left;width:330px;overflow:auto; height:250px; margin-left:10px; background-color:#fff; border:1px solid #ccc;}
+.code_tree span.ad { width:320px; height:250px; margin-left:20px; float:left; overflow:hidden; }

@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>tutorial</title>
+<Style>
+BODY, P, TD { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt }
+H2,H3,H4,H5 { color: #ff9900; font-weight: bold; }
+H2 { font-size: 13pt; }
+H3 { font-size: 12pt; }
+H4 { font-size: 10pt; color: black; }
+PRE { BACKGROUND-COLOR: #FBEDBB; FONT-FAMILY: "Courier New", Courier, mono; WHITE-SPACE: pre; }
+CODE { COLOR: #990000; FONT-FAMILY: "Courier New", Courier, mono; }
+.style1 {
+	color: #0000FF;
+	font-weight: bold;
+}
+.style2 {color: #0000FF}
+.style3 {
+	color: #FF0000;
+	font-weight: bold;
+}
+</style>
+</head>
+<body bgcolor="#FFFFFF" color=#000000>
+<H2>example: 002</H2>
+<table width="80%"  border="0" bgcolor="#FFFFEC">
+  <tr valign="top">
+    <td class="style1"><span class="style1">Purpose:</span></td>
+    <td><p>Draw image on screen under Windows</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr valign="top">
+    <td class="style1"><span class="style1">OS:</span></td>
+    <td><p>windows (a SDK project) </p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr valign="top">
+    <td class="style1"><span class="style1">Place:</span></td>
+    <td><p>example/002/src</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr valign="top">
+    <td class="style1"><span class="style1">Notice:</span></td>
+    <td><p class="style3">you must put a JPG image named test.jpg at root of C driver </p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr valign="top">
+    <td class="style1"><span class="style2">Usage:</span></td>
+    <td><p> bk.tga (in resource) is back image of window, use FCWin32::LoadImageRes to load a image from resource </p>
+      <p>use FCWin32::DrawImage / FCWin32::DrawImageAspect / FCWin32::AlphaImageOnDC function to draw image on screen</p>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>
