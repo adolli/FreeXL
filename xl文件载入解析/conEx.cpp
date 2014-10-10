@@ -1,4 +1,4 @@
-// conEx.cpp
+ï»¿// conEx.cpp
 
 #include "xmlSel.h"
 using namespace std;
@@ -60,7 +60,7 @@ vector<TiXmlNode*> conExParser::match(TiXmlNode* root)
 		{
 			conEx father(vecExp[i].substr(0, pos));
 			conExParser son(vecExp[i].substr(pos + 1));
-			// father ºÍ son¶¼matchTree
+			// father å’Œ sonéƒ½matchTree
 			vector<TiXmlNode*> fatherResult = father.matchTree(root);
 			for (UINT j = 0; j < fatherResult.size(); j++)
 			{
@@ -104,7 +104,7 @@ vector<TiXmlNode*> conExParser::matchOnce(TiXmlNode* root)
 		{
 			conEx father(vecExp[i].substr(0, gPos));
 			conExParser son(vecExp[i].substr(gPos + 1));
-			vector<TiXmlNode*> fatherResult = father.matchOnce(root); //ÒòÎª±í´ïÊ½ÒªÇómatchOnce£¬ËùÒÔÕâÀïÒ²ÊÇmatchOnce
+			vector<TiXmlNode*> fatherResult = father.matchOnce(root); //å› ä¸ºè¡¨è¾¾å¼è¦æ±‚matchOnceï¼Œæ‰€ä»¥è¿™é‡Œä¹Ÿæ˜¯matchOnce
 			for (UINT j = 0; j < fatherResult.size(); j++)
 			{
 				VecCombine(ret, son.matchOnce(fatherResult[j]));
@@ -123,7 +123,7 @@ vector<TiXmlNode*> conExParser::matchOnce(TiXmlNode* root)
 		else
 		{
 			conEx result(vecExp[i]);
-			VecCombine(ret, result.matchOnce(root)); //ÕâÀïÒ²Òª¶ÔÓ¦matchOnce(´¦ÀíÕâÑùµÄ½áÎ²A>B)
+			VecCombine(ret, result.matchOnce(root)); //è¿™é‡Œä¹Ÿè¦å¯¹åº”matchOnce(å¤„ç†è¿™æ ·çš„ç»“å°¾A>B)
 		}
 	}
 	return ret;
@@ -149,7 +149,7 @@ conEx& conEx::parse(string exp)
 	int pos = 0;
 	if (exp.find("!(") != string::npos)
 	{
-		// ³öÏÖ´Ë¼ÇºÅ±íÊ¾²»Âú×ã´ËÌõ¼şµÄÆ¥Åä³É¹¦
+		// å‡ºç°æ­¤è®°å·è¡¨ç¤ºä¸æ»¡è¶³æ­¤æ¡ä»¶çš„åŒ¹é…æˆåŠŸ
 		bool toExcept = false;
 		string l = "", r = "";
 		if (exp.find("!(") != string::npos)
@@ -161,7 +161,7 @@ conEx& conEx::parse(string exp)
 		pConExGp->conexGp.push_back(conEx(r));
 		pConExGp->conexGp.push_back(conEx(exp, toExcept));
 		pConExGp->conexGp[2].pConExGp->exceptThisConExGp = toExcept;
-		pConExGp->_conExRelation = conEx::CONEX_AND; //ÕâÀïÔİÇÒÕâÑù£¬²»À©Õ¹Ì«¶à¹¦ÄÜ
+		pConExGp->_conExRelation = conEx::CONEX_AND; //è¿™é‡Œæš‚ä¸”è¿™æ ·ï¼Œä¸æ‰©å±•å¤ªå¤šåŠŸèƒ½
 	}
 	else if ((pos = exp.find('.')) != string::npos)
 	{
@@ -203,7 +203,7 @@ conEx& conEx::parse(string exp)
 		else if (exp.find('[') != string::npos && exp.find(']') != string::npos)
 		{
 			// attribute
-			int pos = 0, vpos = 0;	//posÓÃÀ´±ê¼ÇattrNameµÄÄ©Î»ÖÃ£¬vposÓÃÀ´±ê¼ÇattrValueµÄ¿ªÊ¼Î»ÖÃ
+			int pos = 0, vpos = 0;	//posç”¨æ¥æ ‡è®°attrNameçš„æœ«ä½ç½®ï¼Œvposç”¨æ¥æ ‡è®°attrValueçš„å¼€å§‹ä½ç½®
 			exp = exp.substr(1, exp.length() - 2);
 			if ((vpos = pos = exp.find("!=")) != string::npos)
 			{
@@ -242,7 +242,7 @@ conEx& conEx::parse(string exp)
 			// tagName or value of other tpye of node
 			testTagName = exp;
 		}
-		pConExGp->conexGp.push_back(*this);				//×îºóconexGpÖĞÖ»ÓĞÒ»¸öÔªËØconEx
+		pConExGp->conexGp.push_back(*this);				//æœ€åconexGpä¸­åªæœ‰ä¸€ä¸ªå…ƒç´ conEx
 	}
 
 	return *this;
@@ -285,7 +285,7 @@ bool conEx::match(TiXmlNode* node)
 					|| testAttrMatchType == "$="
 							&& value.find_last_of(testAttrValue)
 									== value.length() - 1
-					|| //ÕâÒ»ÌõÒª²âÊÔÒ»ÏÂ
+					|| //è¿™ä¸€æ¡è¦æµ‹è¯•ä¸€ä¸‹
 					testAttrMatchType == "~="
 							&& testAttrValue.find(value) != string::npos
 					|| testAttrMatchType == "=" && value == testAttrValue)
@@ -303,7 +303,7 @@ bool conEx::match(TiXmlNode* node)
 		}
 	}
 
-	return false && !exceptThisConEx || true && exceptThisConEx; // Ö±µ½×îºóÒ»¸öÌõ¼ş¶¼Ã»·¨ÅĞ¶ÏµÄ£¬ÄÇÃ´Ö»ºÃfalseÁË¡£
+	return false && !exceptThisConEx || true && exceptThisConEx; // ç›´åˆ°æœ€åä¸€ä¸ªæ¡ä»¶éƒ½æ²¡æ³•åˆ¤æ–­çš„ï¼Œé‚£ä¹ˆåªå¥½falseäº†ã€‚
 }
 
 conExGp& conEx::conExSplit(string exp, char spSymbol)
@@ -332,7 +332,7 @@ bool conEx::filterDone()
 	{
 		if (!filterExGp[i]._used)
 		{
-			// Ö»ÒªÓĞÒ»¸öfilterÃ»±»Ê¹ÓÃ£¬ÄÇ¾Í¿Ï¶¨»¹Ã»filteÍê
+			// åªè¦æœ‰ä¸€ä¸ªfilteræ²¡è¢«ä½¿ç”¨ï¼Œé‚£å°±è‚¯å®šè¿˜æ²¡filteå®Œ
 			return false;
 		}
 	}
@@ -350,7 +350,7 @@ vector<TiXmlNode*> conEx::matchTree(TiXmlNode* root)
 		TiXmlNode* loopNode = root->FirstChild();
 		while (loopNode)
 		{
-			// ±éÀúº¯Êı²»±éÀúÎÄ±¾½Úµã£¬·ÃÎÊÎÄ±¾½ÚµãÇëÓÃ.text()
+			// éå†å‡½æ•°ä¸éå†æ–‡æœ¬èŠ‚ç‚¹ï¼Œè®¿é—®æ–‡æœ¬èŠ‚ç‚¹è¯·ç”¨.text()
 			if (loopNode->Type() != $::XML_TEXT && pConExGp->gpMatch(loopNode))
 			{
 				ret.push_back(loopNode);
@@ -361,10 +361,10 @@ vector<TiXmlNode*> conEx::matchTree(TiXmlNode* root)
 	}
 	else
 	{
-		// ÕâÀïÓÃ·Çµİ¹éËã·¨£¬ÉÏÃæ±£Áô(²âÊÔ¹ı£¬µİ¹éËã·¨·´¶øĞ§ÂÊ¸ß%1)
+		// è¿™é‡Œç”¨éé€’å½’ç®—æ³•ï¼Œä¸Šé¢ä¿ç•™(æµ‹è¯•è¿‡ï¼Œé€’å½’ç®—æ³•åè€Œæ•ˆç‡é«˜%1)
 		for (UINT i = 0; i < filterExGp.size(); i++)
 		{
-			// ÔÚ×îÇ°ÃæÒ²°ÑfilterÈ«²¿ÉúĞ§£¡
+			// åœ¨æœ€å‰é¢ä¹ŸæŠŠfilterå…¨éƒ¨ç”Ÿæ•ˆï¼
 			filterExGp[i]._used = false;
 		}
 		int matchCnt = 0;
@@ -378,10 +378,10 @@ vector<TiXmlNode*> conEx::matchTree(TiXmlNode* root)
 			stack.pop_back();
 			if (tempNode->Type() != $::XML_TEXT && pConExGp->gpMatch(tempNode))
 			{
-				// matchµ½½ÚµãµÄ´¦Àí²¿·Ö
+				// matchåˆ°èŠ‚ç‚¹çš„å¤„ç†éƒ¨åˆ†
 				matchCnt++;
 				for (UINT i = 0; i < filterExGp.size(); i++)
-				{  //±éÀúfilter£¬°ÑÂú×ãfilterµÄ¶¼¼¯ÖĞÆğÀ´
+				{  //éå†filterï¼ŒæŠŠæ»¡è¶³filterçš„éƒ½é›†ä¸­èµ·æ¥
 					if (filterExGp[i].filterType == conEx::FT_AT
 							&& filterExGp[i].filterValue == matchCnt
 							|| filterExGp[i].filterType == conEx::FT_EVEN
@@ -393,22 +393,22 @@ vector<TiXmlNode*> conEx::matchTree(TiXmlNode* root)
 					{
 						filterExGp[i]._used = true;
 						ret.push_back(tempNode);
-						break;  //Õâ¸öbreak±íÊ¾»ò¹ØÏµµÄfilter,ÔÚÆ¥Åäµ½Ò»¸öÖ®ºó¿ÉÒÔ²»ÓÃÔÙ²âÊÔ±ğµÄÌõ¼ş
+						break;  //è¿™ä¸ªbreakè¡¨ç¤ºæˆ–å…³ç³»çš„filter,åœ¨åŒ¹é…åˆ°ä¸€ä¸ªä¹‹åå¯ä»¥ä¸ç”¨å†æµ‹è¯•åˆ«çš„æ¡ä»¶
 					}
 					else if (filterExGp[i].filterType == conEx::FT_NODETYPE
 							&& filterExGp[i].testNodeType == tempNode->Type()
 							|| filterExGp[i].filterType == conEx::FT_NOT_AT
 									&& filterExGp[i].filterValue != matchCnt)
 					{
-						//ÔÚÕâÒ»²ãÅĞ¶ÏÀïĞèÒª°ÑËùÓĞmatchµ½µÄ½Úµã¶¼ÅĞ¶ÏÒ»´Î£¬ËùÒÔÓÃ¹ıµÄfilter²»»á±»É¾³ı
+						//åœ¨è¿™ä¸€å±‚åˆ¤æ–­é‡Œéœ€è¦æŠŠæ‰€æœ‰matchåˆ°çš„èŠ‚ç‚¹éƒ½åˆ¤æ–­ä¸€æ¬¡ï¼Œæ‰€ä»¥ç”¨è¿‡çš„filterä¸ä¼šè¢«åˆ é™¤
 						ret.push_back(tempNode);
 						break;
 					}
 					if (filterExGp[i].filterType == conEx::FT_LAST)
 					{
-						// Ñ¡È¡lastÕâ¸öÒªÁíÍâ´¦Àí
-						// ÔÚÉÏÃæµÄif·ÖÖ§ÖĞÒÑ¾­ÓĞbreakÌø³öÑ­»·£¬¹ÊÆ¥Åäµ½µÄ½Úµã²»ĞèÒªÔÚÕâÀïÖØ¸´
-						// ×îºóÖ»ĞèÑ½ÅĞ¶ÏsaveTheLastNodeÊÇ·ñ´æÔÚ£¬ÍÆÈëretÖĞ¾Í¿ÉÒÔÁË
+						// é€‰å–lastè¿™ä¸ªè¦å¦å¤–å¤„ç†
+						// åœ¨ä¸Šé¢çš„ifåˆ†æ”¯ä¸­å·²ç»æœ‰breakè·³å‡ºå¾ªç¯ï¼Œæ•…åŒ¹é…åˆ°çš„èŠ‚ç‚¹ä¸éœ€è¦åœ¨è¿™é‡Œé‡å¤
+						// æœ€ååªéœ€å‘€åˆ¤æ–­saveTheLastNodeæ˜¯å¦å­˜åœ¨ï¼Œæ¨å…¥retä¸­å°±å¯ä»¥äº†
 						saveTheLastNode = tempNode;
 					}
 				}
@@ -421,7 +421,7 @@ vector<TiXmlNode*> conEx::matchTree(TiXmlNode* root)
 					return ret;
 				}
 			}
-			// °Ñ¸Ã½ÚµãµÄ×Ó½ÚµãÈ«²¿ÈëÕ»£¬Ë³Ğò±éÀúÔò´ÓºóÍùÇ°ÈëÕ»
+			// æŠŠè¯¥èŠ‚ç‚¹çš„å­èŠ‚ç‚¹å…¨éƒ¨å…¥æ ˆï¼Œé¡ºåºéå†åˆ™ä»åå¾€å‰å…¥æ ˆ
 			for (TiXmlNode* child = tempNode->LastChild(); child;
 					child = child->PreviousSibling())
 			{
@@ -430,7 +430,7 @@ vector<TiXmlNode*> conEx::matchTree(TiXmlNode* root)
 		}
 		for (UINT i = 0; i < filterExGp.size(); i++)
 		{
-			// ÔÚ×îºóÃæ°ÑfilterÈ«²¿ÉúĞ§£¡
+			// åœ¨æœ€åé¢æŠŠfilterå…¨éƒ¨ç”Ÿæ•ˆï¼
 			filterExGp[i]._used = false;
 		}
 		if (saveTheLastNode)
@@ -443,14 +443,14 @@ vector<TiXmlNode*> conEx::matchTree(TiXmlNode* root)
 
 vector<TiXmlNode*> conEx::matchOnce(TiXmlNode* root)
 {
-	// ½ö¶Ôº¢×Ó½Úµã±éÀú£¬ËùÒÔ¶¼²»ĞèÒªµİ¹é
+	// ä»…å¯¹å­©å­èŠ‚ç‚¹éå†ï¼Œæ‰€ä»¥éƒ½ä¸éœ€è¦é€’å½’
 	vector<TiXmlNode*> ret;
 	if (pConExGp->conexGp[0].filterExGp.empty())
 	{
 		for (TiXmlNode* loopNode = root->FirstChild(); loopNode; loopNode =
 				loopNode->NextSibling())
 		{
-			// ±éÀúº¯Êı²»±éÀúÎÄ±¾½Úµã£¬·ÃÎÊÎÄ±¾½ÚµãÇëÓÃ.text()
+			// éå†å‡½æ•°ä¸éå†æ–‡æœ¬èŠ‚ç‚¹ï¼Œè®¿é—®æ–‡æœ¬èŠ‚ç‚¹è¯·ç”¨.text()
 			if (loopNode->Type() != $::XML_TEXT && pConExGp->gpMatch(loopNode))
 			{
 				ret.push_back(loopNode);
@@ -461,7 +461,7 @@ vector<TiXmlNode*> conEx::matchOnce(TiXmlNode* root)
 	{
 		for (UINT i = 0; i < filterExGp.size(); i++)
 		{
-			// ÔÚ×îÇ°ÃæÒ²°ÑfilterÈ«²¿ÉúĞ§£¡
+			// åœ¨æœ€å‰é¢ä¹ŸæŠŠfilterå…¨éƒ¨ç”Ÿæ•ˆï¼
 			filterExGp[i]._used = false;
 		}
 		int matchCnt = 0;
@@ -469,12 +469,12 @@ vector<TiXmlNode*> conEx::matchOnce(TiXmlNode* root)
 		for (TiXmlNode* loopNode = root->FirstChild(); loopNode; loopNode =
 				loopNode->NextSibling())
 		{
-			// ±éÀúº¯Êı²»±éÀúÎÄ±¾½Úµã£¬·ÃÎÊÎÄ±¾½ÚµãÇëÓÃ.text()
+			// éå†å‡½æ•°ä¸éå†æ–‡æœ¬èŠ‚ç‚¹ï¼Œè®¿é—®æ–‡æœ¬èŠ‚ç‚¹è¯·ç”¨.text()
 			if (loopNode->Type() != $::XML_TEXT && pConExGp->gpMatch(loopNode))
 			{
 				matchCnt++;
 				for (UINT i = 0; i < filterExGp.size(); i++)
-				{						//±éÀúfilter£¬°ÑÂú×ãfilterµÄ¶¼¼¯ÖĞÆğÀ´
+				{						//éå†filterï¼ŒæŠŠæ»¡è¶³filterçš„éƒ½é›†ä¸­èµ·æ¥
 					if (filterExGp[i].filterType == conEx::FT_AT
 							&& filterExGp[i].filterValue == matchCnt
 							|| filterExGp[i].filterType == conEx::FT_EVEN
@@ -486,22 +486,22 @@ vector<TiXmlNode*> conEx::matchOnce(TiXmlNode* root)
 					{
 						filterExGp[i]._used = true;
 						ret.push_back(loopNode);
-						break;		//Õâ¸öbreak±íÊ¾»ò¹ØÏµµÄfilter,ÔÚÆ¥Åäµ½Ò»¸öÖ®ºó¿ÉÒÔ²»ÓÃÔÙ²âÊÔ±ğµÄÌõ¼ş
+						break;		//è¿™ä¸ªbreakè¡¨ç¤ºæˆ–å…³ç³»çš„filter,åœ¨åŒ¹é…åˆ°ä¸€ä¸ªä¹‹åå¯ä»¥ä¸ç”¨å†æµ‹è¯•åˆ«çš„æ¡ä»¶
 					}
 					else if (filterExGp[i].filterType == conEx::FT_NODETYPE
 							&& filterExGp[i].testNodeType == loopNode->Type()
 							|| filterExGp[i].filterType == conEx::FT_NOT_AT
 									&& filterExGp[i].filterValue != matchCnt)
 					{
-						//ÔÚÕâÒ»²ãÅĞ¶ÏÀïĞèÒª°ÑËùÓĞmatchµ½µÄ½Úµã¶¼ÅĞ¶ÏÒ»´Î£¬ËùÒÔÓÃ¹ıµÄfilter²»»á±»É¾³ı
+						//åœ¨è¿™ä¸€å±‚åˆ¤æ–­é‡Œéœ€è¦æŠŠæ‰€æœ‰matchåˆ°çš„èŠ‚ç‚¹éƒ½åˆ¤æ–­ä¸€æ¬¡ï¼Œæ‰€ä»¥ç”¨è¿‡çš„filterä¸ä¼šè¢«åˆ é™¤
 						ret.push_back(loopNode);
 						break;
 					}
 					if (filterExGp[i].filterType == conEx::FT_LAST)
 					{
-						// Ñ¡È¡lastÕâ¸öÒªÁíÍâ´¦Àí
-						// ÔÚÉÏÃæµÄif·ÖÖ§ÖĞÒÑ¾­ÓĞbreakÌø³öÑ­»·£¬¹ÊÆ¥Åäµ½µÄ½Úµã²»ĞèÒªÔÚÕâÀïÖØ¸´
-						// ×îºóÖ»ĞèÑ½ÅĞ¶ÏsaveTheLastNodeÊÇ·ñ´æÔÚ£¬ÍÆÈëretÖĞ¾Í¿ÉÒÔÁË
+						// é€‰å–lastè¿™ä¸ªè¦å¦å¤–å¤„ç†
+						// åœ¨ä¸Šé¢çš„ifåˆ†æ”¯ä¸­å·²ç»æœ‰breakè·³å‡ºå¾ªç¯ï¼Œæ•…åŒ¹é…åˆ°çš„èŠ‚ç‚¹ä¸éœ€è¦åœ¨è¿™é‡Œé‡å¤
+						// æœ€ååªéœ€å‘€åˆ¤æ–­saveTheLastNodeæ˜¯å¦å­˜åœ¨ï¼Œæ¨å…¥retä¸­å°±å¯ä»¥äº†
 						saveTheLastNode = loopNode;
 					}
 				}
@@ -517,7 +517,7 @@ vector<TiXmlNode*> conEx::matchOnce(TiXmlNode* root)
 		}
 		for (UINT i = 0; i < filterExGp.size(); i++)
 		{
-			// ÔÚ×îºóÃæ°ÑfilterÈ«²¿ÉúĞ§£¡
+			// åœ¨æœ€åé¢æŠŠfilterå…¨éƒ¨ç”Ÿæ•ˆï¼
 			filterExGp[i]._used = false;
 		}
 		if (saveTheLastNode)
@@ -539,7 +539,7 @@ conExGp::conExGp()
 bool conExGp::gpMatch(TiXmlNode* node)
 {
 	if (conexGp.empty())
-		return true;  //¹ØÓÚ¿Õ½Úµãµ½µ×ÊôÓÚfalse»¹ÊÇtrue£¿£¿»¹Ó¦¸Ã×ĞÏ¸¿¼ÂÇ
+		return true;  //å…³äºç©ºèŠ‚ç‚¹åˆ°åº•å±äºfalseè¿˜æ˜¯trueï¼Ÿï¼Ÿè¿˜åº”è¯¥ä»”ç»†è€ƒè™‘
 	if (conexGp.size() == 1)
 	{
 		switch (_conExRelation)
@@ -574,7 +574,7 @@ bool conExGp::gpMatch(TiXmlNode* node)
 	default:
 		return this->conexGp[0].match(node);
 	}
-	return true && !exceptThisConExGp || false && exceptThisConExGp;// ÆäÓàÇé¿ö¶¼Îªfalse£¬»ò¹ØÏµÎªdefault
+	return true && !exceptThisConExGp || false && exceptThisConExGp;// å…¶ä½™æƒ…å†µéƒ½ä¸ºfalseï¼Œæˆ–å…³ç³»ä¸ºdefault
 }
 
 /////////////////////////////////////////////////////////
@@ -590,11 +590,11 @@ filterEx::filterEx(string exp)
 
 filterEx& filterEx::parse(string exp)
 {
-	// Çë×¢Òâ£¬µ±±í´ïÊ½ÖĞÍ¬Ê±³öÏÖnot(1)ºÍat(1)Ê±£¬
-	// ÄÇnot(1)»á±»ºöÂÔ£¬Õâ¸öÌØÕ÷ÓÉmatchTreeÏµÁĞº¯ÊıÖĞÅĞ¶ÏË³Ğò¾ö¶¨
+	// è¯·æ³¨æ„ï¼Œå½“è¡¨è¾¾å¼ä¸­åŒæ—¶å‡ºç°not(1)å’Œat(1)æ—¶ï¼Œ
+	// é‚£not(1)ä¼šè¢«å¿½ç•¥ï¼Œè¿™ä¸ªç‰¹å¾ç”±matchTreeç³»åˆ—å‡½æ•°ä¸­åˆ¤æ–­é¡ºåºå†³å®š
 	if (exp.find("not(") != string::npos)
 	{
-		// ÅÅ³ıµÚn¸ö
+		// æ’é™¤ç¬¬nä¸ª
 		filterType = conEx::FT_NOT_AT;
 		filterValue = strToInt(exp.substr(4));
 	}
@@ -605,7 +605,7 @@ filterEx& filterEx::parse(string exp)
 	}
 	else if (exp.find("at(") != string::npos || exp.find("eq(") != string::npos)
 	{
-		// ±£ÁôµÚn¸ö
+		// ä¿ç•™ç¬¬nä¸ª
 		filterType = conEx::FT_AT;
 		filterValue = strToInt(exp.substr(3));
 	}
@@ -621,13 +621,13 @@ filterEx& filterEx::parse(string exp)
 	}
 	else if (exp.find("first") != string::npos)
 	{
-		// È¡µÚÒ»¸ö
+		// å–ç¬¬ä¸€ä¸ª
 		filterType = conEx::FT_AT;
 		filterValue = 1;
 	}
 	else if (exp.find("last") != string::npos)
 	{
-		// È¡×îºóÒ»¸ö
+		// å–æœ€åä¸€ä¸ª
 		filterType = conEx::FT_LAST;
 	}
 	else if (exp.find("even") != string::npos)
@@ -676,7 +676,7 @@ char removeBraketPairFrom(string& conexp, string ls, string rs, string& lRemain,
 	int lPos = conexp.find(ls);
 	int rPos = conexp.find_last_of(rs);
 	if (lPos == string::npos || conexp.find(rs) == string::npos)
-		return '-';	// ÒòÎªfind_last_of²»²âÊÔÍêÈ«Æ¥Åä£¬ËùÒÔÒªÏÈÓÃÕâ¸öÅĞ¶Ï
+		return '-';	// å› ä¸ºfind_last_ofä¸æµ‹è¯•å®Œå…¨åŒ¹é…ï¼Œæ‰€ä»¥è¦å…ˆç”¨è¿™ä¸ªåˆ¤æ–­
 	ret = lPos - 1 < 0 ? '-' : conexp[lPos - 1];
 	if (rPos - rs.length() >= lPos + ls.length())
 	{
@@ -687,7 +687,7 @@ char removeBraketPairFrom(string& conexp, string ls, string rs, string& lRemain,
 	}
 	else if (rPos == lPos + 1)
 	{
-		//ÒòÎªsubstr²»ÄÜÈ¡³ö³¤¶ÈÎª0µÄ×Ö·û´®£¬ËùÒÔµ±È¥³ıÁËÁ½±ßµÄÀ¨ºÅºóÃ»ÓĞ×Ö·ûÁËÄÇ¾ÍÖ±½Ó·µ»Ø¿Õ×Ö·û´®
+		//å› ä¸ºsubsträ¸èƒ½å–å‡ºé•¿åº¦ä¸º0çš„å­—ç¬¦ä¸²ï¼Œæ‰€ä»¥å½“å»é™¤äº†ä¸¤è¾¹çš„æ‹¬å·åæ²¡æœ‰å­—ç¬¦äº†é‚£å°±ç›´æ¥è¿”å›ç©ºå­—ç¬¦ä¸²
 		lRemain = conexp.substr(0, lPos);
 		rRemain = conexp.substr(rPos + 1);
 		conexp = "";

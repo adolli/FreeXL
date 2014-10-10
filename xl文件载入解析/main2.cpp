@@ -1,4 +1,4 @@
-// main.cpp
+ï»¿// main.cpp
 
 #include "adXL.h"
 #include <iostream>
@@ -20,32 +20,32 @@ int GetMaxLevel(xlSheet& sheet, unsigned int startRow, unsigned int col_index)
 
 void BatchLevelCalc()
 {
-	cout << "---  ÅúÁ¿²ã¼¶´¦Àí¹¤¾ß v1.0  ---" << endl << endl;
+	cout << "---  æ‰¹é‡å±‚çº§å¤„ç†å·¥å…· v1.0  ---" << endl << endl;
 
-	string filename = "ÊäÈë±í";
+	string filename = "è¾“å…¥è¡¨";
 	string sheetname = "Sheet1";
 	string strColLevel = "A";
 	string strColQty = "B";
 	string strColMass = "C";
 
-	// ´ò¿ª ¡°xx×Ü±í¡± µÄ ¡°sheetname¡±
-	cout << endl << "ÇëÈ·±£ ¡°ÊäÈë±í¡± ÒÑ¾­±»¹Ø±Õ" << endl;
+	// æ‰“å¼€ â€œxxæ€»è¡¨â€ çš„ â€œsheetnameâ€
+	cout << endl << "è¯·ç¡®ä¿ â€œè¾“å…¥è¡¨â€ å·²ç»è¢«å…³é—­" << endl;
 	system("pause");
 
-	cout << endl << "ÕıÔÚ¶ÁÈ¡¡­¡­ÇëÉÔºò¡­¡­" << endl;
+	cout << endl << "æ­£åœ¨è¯»å–â€¦â€¦è¯·ç¨å€™â€¦â€¦" << endl;
 	xlWorkbook wb(filename + ".xml");
 	xlSheet& sh = wb.sheets(sheetname);
-	cout << "ÕıÔÚ¼ÆËã¡­¡­ÇëÉÔºò¡­¡­" << endl;
+	cout << "æ­£åœ¨è®¡ç®—â€¦â€¦è¯·ç¨å€™â€¦â€¦" << endl;
 
-	const unsigned int COL_LEVEL = A1_STYLE(strColLevel).Col1;			//<! ²ã¼¶
-	const unsigned int COL_QUANTITY = A1_STYLE(strColQty).Col1;			//<! ÊıÁ¿
-	const unsigned int COL_MASS = A1_STYLE(strColMass).Col1;		//<! µ¥¸öÖÊÁ¿
-	const unsigned int COL_CAL_MASS = sh.maxCol() + 1;				//<! ¼ÆËãÖÊÁ¿
+	const unsigned int COL_LEVEL = A1_STYLE(strColLevel).Col1;			//<! å±‚çº§
+	const unsigned int COL_QUANTITY = A1_STYLE(strColQty).Col1;			//<! æ•°é‡
+	const unsigned int COL_MASS = A1_STYLE(strColMass).Col1;		//<! å•ä¸ªè´¨é‡
+	const unsigned int COL_CAL_MASS = sh.maxCol() + 1;				//<! è®¡ç®—è´¨é‡
 
-	// »ñÈ¡¸Ã±í×î´óĞĞºÅ
+	// è·å–è¯¥è¡¨æœ€å¤§è¡Œå·
 	const unsigned int MAX_ROW = sh.maxRow();
 
-	// Ä¬ÈÏÊı¾İÆğÊ¼ĞĞÎªµÚ2ĞĞ
+	// é»˜è®¤æ•°æ®èµ·å§‹è¡Œä¸ºç¬¬2è¡Œ
 	unsigned int START_ROW = 2;
 
 	for (unsigned int r = 2; r <= MAX_ROW; ++r)
@@ -58,32 +58,32 @@ void BatchLevelCalc()
 		}
 	}
 
-	// »ñÈ¡×îµ×µÄ²ã¼¶ºÍ¸Ã±í×î´óĞĞºÅ
+	// è·å–æœ€åº•çš„å±‚çº§å’Œè¯¥è¡¨æœ€å¤§è¡Œå·
 	const unsigned int MAX_LEVEL = GetMaxLevel(sh, 2, COL_LEVEL);
 
-	// ÏÈÌî³äµ¥¼şÖÊÁ¿
+	// å…ˆå¡«å……å•ä»¶è´¨é‡
 	sh.cells(START_ROW - 1, COL_CAL_MASS) = "computedMass";
 	for (unsigned int r = MAX_ROW; r >= START_ROW; --r)
 	{
 		sh.cells(r, COL_CAL_MASS) = sh.cells(r, COL_MASS).dValue();
 	}
 
-	// ´Ó×îµ×µÄ²ã¼¶¿ªÊ¼Ò»²ãÒ»²ã¹é²¢¼ÆËã
+	// ä»æœ€åº•çš„å±‚çº§å¼€å§‹ä¸€å±‚ä¸€å±‚å½’å¹¶è®¡ç®—
 	for (unsigned int level = MAX_LEVEL; level >= 2; --level)
 	{
-		// ÓÃÓÚ±£´æ¼Ì³ĞÖÊÁ¿
+		// ç”¨äºä¿å­˜ç»§æ‰¿è´¨é‡
 		double inheritMass = 0;
 
-		// Ã¿Ò»²ã¼ÆËã´Ó±íµÄ×îºóÒ»ĞĞÍùÉÏµ½ÆğÊ¼ĞĞ
+		// æ¯ä¸€å±‚è®¡ç®—ä»è¡¨çš„æœ€åä¸€è¡Œå¾€ä¸Šåˆ°èµ·å§‹è¡Œ
 		for (unsigned int r = MAX_ROW; r >= START_ROW; --r)
 		{
-			// °Ñµ±Ç°²ã¼¶µÄÊı¾İÀÛ¼ÓÆğÀ´
+			// æŠŠå½“å‰å±‚çº§çš„æ•°æ®ç´¯åŠ èµ·æ¥
 			if (sh.cells(r, COL_LEVEL).iValue() == level)
 			{
 				inheritMass += sh.cells(r, COL_CAL_MASS).dValue()
 						* sh.cells(r, COL_QUANTITY).iValue();
 			}
-			// Óöµ½µ±Ç°²ã¼¶¸ü¸ßÒ»²ãµÄ¾Í°ÑÀÛ¼ÓµÄÊı¾İ±£´æµ½¸ü¸ßÒ»²ã
+			// é‡åˆ°å½“å‰å±‚çº§æ›´é«˜ä¸€å±‚çš„å°±æŠŠç´¯åŠ çš„æ•°æ®ä¿å­˜åˆ°æ›´é«˜ä¸€å±‚
 			else if (sh.cells(r, COL_LEVEL).iValue() == level - 1
 					&& inheritMass != 0)
 			{
@@ -93,16 +93,16 @@ void BatchLevelCalc()
 		}
 	}
 
-	cout << "¼ÆËãÍê³É£¬ÕıÔÚ±£´æ¡­¡­ÇëÉÔºò¡­¡­" << endl;
+	cout << "è®¡ç®—å®Œæˆï¼Œæ­£åœ¨ä¿å­˜â€¦â€¦è¯·ç¨å€™â€¦â€¦" << endl;
 
-	// Áí´æÎª
+	// å¦å­˜ä¸º
 	wb.saveAs("output.xml");
-	cout << "±£´æÍê±Ï£¡ Êä³öÎÄ¼şÃûÎª ¡°output.xml¡±" << endl;
-	cout << "Çë´ò¿ª ¡°output.xml¡± µÄ×îºóÒ»ÁĞ½«Êı¾İÈ¡×ß" << endl;
+	cout << "ä¿å­˜å®Œæ¯•ï¼ è¾“å‡ºæ–‡ä»¶åä¸º â€œoutput.xmlâ€" << endl;
+	cout << "è¯·æ‰“å¼€ â€œoutput.xmlâ€ çš„æœ€åä¸€åˆ—å°†æ•°æ®å–èµ°" << endl;
 }
 
 /*
- * @brief	Áã¼ş
+ * @brief	é›¶ä»¶
  */
 class Part
 {
@@ -156,30 +156,30 @@ void CombineToSubmitList(map<string, ListItem>& m, const vector<Part>& p,
 
 int main()
 {
-	cout << "---  Áã¼ş»ù±¾±í×Ô¶¯Çåµ¥¹¤¾ß v1.0  ---" << endl << endl;
+	cout << "---  é›¶ä»¶åŸºæœ¬è¡¨è‡ªåŠ¨æ¸…å•å·¥å…· v1.0  ---" << endl << endl;
 
-	string filename = "Áã¼ş»ù±¾±í";
+	string filename = "é›¶ä»¶åŸºæœ¬è¡¨";
 	string sheetname = "Input";
 	string strColLevel = "A";
 	string strColId = "B";
 	string strColName = "C";
 	string strColEng = "D";
-	const unsigned int COL_LEVEL = A1_STYLE(strColLevel).Col1;		//<! ²ã¼¶
-	const unsigned int COL_ID = A1_STYLE(strColId).Col1;			//<! Áã¼ş´úÂë
-	const unsigned int COL_NAME = A1_STYLE(strColName).Col1;		//<! Áã¼şÃû³Æ
-	const unsigned int COL_ENG = A1_STYLE(strColEng).Col1;			//<! ²úÆ·¹¤³ÌÊ¦
+	const unsigned int COL_LEVEL = A1_STYLE(strColLevel).Col1;		//<! å±‚çº§
+	const unsigned int COL_ID = A1_STYLE(strColId).Col1;			//<! é›¶ä»¶ä»£ç 
+	const unsigned int COL_NAME = A1_STYLE(strColName).Col1;		//<! é›¶ä»¶åç§°
+	const unsigned int COL_ENG = A1_STYLE(strColEng).Col1;			//<! äº§å“å·¥ç¨‹å¸ˆ
 
-	cout << endl << "ÇëÈ·±£ ¡°" + filename + "¡± ÒÑ¾­±»¹Ø±Õ" << endl;
+	cout << endl << "è¯·ç¡®ä¿ â€œ" + filename + "â€ å·²ç»è¢«å…³é—­" << endl;
 	system("pause");
 
-	cout << endl << "ÕıÔÚ½âÎöÊı¾İ¡­¡­ÇëÉÔºò¡­¡­" << endl;
+	cout << endl << "æ­£åœ¨è§£ææ•°æ®â€¦â€¦è¯·ç¨å€™â€¦â€¦" << endl;
 	xlWorkbook wb(filename + ".xml");
 	xlSheet& sh = wb.sheets(sheetname);
 	xlSheet& output_sh = wb.sheets("Output");
 	xlSheet& String_sh = wb.sheets("String");
-	cout << "ÕıÔÚ¼ÆËã¡­¡­ÇëÉÔºò¡­¡­" << endl;
+	cout << "æ­£åœ¨è®¡ç®—â€¦â€¦è¯·ç¨å€™â€¦â€¦" << endl;
 
-	// ÕÒ³öÒªÓÃµ½µÄString
+	// æ‰¾å‡ºè¦ç”¨åˆ°çš„String
 	map < string, string > stringTable;
 	for (unsigned int r = 2; r <= String_sh.maxRow(); ++r)
 	{
@@ -190,7 +190,7 @@ int main()
 	const unsigned int MAX_ROW = sh.maxRow();
 	const unsigned int MAX_COL = sh.maxCol();
 
-	// Ä¬ÈÏÊı¾İÆğÊ¼ĞĞÎªµÚ5ĞĞ
+	// é»˜è®¤æ•°æ®èµ·å§‹è¡Œä¸ºç¬¬5è¡Œ
 	const unsigned int START_ROW = 5;
 	const unsigned int START_COL = 5;
 
@@ -208,7 +208,7 @@ int main()
 			{
 				if (!vParts.empty())
 				{
-					// ¼ÙÉè°ÑÕû¸ö±íÉ¨ÃèÒ»±éºóÄÚ²¿µÄÅÅĞò¶¼Ò»Ñù
+					// å‡è®¾æŠŠæ•´ä¸ªè¡¨æ‰«æä¸€éåå†…éƒ¨çš„æ’åºéƒ½ä¸€æ ·
 					CombineToSubmitList(mapPartsPerType, vParts, CarQty);
 					OutputToSubmitList(mapParts, vParts);
 					vParts.clear();
@@ -225,7 +225,7 @@ int main()
 			}
 		}
 
-		// ×îºóÒ»ÅúÊı¾İ
+		// æœ€åä¸€æ‰¹æ•°æ®
 		if (!vParts.empty())
 		{
 			CombineToSubmitList(mapPartsPerType, vParts, CarQty);
@@ -234,7 +234,7 @@ int main()
 		}
 	}
 
-	// µ¼³öµ¥Ì¨ÓÃÁ¿
+	// å¯¼å‡ºå•å°ç”¨é‡
 	output_sh.cells(1, 5) = "single usage";
 	unsigned int rr = 2;
 	for (auto it = mapPartsPerType.begin(); it != mapPartsPerType.end(); ++it)
@@ -269,9 +269,9 @@ int main()
 		}
 	}
 
-	cout << "ÕıÔÚ±£´æ¡­¡­ÇëÉÔºò¡­¡­" << endl;
+	cout << "æ­£åœ¨ä¿å­˜â€¦â€¦è¯·ç¨å€™â€¦â€¦" << endl;
 	wb.saveAs(filename + "_out.xml");
-	cout << "±£´æ³É¹¦¡­¡­Çë´ò¿ª ¡°" + filename + "_out¡± ¶ÁÈ¡" << endl;
+	cout << "ä¿å­˜æˆåŠŸâ€¦â€¦è¯·æ‰“å¼€ â€œ" + filename + "_outâ€ è¯»å–" << endl;
 
 	system("pause");
 	return 0;

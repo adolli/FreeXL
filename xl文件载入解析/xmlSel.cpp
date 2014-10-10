@@ -1,4 +1,4 @@
-//xmlSel.cpp
+ï»¿//xmlSel.cpp
 
 #include "tinyxml\tinyxml.h"
 #include "xmlSel.h"
@@ -22,7 +22,7 @@ $::$(bool _isPreDefined) :
 template<typename X, typename Y> inline bool alwaysRtTrue(X x, Y y)
 {
 	return true;
-}			//ÓÃÓÚÓÀÔ¶·µ»ØtrueµÄº¯Êı
+}			//ç”¨äºæ°¸è¿œè¿”å›trueçš„å‡½æ•°
 
 // constant and static
 string $::notFound = "__000000_NOT_FOUND_ATTRIBUTE_OR_NODE__";
@@ -53,9 +53,9 @@ $::$(vector<TiXmlNode*> vecNode) :
 
 $::$(TiXmlDocument* _xmlDoc, string filter, string root) :
 		xmlDoc(_xmlDoc), isPreDefined(false)
-{	//Ë½ÓĞ¹¹Ôì£¬ÓÃÓÚ³ÌĞòÄÚ²¿
+{	//ç§æœ‰æ„é€ ï¼Œç”¨äºç¨‹åºå†…éƒ¨
 	if (xmlDoc)
-	{														//Ê¹ÓÃÇ°Îñ±Ø¼ì²é_xmlDocÊÇ·ñ´æÔÚ
+	{														//ä½¿ç”¨å‰åŠ¡å¿…æ£€æŸ¥_xmlDocæ˜¯å¦å­˜åœ¨
 		$_SelElement = select(filter, $(root, xmlDoc)).$_SelElement;
 	}
 }
@@ -69,7 +69,7 @@ $::$(string filter, TiXmlNode* root) :
 
 $::$(string filter, $ root) :
 		isPreDefined(false)
-{									//Ë½ÓĞ¹¹Ôì£¬ÓÃÓÚ³ÌĞòÄÚ²¿
+{									//ç§æœ‰æ„é€ ï¼Œç”¨äºç¨‹åºå†…éƒ¨
 	this->xmlDoc = root.xmlDoc;
 	if (xmlDoc)
 	{
@@ -116,7 +116,7 @@ $& $::loadXml(const char * xmlFileName)
 		{
 			string newFileName =
 					string(xmlFileName) == "" ? "temp.xml" : xmlFileName;
-			xmlDoc->SaveFile(newFileName.c_str());//Èç¹ûÔØÈëÊ§°Ü£¬ÔòĞÂ½¨ÁÙÊ±ÎÄ¼ş£¬ÓÃÓÚÓÃ»§´´½¨ÎÄ¼şµÄÁÙÊ±´æ´¢
+			xmlDoc->SaveFile(newFileName.c_str());//å¦‚æœè½½å…¥å¤±è´¥ï¼Œåˆ™æ–°å»ºä¸´æ—¶æ–‡ä»¶ï¼Œç”¨äºç”¨æˆ·åˆ›å»ºæ–‡ä»¶çš„ä¸´æ—¶å­˜å‚¨
 			recentXmlDoc = xmlDoc = fileMap[xmlFileName] = new TiXmlDocument(
 					newFileName.c_str());
 		}
@@ -126,7 +126,7 @@ $& $::loadXml(const char * xmlFileName)
 
 bool $::save(string filename)
 {
-	filename = filename == "" ? xmlDoc->ValueStr() : filename;  //Ä¬ÈÏÎÄ¼şÃû
+	filename = filename == "" ? xmlDoc->ValueStr() : filename;  //é»˜è®¤æ–‡ä»¶å
 	bool success = xmlDoc->SaveFile(filename.c_str());
 	xmlDoc->SetValue(filename.c_str());
 	return success;
@@ -163,8 +163,8 @@ $& $::select(string filter, $& root)
 
 $& $::select(string filter, TiXmlNode* root)
 {
-	// TODO : ÔÚ¸ø¶¨rootÏÂÕÒ³öÂú×ãfilterµÄËùÓĞ½Úµã
-	// ÎÒÃÇÊ¹ÓÃÇ¿´óµÄconExÒıÇæËÑË÷£¡
+	// TODO : åœ¨ç»™å®šrootä¸‹æ‰¾å‡ºæ»¡è¶³filterçš„æ‰€æœ‰èŠ‚ç‚¹
+	// æˆ‘ä»¬ä½¿ç”¨å¼ºå¤§çš„conExå¼•æ“æœç´¢ï¼
 	root = !root ? xmlDoc : root;
 	if (!notBindXml())
 	{
@@ -173,8 +173,8 @@ $& $::select(string filter, TiXmlNode* root)
 	}
 	else
 	{
-		cout << "xmlDoc ²»´æÔÚ£¡Çë¼ì²é [Çëµ÷ÊÔ]" << endl;
-		cout << "Ò²ÓĞ¿ÉÄÜÊÇÊ¹ÓÃÈçÏÂ½á¹¹ $(TiXmlNode*) µÄTiXmlNode*ÊÇ¹ÂÁ¢µÄ" << endl;
+		cout << "xmlDoc ä¸å­˜åœ¨ï¼è¯·æ£€æŸ¥ [è¯·è°ƒè¯•]" << endl;
+		cout << "ä¹Ÿæœ‰å¯èƒ½æ˜¯ä½¿ç”¨å¦‚ä¸‹ç»“æ„ $(TiXmlNode*) çš„TiXmlNode*æ˜¯å­¤ç«‹çš„" << endl;
 	}
 	return this->clearSame();
 }/*Main Proc*/
@@ -192,22 +192,22 @@ $& $::operator()(string selector, $& root)
 {
 	if (root.isPreDefined)
 		root.xmlDoc = recentXmlDoc;
-	$ protectRoot = root;//°Ñroot±£»¤ÆğÀ´£¬ÒòÎªÏÂÃæselectµÄÊ±ºò¿ÉÄÜ»áclearµô´«½øÀ´rootµÄÄÚÈİÈç xQuery("Table",xQuery("Data"));
+	$ protectRoot = root;//æŠŠrootä¿æŠ¤èµ·æ¥ï¼Œå› ä¸ºä¸‹é¢selectçš„æ—¶å€™å¯èƒ½ä¼šclearæ‰ä¼ è¿›æ¥rootçš„å†…å®¹å¦‚ xQuery("Table",xQuery("Data"));
 	return this->clear().select(selector, protectRoot);
 }
 
 $& $::filter(string condition)
 {
-	// filter±í´ïÊ½µÄÄÚÈİÈÔÈ»ÊÇÒÔÇ°µÄ
-	// ¾¡Á¿±ÜÃâÊ¹ÓÃfilterÓï·¨
+	// filterè¡¨è¾¾å¼çš„å†…å®¹ä»ç„¶æ˜¯ä»¥å‰çš„
+	// å°½é‡é¿å…ä½¿ç”¨filterè¯­æ³•
 	if ("" == condition)
-		return *this;						//Èç¹ûÉ¸Ñ¡Ìõ¼şÊÇ¿ÕµÄÄÇ¾ÍÖ±½Ó·µ»Ø
+		return *this;						//å¦‚æœç­›é€‰æ¡ä»¶æ˜¯ç©ºçš„é‚£å°±ç›´æ¥è¿”å›
 
 	string except = "";
-	condition = removeSection(condition, ".not", except);//·ÖÀë³ö:not(x)µÄÄÇ²¿·Ö£¬ÏÈ´¦ÀíÕı³£µÄ¹ıÂË£¬ÔÙ´¦ÀíÅÅ³ıµÄ¹ıÂË
-	vector<TiXmlNode*> result;						//ÓÃÓÚ±£´æÃ¿´Î¹ıÂËµÄ½á¹û£¬Ã¿Ò»´ÎµÄ¹ıÂËÖ®¼äÊÇ»ò¹ØÏµ
+	condition = removeSection(condition, ".not", except);//åˆ†ç¦»å‡º:not(x)çš„é‚£éƒ¨åˆ†ï¼Œå…ˆå¤„ç†æ­£å¸¸çš„è¿‡æ»¤ï¼Œå†å¤„ç†æ’é™¤çš„è¿‡æ»¤
+	vector<TiXmlNode*> result;						//ç”¨äºä¿å­˜æ¯æ¬¡è¿‡æ»¤çš„ç»“æœï¼Œæ¯ä¸€æ¬¡çš„è¿‡æ»¤ä¹‹é—´æ˜¯æˆ–å…³ç³»
 	if (condition.find(".not") != string::npos)
-	{				//Ö±µ½°Ñ:not(x)·ÖÀëÍê
+	{				//ç›´åˆ°æŠŠ:not(x)åˆ†ç¦»å®Œ
 		VecCombine(result, filter(condition).getSelection());
 	}
 	vector < string > conditions = split(condition, '.');
@@ -218,7 +218,7 @@ $& $::filter(string condition)
 				|| conditions[i].find("eq(") != string::npos
 						&& conditions[i].find(")") != string::npos)
 		{
-			int start = 3,								//Ö±½Ó¾ÍÊÇ3ÁË£¬³ı·ÇÕâ¸ö´Ê²»ÊÇat»òÕßeq
+			int start = 3,								//ç›´æ¥å°±æ˜¯3äº†ï¼Œé™¤éè¿™ä¸ªè¯ä¸æ˜¯atæˆ–è€…eq
 					end = conditions[i].find(")"), index = strToInt(
 							conditions[i].substr(start, end - start)) - 1;
 			if (index >= 0 && index < $_SelElement.size())
@@ -226,19 +226,19 @@ $& $::filter(string condition)
 				result.push_back($_SelElement[index]);
 			}
 		}
-		else if (conditions[i].find("first") != string::npos		//Ñ¡³öµÚÒ»¸ö
+		else if (conditions[i].find("first") != string::npos		//é€‰å‡ºç¬¬ä¸€ä¸ª
 				)
 		{
 			VecCombine(result, this->filter(".at(1)").getSelection());
 		}
-		else if (conditions[i].find("last") != string::npos		//Ñ¡³ö×îºóÒ»¸ö
+		else if (conditions[i].find("last") != string::npos		//é€‰å‡ºæœ€åä¸€ä¸ª
 				)
 		{
 			int lastidex = this->$_SelElement.size();
 			VecCombine(result,
 					this->filter(".at(" + intToStr(lastidex) + ")").getSelection());
 		}
-		else if (conditions[i].find("even") != string::npos		//Ñ¡³öµÚÅ¼Êı¸ö
+		else if (conditions[i].find("even") != string::npos		//é€‰å‡ºç¬¬å¶æ•°ä¸ª
 				)
 		{
 			for (unsigned int i = 1; i < $_SelElement.size(); i += 2)
@@ -246,7 +246,7 @@ $& $::filter(string condition)
 				result.push_back($_SelElement[i]);
 			}
 		}
-		else if (conditions[i].find("odd") != string::npos			//Ñ¡³öµÚÆæÊı¸ö
+		else if (conditions[i].find("odd") != string::npos			//é€‰å‡ºç¬¬å¥‡æ•°ä¸ª
 				)
 		{
 			for (unsigned int j = 0; j < $_SelElement.size(); j += 2)
@@ -254,7 +254,7 @@ $& $::filter(string condition)
 				result.push_back($_SelElement[j]);
 			}
 		}
-		else if (conditions[i].find("element") != string::npos		//Ñ¡³öÀïÃæµÄÔªËØ½Úµã
+		else if (conditions[i].find("element") != string::npos		//é€‰å‡ºé‡Œé¢çš„å…ƒç´ èŠ‚ç‚¹
 				)
 		{
 			for (unsigned int j = 0; j < $_SelElement.size(); j++)
@@ -271,12 +271,12 @@ $& $::filter(string condition)
 		}
 	}
 	if (result.size())
-		$_SelElement = result;	//±£´æ×îºó¹ıÂË½á¹û
+		$_SelElement = result;	//ä¿å­˜æœ€åè¿‡æ»¤ç»“æœ
 	if (except != "")
-	{		//×îºó¿ÉÄÜÒªÅÅ³ıÒ»Ğ©½á¹û
+	{		//æœ€åå¯èƒ½è¦æ’é™¤ä¸€äº›ç»“æœ
 		$_SelElement = this->except(except).getSelection();
 	}
-	this->clearSame();		//×îºóÈ¥µô¿ÉÄÜ»á²úÉúÖØ¸´µÄ
+	this->clearSame();		//æœ€åå»æ‰å¯èƒ½ä¼šäº§ç”Ÿé‡å¤çš„
 	return this->popEmpty();
 }
 
@@ -287,22 +287,22 @@ $& $::filter(NodeType type)
 
 $& $::except(string condition)
 {
-	// except±í´ïÊ½µÄÄÚÈİÈÔÈ»ÊÇÒÔÇ°µÄ
-	// ¾¡Á¿±ÜÃâÊ¹ÓÃexceptÓï·¨
+	// exceptè¡¨è¾¾å¼çš„å†…å®¹ä»ç„¶æ˜¯ä»¥å‰çš„
+	// å°½é‡é¿å…ä½¿ç”¨exceptè¯­æ³•
 	if ("" == condition)
-		return *this;						//Èç¹ûÉ¸Ñ¡Ìõ¼şÊÇ¿ÕµÄÄÇ¾ÍÖ±½Ó·µ»Ø
+		return *this;						//å¦‚æœç­›é€‰æ¡ä»¶æ˜¯ç©ºçš„é‚£å°±ç›´æ¥è¿”å›
 
-	//´«Èë²»°üº¬¡®.¡¯µÄconditionÔòÖ±½Óµ÷ÓÃÏÂÃæµÄº¯ÊıÅÅ³ı
+	//ä¼ å…¥ä¸åŒ…å«â€˜.â€™çš„conditionåˆ™ç›´æ¥è°ƒç”¨ä¸‹é¢çš„å‡½æ•°æ’é™¤
 	if (condition.find('.') == string::npos)
 	{
 		return this->removeFromSelector(condition);
 	}
 
 	string filter = "";
-	condition = removeSection(condition, ".not", filter);//·ÖÀë³ö.not(x)µÄÄÇ²¿·Ö£¬ÖØĞÂÍ¶»ØÕı³£filterÄÇ±ß´¦Àí
+	condition = removeSection(condition, ".not", filter);//åˆ†ç¦»å‡º.not(x)çš„é‚£éƒ¨åˆ†ï¼Œé‡æ–°æŠ•å›æ­£å¸¸filteré‚£è¾¹å¤„ç†
 
 	if (condition.find(".not") != string::npos)
-	{				//Ö±µ½°Ñ.not(x)·ÖÀëÍê
+	{				//ç›´åˆ°æŠŠ.not(x)åˆ†ç¦»å®Œ
 		$_SelElement = this->except(condition).getSelection();
 	}
 	vector<TiXmlNode*> result = $_SelElement;
@@ -316,7 +316,7 @@ $& $::except(string condition)
 				|| conditions[i].find("eq(") != string::npos
 						&& conditions[i].find(")") != string::npos)
 		{
-			int start = 3,								//Ö±½Ó¾ÍÊÇ3ÁË£¬³ı·ÇÕâ¸ö´Ê²»ÊÇat»òÕßeq
+			int start = 3,								//ç›´æ¥å°±æ˜¯3äº†ï¼Œé™¤éè¿™ä¸ªè¯ä¸æ˜¯atæˆ–è€…eq
 					end = conditions[i].find(")"), index = strToInt(
 							conditions[i].substr(start, end - start)) - 1;
 			if (index >= 0 && index < result.size())
@@ -324,18 +324,18 @@ $& $::except(string condition)
 				result[index] = NULL;
 			}
 		}
-		else if (conditions[i].find("first") != string::npos		//Ñ¡³öµÚÒ»¸ö
+		else if (conditions[i].find("first") != string::npos		//é€‰å‡ºç¬¬ä¸€ä¸ª
 				)
 		{
 			result[0] = NULL;
 		}
-		else if (conditions[i].find("last") != string::npos		//Ñ¡³ö×îºóÒ»¸ö
+		else if (conditions[i].find("last") != string::npos		//é€‰å‡ºæœ€åä¸€ä¸ª
 				)
 		{
 			int lastidex = this->$_SelElement.size();
 			result[lastidex] = NULL;
 		}
-		else if (conditions[i].find("even") != string::npos		//Ñ¡³öµÚÅ¼Êı¸ö
+		else if (conditions[i].find("even") != string::npos		//é€‰å‡ºç¬¬å¶æ•°ä¸ª
 				)
 		{
 			for (unsigned int j = 1; j < $_SelElement.size(); j += 2)
@@ -343,7 +343,7 @@ $& $::except(string condition)
 				result[j] = NULL;
 			}
 		}
-		else if (conditions[i].find("odd") != string::npos			//Ñ¡³öµÚÆæÊı¸ö
+		else if (conditions[i].find("odd") != string::npos			//é€‰å‡ºç¬¬å¥‡æ•°ä¸ª
 				)
 		{
 			for (unsigned int j = 0; j < $_SelElement.size(); j += 2)
@@ -351,7 +351,7 @@ $& $::except(string condition)
 				result[j] = NULL;
 			}
 		}
-		else if (conditions[i].find("element") != string::npos		//ÅÅ³ıÔªËØ½Úµã
+		else if (conditions[i].find("element") != string::npos		//æ’é™¤å…ƒç´ èŠ‚ç‚¹
 				)
 		{
 			for (unsigned int j = 0; j < $_SelElement.size(); j++)
@@ -375,14 +375,14 @@ $& $::except(string condition)
 			$_SelElement.push_back(result[i]);
 	}
 	if (filter != "")
-	{		//Èç¹û×îºóÓĞ¿ÉÄÜ»¹Òª¼Ó»ØÀ´Ò»Ğ©ÄÚÈİ
-		VecCombine($_SelElement, this->filter(filter).getSelection());//ÅÅ³ıÁËÖ®ºóÓÖÒª¼Ó»ØÀ´Ë«notÄÚµÄ¹ıÂËÄÚÈİ
+	{		//å¦‚æœæœ€åæœ‰å¯èƒ½è¿˜è¦åŠ å›æ¥ä¸€äº›å†…å®¹
+		VecCombine($_SelElement, this->filter(filter).getSelection());//æ’é™¤äº†ä¹‹ååˆè¦åŠ å›æ¥åŒnotå†…çš„è¿‡æ»¤å†…å®¹
 	}
-	this->clearSame();			//×îºó¿ÉÄÜ»á²úÉúÖØ¸´µÄ
+	this->clearSame();			//æœ€åå¯èƒ½ä¼šäº§ç”Ÿé‡å¤çš„
 
-	// °ÑÆäËûÌõ¼şÍ¨¹ıÕâ¸öÅÅ³ı£¬À©³äexceptµÄ¹¦ÄÜ£¬µ«ÊÇ×¢Òâ²»Òª¸ú±ğµÄÌõ¼ş»ìÓÃ£¬
-	//±ÈÈçËµ.except(tag.first) ±íÊ¾È¥µôµ±Ç°Ñ¡ÔñÆ÷ÖĞµÄµÚÒ»¸ö£¬È»ºó²ÅÈ¥µô<tag>£¬¶ø²»ÊÇµÚÒ»¸ö<tag>
-	//µ«ÊÇÈç¹ûfirstÒ²ÊÇ±êÇ©ÃûµÄ£¬ÒªÈ¥µô<first>£¬ÄÇÃ´Ö»ÄÜÓÃremoveFromSelector(first);
+	// æŠŠå…¶ä»–æ¡ä»¶é€šè¿‡è¿™ä¸ªæ’é™¤ï¼Œæ‰©å……exceptçš„åŠŸèƒ½ï¼Œä½†æ˜¯æ³¨æ„ä¸è¦è·Ÿåˆ«çš„æ¡ä»¶æ··ç”¨ï¼Œ
+	//æ¯”å¦‚è¯´.except(tag.first) è¡¨ç¤ºå»æ‰å½“å‰é€‰æ‹©å™¨ä¸­çš„ç¬¬ä¸€ä¸ªï¼Œç„¶åæ‰å»æ‰<tag>ï¼Œè€Œä¸æ˜¯ç¬¬ä¸€ä¸ª<tag>
+	//ä½†æ˜¯å¦‚æœfirstä¹Ÿæ˜¯æ ‡ç­¾åçš„ï¼Œè¦å»æ‰<first>ï¼Œé‚£ä¹ˆåªèƒ½ç”¨removeFromSelector(first);
 	for (UINT i = 0; i < otherConditions.size(); i++)
 	{
 		this->removeFromSelector(otherConditions[i]);
@@ -394,7 +394,7 @@ $& $::except(string condition)
 $& $::next(string condition)
 {
 	if (this->isEmpty())
-		return *this;							//Ñ¡ÔñÆ÷Îª¿ÕÔòÖ±½Ó·µ»Ø
+		return *this;							//é€‰æ‹©å™¨ä¸ºç©ºåˆ™ç›´æ¥è¿”å›
 	vector<TiXmlNode*> result;
 	// debug : adolli
 	// skip non-element node. 2012-12-25
@@ -421,7 +421,7 @@ $& $::next(string condition)
 $& $::previous(string condition)
 {
 	if (this->isEmpty())
-		return *this;							//Ñ¡ÔñÆ÷Îª¿ÕÔòÖ±½Ó·µ»Ø
+		return *this;							//é€‰æ‹©å™¨ä¸ºç©ºåˆ™ç›´æ¥è¿”å›
 	vector<TiXmlNode*> result;
 	// debug : adolli
 	// skip non-element node. tixml does not supply previousSiblingElement method
@@ -446,9 +446,9 @@ $& $::previous(string condition)
 
 $& $::nextAll(string condition)
 {
-	// ¶ÔÓÚnextAllºÍpreviousAll¿ÉÒÔÑ¡³öËùÓĞÀàĞÍµÄ½Úµã£¬²»Ö»ÊÇÔªËØ½Úµã
+	// å¯¹äºnextAllå’ŒpreviousAllå¯ä»¥é€‰å‡ºæ‰€æœ‰ç±»å‹çš„èŠ‚ç‚¹ï¼Œä¸åªæ˜¯å…ƒç´ èŠ‚ç‚¹
 	if (this->isEmpty())
-		return *this;							//Ñ¡ÔñÆ÷Îª¿ÕÔòÖ±½Ó·µ»Ø
+		return *this;							//é€‰æ‹©å™¨ä¸ºç©ºåˆ™ç›´æ¥è¿”å›
 	vector<TiXmlNode*> result;
 	conEx conex(condition);
 	for (UINT i = 0; i < $_SelElement.size(); i++)
@@ -469,7 +469,7 @@ $& $::nextAll(string condition)
 $& $::previousAll(string condition)
 {
 	if (this->isEmpty())
-		return *this;							//Ñ¡ÔñÆ÷Îª¿ÕÔòÖ±½Ó·µ»Ø
+		return *this;							//é€‰æ‹©å™¨ä¸ºç©ºåˆ™ç›´æ¥è¿”å›
 	vector<TiXmlNode*> result;
 	conEx conex(condition);
 	for (UINT i = 0; i < $_SelElement.size(); i++)
@@ -489,7 +489,7 @@ $& $::previousAll(string condition)
 
 $& $::parent()
 {
-	// ½«Ñ¡ÔñÆ÷ÖĞËùÓĞ½Úµã¶¼×ª»»³ÉËûÃÇµÄ¸¸½Úµã£¬È»ºóÇå³ı¿ÕµÄºÍÖØ¸´µÄ
+	// å°†é€‰æ‹©å™¨ä¸­æ‰€æœ‰èŠ‚ç‚¹éƒ½è½¬æ¢æˆä»–ä»¬çš„çˆ¶èŠ‚ç‚¹ï¼Œç„¶åæ¸…é™¤ç©ºçš„å’Œé‡å¤çš„
 	vector<TiXmlNode*> result;
 	for (unsigned int i = 0; i < $_SelElement.size(); i++)
 	{
@@ -504,7 +504,7 @@ $& $::parent()
 
 $& $::ancestors()
 {
-	// ½«Ñ¡ÔñÆ÷ÖĞËùÓĞ½Úµã¶¼×ª»»³ÉËûÃÇµÄ×æÏÈµã£¬È»ºóÇå³ı¿ÕµÄºÍÖØ¸´µÄ
+	// å°†é€‰æ‹©å™¨ä¸­æ‰€æœ‰èŠ‚ç‚¹éƒ½è½¬æ¢æˆä»–ä»¬çš„ç¥–å…ˆç‚¹ï¼Œç„¶åæ¸…é™¤ç©ºçš„å’Œé‡å¤çš„
 	vector<TiXmlNode*> result;
 	for (unsigned int i = 0; i < $_SelElement.size(); i++)
 	{
@@ -555,14 +555,14 @@ bool $::noChildren()
 // append functions
 template<typename T> $& $::_append(T node_type, int method)
 {
-	//ÏÈÅĞ¶ÏÎÄµµÊÇ²»ÊÇ¿ÕµÄ£¬¿ÕµÄÖ»ÄÜÓÃÕâ¸öº¯ÊıÀ´²åÈëµÚÒ»¸ö½Úµã
+	//å…ˆåˆ¤æ–­æ–‡æ¡£æ˜¯ä¸æ˜¯ç©ºçš„ï¼Œç©ºçš„åªèƒ½ç”¨è¿™ä¸ªå‡½æ•°æ¥æ’å…¥ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
 	if (xmlDoc && xmlDoc->NoChildren() || this->isEmpty())
 	{
 		xmlDoc->InsertEndChild(*node_type);
 		return *this;
 	}
 
-	method = method & (~$::APDM_DOUBLETAG) & (~$::APDM_SELFCLOSE);	//È¥³ıÁ½¸ö·½·¨µÄÓ°Ïì
+	method = method & (~$::APDM_DOUBLETAG) & (~$::APDM_SELFCLOSE);	//å»é™¤ä¸¤ä¸ªæ–¹æ³•çš„å½±å“
 	switch (method)
 	{
 
@@ -593,7 +593,7 @@ template<typename T> $& $::_append(T node_type, int method)
 		for (unsigned int i = 0; i < $_SelElement.size(); i++)
 		{
 			if ($_SelElement[i]->NoChildren())
-			{					//Èç¹ûÃ»ÓĞº¢×ÓÏàµ±ÓÚÖ±½Ó²åÈëÄÚ²¿×îºó
+			{					//å¦‚æœæ²¡æœ‰å­©å­ç›¸å½“äºç›´æ¥æ’å…¥å†…éƒ¨æœ€å
 				$_SelElement[i]->InsertEndChild(*node_type);
 			}
 			else
@@ -620,7 +620,7 @@ template<typename T> $& $::_append(T node_type, int method)
 
 	case $::APOS_BEFORE | $::APOS_INSIDE:
 		if (lastSelection()->NoChildren())
-		{					//Èç¹ûÃ»ÓĞº¢×ÓÏàµ±ÓÚÖ±½Ó²åÈëÄÚ²¿×îºó
+		{					//å¦‚æœæ²¡æœ‰å­©å­ç›¸å½“äºç›´æ¥æ’å…¥å†…éƒ¨æœ€å
 			lastSelection()->InsertEndChild(*node_type);
 		}
 		else
@@ -671,8 +671,8 @@ $& $::appendElement(string tagName, int method)
 	{
 		TiXmlElement* element = new TiXmlElement(tagName.c_str());
 		if (!(method & $::APDM_SELFCLOSE))
-		{											//·Ç×Ô¶¯±ÕºÏ±êÇ©ÅĞ¶Ï
-			TiXmlText* blankText = new TiXmlText("");//Õâ¸öµØ·½µ÷ÊÔÁËºÜ¾Ã£¬Ö÷ÒªÊÇÎªÁË¸ÄÔìÔ­±¾µÄ×Ô¶¯±ÕºÏÌØĞÔ£¬²Î¿¼tixmlµÄÔ´´úÂë
+		{											//éè‡ªåŠ¨é—­åˆæ ‡ç­¾åˆ¤æ–­
+			TiXmlText* blankText = new TiXmlText("");//è¿™ä¸ªåœ°æ–¹è°ƒè¯•äº†å¾ˆä¹…ï¼Œä¸»è¦æ˜¯ä¸ºäº†æ”¹é€ åŸæœ¬çš„è‡ªåŠ¨é—­åˆç‰¹æ€§ï¼Œå‚è€ƒtixmlçš„æºä»£ç 
 			element->LinkEndChild(blankText);
 			// to link child as every time we make a new pointer
 		}
@@ -709,7 +709,7 @@ $& $::removeFromSelector(string selector)
 
 $& $::removeFromSelector(int index)
 {
-	index = index - 1;											//´Ó1¿ªÊ¼¼ÆËã
+	index = index - 1;											//ä»1å¼€å§‹è®¡ç®—
 	if (index >= 0 && index < $_SelElement.size())
 	{
 		$_SelElement[index] = NULL;
@@ -724,10 +724,10 @@ $& $::remove(string selector)
 	{
 		// we should only remove the highest parent
 		// or we'll meet the same exception as in replaceWith();
-		// ¸¸½Úµã±»ÒÆ³ıÁËÖ®ºó£¬×Ó½Úµã¾Í²»´æÔÚÁË£¬ËùÒÔÖ»ĞèÒªÒÆ³ı×î×æ×ÚµÄ½Úµã
+		// çˆ¶èŠ‚ç‚¹è¢«ç§»é™¤äº†ä¹‹åï¼Œå­èŠ‚ç‚¹å°±ä¸å­˜åœ¨äº†ï¼Œæ‰€ä»¥åªéœ€è¦ç§»é™¤æœ€ç¥–å®—çš„èŠ‚ç‚¹
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
-			// ÓÃÈ¡½»¼¯µÄ·½·¨£¬×î¸ß±²·ÖµÄ½ÚµãÒ»¶¨²»»áºÍ$_SelElementÖĞ½ÚµãÓĞÖØµş
+			// ç”¨å–äº¤é›†çš„æ–¹æ³•ï¼Œæœ€é«˜è¾ˆåˆ†çš„èŠ‚ç‚¹ä¸€å®šä¸ä¼šå’Œ$_SelElementä¸­èŠ‚ç‚¹æœ‰é‡å 
 			if ($($_SelElement[i]).ancestors().intersectionWith($_SelElement).isEmpty())
 			{
 				deOffspring.push_back($_SelElement[i]);
@@ -743,7 +743,7 @@ $& $::remove(string selector)
 		vector<TiXmlNode*> selectNode = $(selector, xmlDoc).getSelection();
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
-			// ÓÃÈ¡½»¼¯µÄ·½·¨£¬×î¸ß±²·ÖµÄ½ÚµãÒ»¶¨²»»áºÍ$_SelElementÖĞ½ÚµãÓĞÖØµş
+			// ç”¨å–äº¤é›†çš„æ–¹æ³•ï¼Œæœ€é«˜è¾ˆåˆ†çš„èŠ‚ç‚¹ä¸€å®šä¸ä¼šå’Œ$_SelElementä¸­èŠ‚ç‚¹æœ‰é‡å 
 			if ($(selectNode).ancestors().intersectionWith(selectNode[i]).isEmpty())
 			{
 				deOffspring.push_back(selectNode[i]);
@@ -762,7 +762,7 @@ $& $::removeText(string selector)
 {
 	if ("" == selector)
 	{
-		//ÏÈ°ÑÑ¡ÔñÆ÷ÖĞµÄÎÄ±¾½Úµã´ÓxmlÖĞÒÆ³ı
+		//å…ˆæŠŠé€‰æ‹©å™¨ä¸­çš„æ–‡æœ¬èŠ‚ç‚¹ä»xmlä¸­ç§»é™¤
 		vector<TiXmlNode*> result;
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
@@ -778,7 +778,7 @@ $& $::removeText(string selector)
 		}
 		$_SelElement = result;
 
-		//±éÀúÑ¡ÔñÆ÷ÖĞµÄ½ÚµãµÄº¢×Ó½Úµã
+		//éå†é€‰æ‹©å™¨ä¸­çš„èŠ‚ç‚¹çš„å­©å­èŠ‚ç‚¹
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
 			TiXmlNode* child = $_SelElement[i]->FirstChild();
@@ -815,11 +815,11 @@ $& $::replaceWith(string withThis, int copyMethod)
 
 $& $::replaceWith($& withThis, int copyMethod)
 {
-	// TODO : °ÑwithThisÖĞµÄ½ÚµãcloneºóÌæ»»µ½µ±Ç°selectorÖĞµÄ½Úµã
-	// CM_With_singleNODE	: Ç³¿½±´
-	// CM_With_whole_TREE	: Éî¿½±´
-	// CM_DeepCopy			: Éî¿½±´
-	// CM_ShallowCopy		: Ç³¿½±´
+	// TODO : æŠŠwithThisä¸­çš„èŠ‚ç‚¹cloneåæ›¿æ¢åˆ°å½“å‰selectorä¸­çš„èŠ‚ç‚¹
+	// CM_With_singleNODE	: æµ…æ‹·è´
+	// CM_With_whole_TREE	: æ·±æ‹·è´
+	// CM_DeepCopy			: æ·±æ‹·è´
+	// CM_ShallowCopy		: æµ…æ‹·è´
 
 	if (withThis.isEmpty())
 		return *this;
@@ -831,7 +831,7 @@ $& $::replaceWith($& withThis, int copyMethod)
 	{
 	case CM_With_whole_TREE:
 	case CM_DeepCopy:
-		// copy³öÉî¿½±´µÄ½Úµã
+		// copyå‡ºæ·±æ‹·è´çš„èŠ‚ç‚¹
 		for (UINT i = 0; i < withThis.length(); i++)
 		{
 			replaceWithTheNode.push_back(withThis[i]->Clone());
@@ -841,7 +841,7 @@ $& $::replaceWith($& withThis, int copyMethod)
 	case CM_With_singleNODE:
 	case CM_ShallowCopy:
 	default:
-		// copy³öÇ³¿½±´µÄ½Úµã
+		// copyå‡ºæµ…æ‹·è´çš„èŠ‚ç‚¹
 		for (UINT i = 0; i < withThis.length(); i++)
 		{
 			tempNode = withThis[i]->Clone();
@@ -850,30 +850,30 @@ $& $::replaceWith($& withThis, int copyMethod)
 		}
 	}
 
-	// Ìæ»»½ÚµãÓĞµãÌØÊâ£¬$_SelElement¿ÉÄÜÓĞ¸¸×Ó¹ØÏµµÃµ½½Úµã£¬
-	// ¸¸½Úµã±»Ìæ»»ÁËÖ®ºó£¬×Ó½Úµã¾Í²»´æÔÚÁË£¬ËùÒÔÖ»ÄÜÌæ»»×î×æ×ÚµÄ½Úµã
+	// æ›¿æ¢èŠ‚ç‚¹æœ‰ç‚¹ç‰¹æ®Šï¼Œ$_SelElementå¯èƒ½æœ‰çˆ¶å­å…³ç³»å¾—åˆ°èŠ‚ç‚¹ï¼Œ
+	// çˆ¶èŠ‚ç‚¹è¢«æ›¿æ¢äº†ä¹‹åï¼Œå­èŠ‚ç‚¹å°±ä¸å­˜åœ¨äº†ï¼Œæ‰€ä»¥åªèƒ½æ›¿æ¢æœ€ç¥–å®—çš„èŠ‚ç‚¹
 	vector<TiXmlNode*> deOffspring;
 	for (UINT i = 0; i < $_SelElement.size(); i++)
 	{
-		// ÓÃÈ¡½»¼¯µÄ·½·¨£¬×î¸ß±²·ÖµÄ½ÚµãÒ»¶¨²»»áºÍ$_SelElementÖĞ½ÚµãÓĞÖØµş
+		// ç”¨å–äº¤é›†çš„æ–¹æ³•ï¼Œæœ€é«˜è¾ˆåˆ†çš„èŠ‚ç‚¹ä¸€å®šä¸ä¼šå’Œ$_SelElementä¸­èŠ‚ç‚¹æœ‰é‡å 
 		if ($($_SelElement[i]).ancestors().intersectionWith($_SelElement).isEmpty())
 		{
 			deOffspring.push_back($_SelElement[i]);
 		}
 	}
 
-	vector<TiXmlNode*> result;	//ÓÃÓÚ±£´æĞÂ»»ÉÏÈ¥µÄ½Úµã
+	vector<TiXmlNode*> result;	//ç”¨äºä¿å­˜æ–°æ¢ä¸Šå»çš„èŠ‚ç‚¹
 	for (UINT i = 0; i < deOffspring.size(); i++)
 	{
 
-		// ÏÈ°ÑÒª»»³ÉµÄ½Úµã³ıµÚÒ»¸öÍâÌí¼Óµ½±»»»µÄ½Úµãºó
+		// å…ˆæŠŠè¦æ¢æˆçš„èŠ‚ç‚¹é™¤ç¬¬ä¸€ä¸ªå¤–æ·»åŠ åˆ°è¢«æ¢çš„èŠ‚ç‚¹å
 		for (UINT j = 1; j < replaceWithTheNode.size(); j++)
 		{
 			result.push_back(
 					deOffspring[i]->Parent()->InsertAfterChild(deOffspring[i],
 							*replaceWithTheNode[j]));
 		}
-		// È»ºó°ÑÒª»¹µÄ½Úµã»»³ÉtoPlaceWithThis[0]
+		// ç„¶åæŠŠè¦è¿˜çš„èŠ‚ç‚¹æ¢æˆtoPlaceWithThis[0]
 		result.push_back(
 				deOffspring[i]->Parent()->ReplaceChild(deOffspring[i],
 						*replaceWithTheNode[0]));
@@ -891,19 +891,19 @@ $& $::replaceWithNewElement(string tagName)
 
 $& $::clone($& pasteTo, int position, int copyMethod)
 {
-	//ÏÈÅĞ¶ÏpasteToÊÇ·ñÎª¿Õ
+	//å…ˆåˆ¤æ–­pasteToæ˜¯å¦ä¸ºç©º
 	if (pasteTo.isEmpty())
 		return *this;
 
 	vector<TiXmlNode*> cloneNode;
 	TiXmlNode* tempNode;
 
-	// ¿½±´Ä£Ê½µÄ¿ª¹Ø
+	// æ‹·è´æ¨¡å¼çš„å¼€å…³
 	switch (copyMethod)
 	{
 	case CM_With_whole_TREE:
 	case CM_DeepCopy:
-		// copy³öÉî¿½±´µÄ½Úµã
+		// copyå‡ºæ·±æ‹·è´çš„èŠ‚ç‚¹
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
 			cloneNode.push_back($_SelElement[i]->Clone());
@@ -913,7 +913,7 @@ $& $::clone($& pasteTo, int position, int copyMethod)
 	case CM_With_singleNODE:
 	case CM_ShallowCopy:
 	default:
-		// copy³öÇ³¿½±´µÄ½Úµã
+		// copyå‡ºæµ…æ‹·è´çš„èŠ‚ç‚¹
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
 			tempNode = $_SelElement[i]->Clone();
@@ -922,9 +922,9 @@ $& $::clone($& pasteTo, int position, int copyMethod)
 		}
 	}
 
-	// resultÓÃÀ´±£´æĞÂ²åÈëµÄ½Úµã£¬×îºó·µ»Ø¸øÑ¡ÔñÆ÷
+	// resultç”¨æ¥ä¿å­˜æ–°æ’å…¥çš„èŠ‚ç‚¹ï¼Œæœ€åè¿”å›ç»™é€‰æ‹©å™¨
 	vector<TiXmlNode*> result;
-	// ²åÈëÎ»ÖÃµÄ¿ª¹Ø
+	// æ’å…¥ä½ç½®çš„å¼€å…³
 	switch (position)
 	{
 	case $::APOS_AFTER:
@@ -969,7 +969,7 @@ $& $::clone($& pasteTo, int position, int copyMethod)
 			}
 		}
 		break;
-	default:	//Ä¬ÈÏÊÇ²åÈëµ½pasteToµÄ½Úµãºó
+	default:	//é»˜è®¤æ˜¯æ’å…¥åˆ°pasteToçš„èŠ‚ç‚¹å
 		for (UINT i = 0; i < cloneNode.size(); i++)
 		{
 			for (UINT j = 0; j < pasteTo.length(); j++)
@@ -987,19 +987,19 @@ $& $::clone($& pasteTo, int position, int copyMethod)
 
 $& $::cloneTo($& pasteTo, int position, int copyMethod)
 {
-	//ÏÈÅĞ¶ÏpasteToÊÇ·ñÎª¿Õ
+	//å…ˆåˆ¤æ–­pasteToæ˜¯å¦ä¸ºç©º
 	if (pasteTo.isEmpty())
 		return *this;
 
 	vector<TiXmlNode*> cloneNode;
 	TiXmlNode* tempNode;
 
-	// ¿½±´Ä£Ê½µÄ¿ª¹Ø
+	// æ‹·è´æ¨¡å¼çš„å¼€å…³
 	switch (copyMethod)
 	{
 	case CM_With_whole_TREE:
 	case CM_DeepCopy:
-		// copy³öÉî¿½±´µÄ½Úµã
+		// copyå‡ºæ·±æ‹·è´çš„èŠ‚ç‚¹
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
 			cloneNode.push_back($_SelElement[i]->Clone());
@@ -1009,7 +1009,7 @@ $& $::cloneTo($& pasteTo, int position, int copyMethod)
 	case CM_With_singleNODE:
 	case CM_ShallowCopy:
 	default:
-		// copy³öÇ³¿½±´µÄ½Úµã
+		// copyå‡ºæµ…æ‹·è´çš„èŠ‚ç‚¹
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
 			tempNode = $_SelElement[i]->Clone();
@@ -1018,7 +1018,7 @@ $& $::cloneTo($& pasteTo, int position, int copyMethod)
 		}
 	}
 
-	// ²åÈëÎ»ÖÃµÄ¿ª¹Ø
+	// æ’å…¥ä½ç½®çš„å¼€å…³
 	switch (position)
 	{
 	case $::APOS_AFTER:
@@ -1060,7 +1060,7 @@ $& $::cloneTo($& pasteTo, int position, int copyMethod)
 			}
 		}
 		break;
-	default:	//Ä¬ÈÏÊÇ²åÈëµ½pasteToµÄ½Úµãºó
+	default:	//é»˜è®¤æ˜¯æ’å…¥åˆ°pasteToçš„èŠ‚ç‚¹å
 		for (UINT i = 0; i < cloneNode.size(); i++)
 		{
 			for (UINT j = 0; j < pasteTo.length(); j++)
@@ -1084,8 +1084,8 @@ $& $::wrapBy($& byThis)
 	{
 		for (UINT i = 0; i < $_SelElement.size(); i++)
 		{
-			// ÏÈ°Ñ×îÄêÇáµÄ½Úµã°ü¹üÁË£¬°ü¹üÍêºóÔÚÑ¡ÔñÆ÷ÖĞÇå³ıÕâ¸ö½Úµã
-			// ÒªÒ»²ãÒ»²ãÍùÉÏ°ü¹ü£¬Ö±µ½Ñ¡ÔñÆ÷ÖĞÃ»ÓĞ½ÚµãÒª°ü¹üÎªÖ¹
+			// å…ˆæŠŠæœ€å¹´è½»çš„èŠ‚ç‚¹åŒ…è£¹äº†ï¼ŒåŒ…è£¹å®Œååœ¨é€‰æ‹©å™¨ä¸­æ¸…é™¤è¿™ä¸ªèŠ‚ç‚¹
+			// è¦ä¸€å±‚ä¸€å±‚å¾€ä¸ŠåŒ…è£¹ï¼Œç›´åˆ°é€‰æ‹©å™¨ä¸­æ²¡æœ‰èŠ‚ç‚¹è¦åŒ…è£¹ä¸ºæ­¢
 			if ($($_SelElement[i]).offspring().intersectionWith($_SelElement).isEmpty())
 			{
 				TiXmlNode* wrapper =
@@ -1100,7 +1100,7 @@ $& $::wrapBy($& byThis)
 		this->popEmpty();
 	}
 
-	// ²¢ÇÒÑ¡ÔñÆ÷ÖĞ·µ»ØĞÂ°ü¹üºÃµÄ½Úµã
+	// å¹¶ä¸”é€‰æ‹©å™¨ä¸­è¿”å›æ–°åŒ…è£¹å¥½çš„èŠ‚ç‚¹
 	$_SelElement = result;
 	return this->popEmpty().clearSame();
 }
@@ -1136,23 +1136,23 @@ $& $::clear()
 
 $& $::clearSame()
 {
-	vector<TiXmlNode*> result;						//ÔİÊ±´æ·Å½á¹û
+	vector<TiXmlNode*> result;						//æš‚æ—¶å­˜æ”¾ç»“æœ
 	unsigned int i = 0, j = 0;
 	for (i = 0; i < $_SelElement.size(); i++)
 	{
-		bool hasSame = false;							//Ã¿´ÎÑ­»·¿ªÊ¼¼ÙÉè¶¼Ã»ÓĞÏàÍ¬µÄ
+		bool hasSame = false;							//æ¯æ¬¡å¾ªç¯å¼€å§‹å‡è®¾éƒ½æ²¡æœ‰ç›¸åŒçš„
 		for (j = i + 1; j < $_SelElement.size(); j++)
-		{	//ÓëºóÃæµÄÔªËØ×÷±È½Ï
+		{	//ä¸åé¢çš„å…ƒç´ ä½œæ¯”è¾ƒ
 			if ($_SelElement[i] == $_SelElement[j])
 			{
-				hasSame = true;						//Èç¹ûÓĞÏàÍ¬µÄ¾ÍÖ±½ÓÌø³ö±¾´ÎÑ­»·
+				hasSame = true;						//å¦‚æœæœ‰ç›¸åŒçš„å°±ç›´æ¥è·³å‡ºæœ¬æ¬¡å¾ªç¯
 				break;
 			}
 		}
 		if (!hasSame)
-			result.push_back($_SelElement[i]);					//Èç¹ûÃ»ÓĞÏàÍ¬µÄ¾Í·ÅÈë½á¹ûÖĞ
+			result.push_back($_SelElement[i]);					//å¦‚æœæ²¡æœ‰ç›¸åŒçš„å°±æ”¾å…¥ç»“æœä¸­
 	}
-	$_SelElement = result;							//×îºó±£´æ½á¹û
+	$_SelElement = result;							//æœ€åä¿å­˜ç»“æœ
 	return *this;
 }
 
@@ -1171,7 +1171,7 @@ $& $::popEmpty()
 $& $::pushNode(TiXmlNode* node)
 {
 	if (node->GetDocument() == xmlDoc)
-	{		//Òª¼ì²éÕâ¸ö½ÚµãÊÇ·ñÊôÓÚµ±Ç°ÎÄµµ
+	{		//è¦æ£€æŸ¥è¿™ä¸ªèŠ‚ç‚¹æ˜¯å¦å±äºå½“å‰æ–‡æ¡£
 		this->$_SelElement.push_back(node);
 	}
 	return *this;
@@ -1182,16 +1182,16 @@ $& $::subtractBy(const vector<TiXmlNode*> & withThis)
 	vector<TiXmlNode*> result;
 	unsigned int a = 0, b = 0;
 	for (a = 0; a < withThis.size(); a++)
-	{				//É¨ÃèÒªÈ¥µôµÄ½Úµã
-		result.clear();								//Çå¿Õ£¬×¼±¸ÏÂÒ»ÂÖÊÕ»ñÊ£ÏÂµÄ½Úµã
+	{				//æ‰«æè¦å»æ‰çš„èŠ‚ç‚¹
+		result.clear();								//æ¸…ç©ºï¼Œå‡†å¤‡ä¸‹ä¸€è½®æ”¶è·å‰©ä¸‹çš„èŠ‚ç‚¹
 		for (b = 0; b < $_SelElement.size(); b++)
 		{
 			if (withThis[a] != $_SelElement[b])
-			{		//²»Í¬µÄ¾Í´æÆğÀ´
+			{		//ä¸åŒçš„å°±å­˜èµ·æ¥
 				result.push_back($_SelElement[b]);
 			}
 		}
-		$_SelElement = result;						//Ã¿´Î¶¼°ÑÊ£ÏÂµÄ½Úµã±£´æ»Øelement
+		$_SelElement = result;						//æ¯æ¬¡éƒ½æŠŠå‰©ä¸‹çš„èŠ‚ç‚¹ä¿å­˜å›element
 	}
 	return this->clearSame();
 }
@@ -1432,7 +1432,7 @@ $::OS_Validation $::hasOffSpring(const string& selector)
 		gotParent = false;
 		TiXmlNode * parent = offspring[i]->Parent();
 		while (parent)
-		{								//×·Ëİµ½¸ù½ÚµãÑ°ÕÒ¿´ÊÇ·ñÕÒµ½¸¸½Úµã
+		{								//è¿½æº¯åˆ°æ ¹èŠ‚ç‚¹å¯»æ‰¾çœ‹æ˜¯å¦æ‰¾åˆ°çˆ¶èŠ‚ç‚¹
 			if (parent == $_SelElement[0])
 			{
 				gotParent = true;
@@ -1445,7 +1445,7 @@ $::OS_Validation $::hasOffSpring(const string& selector)
 
 	bool findTrue = false, findFalse = false;
 	for (unsigned int i = 0; i < getParentStatus.size(); i++)
-	{								//ÅĞ¶Ï½á¹ûÇé¿ö
+	{								//åˆ¤æ–­ç»“æœæƒ…å†µ
 		if (getParentStatus[i])
 		{
 			findTrue = true;
@@ -1455,7 +1455,7 @@ $::OS_Validation $::hasOffSpring(const string& selector)
 			findFalse = true;
 		}
 	}
-	//¸ù¾İÊÇ·ñ½á¹ûÕÒµ½µÄ²»Í¬·µ»Ø²»Í¬ºó´úĞÅÏ¢
+	//æ ¹æ®æ˜¯å¦ç»“æœæ‰¾åˆ°çš„ä¸åŒè¿”å›ä¸åŒåä»£ä¿¡æ¯
 	if (findTrue && findFalse)
 	{
 		return $::OS_PART;
@@ -1627,7 +1627,7 @@ vector<TiXmlNode*> traverse(TiXmlNode* rootElement,
 	TiXmlNode* loopNode = rootElement->FirstChild();
 	while (loopNode)
 	{
-		// ±éÀúº¯Êı²»±éÀúÎÄ±¾½Úµã£¬·ÃÎÊÎÄ±¾½ÚµãÇëÓÃ.text()
+		// éå†å‡½æ•°ä¸éå†æ–‡æœ¬èŠ‚ç‚¹ï¼Œè®¿é—®æ–‡æœ¬èŠ‚ç‚¹è¯·ç”¨.text()
 		if (loopNode->Type() != $::XML_TEXT && (*testOk)(loopNode, testValue))
 		{
 			result.push_back(loopNode);
@@ -1645,7 +1645,7 @@ vector<TiXmlNode*> traverseOnce(TiXmlNode* rootElement,
 	TiXmlNode* loopNode = rootElement->FirstChild();
 	while (loopNode)
 	{
-		// ±éÀúº¯Êı²»±éÀúÎÄ±¾½Úµã£¬·ÃÎÊÎÄ±¾½ÚµãÇëÓÃ.text()
+		// éå†å‡½æ•°ä¸éå†æ–‡æœ¬èŠ‚ç‚¹ï¼Œè®¿é—®æ–‡æœ¬èŠ‚ç‚¹è¯·ç”¨.text()
 		if (loopNode->Type() != $::XML_TEXT && (*testOk)(loopNode, testValue))
 		{
 			result.push_back(loopNode);
@@ -1661,7 +1661,7 @@ vector<TiXmlNode*> traverseAmongNodes(vector<TiXmlNode*> amongThis,
 	vector<TiXmlNode*> result;
 	for (UINT i = 0; i < amongThis.size(); i++)
 	{
-		// ±éÀúº¯Êı²»±éÀúÎÄ±¾½Úµã£¬·ÃÎÊÎÄ±¾½ÚµãÇëÓÃ.text()
+		// éå†å‡½æ•°ä¸éå†æ–‡æœ¬èŠ‚ç‚¹ï¼Œè®¿é—®æ–‡æœ¬èŠ‚ç‚¹è¯·ç”¨.text()
 		if ((*testOk)(amongThis[i], testValue)
 				&& amongThis[i]->Type() != $::XML_TEXT)
 		{
@@ -1679,7 +1679,7 @@ vector<string> split(string source, char splitSymbol)
 		int pos = source.find(splitSymbol);
 		if (pos == 0)
 		{
-			result.push_back(string(""));			//Ç°µ¼¿Õ·Ö¸ô·û±íÊ¾Ç°ÃæÊÇÒ»¸ö³¤¶ÈÎª0µÄstring
+			result.push_back(string(""));			//å‰å¯¼ç©ºåˆ†éš”ç¬¦è¡¨ç¤ºå‰é¢æ˜¯ä¸€ä¸ªé•¿åº¦ä¸º0çš„string
 			source = source.substr(1);
 			continue;
 		}
@@ -1712,12 +1712,12 @@ template<typename T>
 vector<T> & VecCombine(vector<T> & result, const vector<T> & add)
 {
 	if (result == add)
-		return result;					//Èç¹ûÁ½¸övecÏàÍ¬¾Í²»ÓÃÔÙÖØ¸´¼Ó½øÈ¥ÁË
+		return result;					//å¦‚æœä¸¤ä¸ªvecç›¸åŒå°±ä¸ç”¨å†é‡å¤åŠ è¿›å»äº†
 	for (unsigned int i = 0; i < add.size(); i++)
-	{		//Öğ¸öÌí¼Ó
+	{		//é€ä¸ªæ·»åŠ 
 		result.push_back(add[i]);
 	}
-	return result;									//·µ»ØµÚÒ»¸ö±äÁ¿µÄÒıÓÃ
+	return result;									//è¿”å›ç¬¬ä¸€ä¸ªå˜é‡çš„å¼•ç”¨
 }
 
 int strToInt(string str)
@@ -1727,7 +1727,7 @@ int strToInt(string str)
 
 string intToStr(int num)
 {
-	char *str = new char[15];		//Ò»°ãint²»³¬¹ı15Î»
+	char *str = new char[15];		//ä¸€èˆ¬intä¸è¶…è¿‡15ä½
 	itoa(num, str, 10);
 	return string(str);
 }
@@ -1785,7 +1785,7 @@ string removeSection(const string origin, string condition, string& removed)
 // codecs
 string& encode(string& encodeStr)
 {
-	//±àÂëÃ°ºÅ ':'
+	//ç¼–ç å†’å· ':'
 	int pos = encodeStr.find(':');
 	while (pos != string::npos)
 	{
@@ -1793,13 +1793,13 @@ string& encode(string& encodeStr)
 				"<colon;");
 		pos = encodeStr.find(':');
 	}
-	// ÔÚÕâÀïÌí¼Ó±ğµÄ±àÂë·ûºÅ
+	// åœ¨è¿™é‡Œæ·»åŠ åˆ«çš„ç¼–ç ç¬¦å·
 	return encodeStr;
 }
 
 string& decode(string& decodeStr)
 {
-	//½âÂëÃ°ºÅ ':'
+	//è§£ç å†’å· ':'
 	int pos = decodeStr.find("<colon;");
 	while (pos != string::npos)
 	{
@@ -1807,14 +1807,14 @@ string& decode(string& decodeStr)
 				":");
 		pos = decodeStr.find("<colon;");
 	}
-	// ÔÚÕâÀïÌí¼Ó±ğµÄ½âÂë·ûºÅ
+	// åœ¨è¿™é‡Œæ·»åŠ åˆ«çš„è§£ç ç¬¦å·
 	return decodeStr;
 }
 
 string& filterStrProc(string& filterStr)
 {
-	int lPos = 0,				//×óÀ¨ºÅÎ»ÖÃ
-	int rPos = 0;				//ÓÒÀ¨ºÅÎ»ÖÃ
+	int lPos = 0,				//å·¦æ‹¬å·ä½ç½®
+	int rPos = 0;				//å³æ‹¬å·ä½ç½®
 	lPos = filterStr.find('[');
 	rPos = filterStr.find(']');
 	string procAttrPart;

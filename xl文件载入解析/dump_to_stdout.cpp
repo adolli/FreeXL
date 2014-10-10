@@ -1,4 +1,4 @@
-// dunp_to_stdout.cpp
+﻿// dunp_to_stdout.cpp
 /*
  DECLARE:
  The program and the functions blow are code by TinyXml,
